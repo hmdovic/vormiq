@@ -57,9 +57,13 @@
   "priceRange": "€€",
   "makesOffer": [
     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Website Starter" }, "price": "100", "priceCurrency": "EUR" },
-    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Maatwerk Website" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Maatwerk Website" }, "priceSpecification": { "@type": "UnitPriceSpecification", "minPrice": "350", "priceCurrency": "EUR" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Webshop" }, "priceSpecification": { "@type": "UnitPriceSpecification", "minPrice": "750", "priceCurrency": "EUR" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Branding" }, "priceSpecification": { "@type": "UnitPriceSpecification", "minPrice": "150", "priceCurrency": "EUR" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Automatiseringen" }, "priceSpecification": { "@type": "UnitPriceSpecification", "minPrice": "250", "priceCurrency": "EUR" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Video's" }, "priceSpecification": { "@type": "UnitPriceSpecification", "minPrice": "150", "priceCurrency": "EUR" } },
     { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Vormiq Care" }, "price": "50", "priceCurrency": "EUR" },
-    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Avatar Video (lipsync)" }, "priceSpecification": { "@type": "UnitPriceSpecification", "price": "2", "priceCurrency": "EUR", "unitText": "per seconde video" } }
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Avatars" }, "priceSpecification": { "@type": "UnitPriceSpecification", "price": "2", "priceCurrency": "EUR", "unitText": "per seconde video" } }
   ]
 }</script>
 <script type="application/ld+json">{
@@ -68,7 +72,7 @@
   "mainEntity": [
     { "@type": "Question", "name": "Hoe lang duurt het om een website te laten maken?", "acceptedAnswer": { "@type": "Answer", "text": "De Website Starter staat meestal binnen ongeveer één werkdag live. Een maatwerk website duurt langer, afhankelijk van het aantal pagina's en de gewenste strategie." } },
     { "@type": "Question", "name": "Wat kost een AI Avatar video?", "acceptedAnswer": { "@type": "Answer", "text": "Een AI Avatar video met lipsync kost €2 per seconde. Voor een avatar van 60 seconden betaal je dus €120." } },
-    { "@type": "Question", "name": "Bouwen jullie ook webshops?", "acceptedAnswer": { "@type": "Answer", "text": "Ja, webshops zijn een aparte, premium dienst. We kijken samen naar productstructuur, betaalmethoden en conversie." } }
+    { "@type": "Question", "name": "Bouwen jullie ook webshops?", "acceptedAnswer": { "@type": "Answer", "text": "Ja, webshops zijn een aparte dienst vanaf €750. We kijken samen naar productstructuur, betaalmethoden en conversie." } }
   ]
 }</script>
 </head>
@@ -109,30 +113,31 @@
 
 <main>
 
-<section class="hero">
+<section class="hero" id="hero">
   <video class="hero__video" src="header.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
   <div class="hero__overlay" aria-hidden="true"></div>
+  <div class="hero__glow" aria-hidden="true"></div>
   <div class="wrap">
     <div class="hero__grid">
       <div>
-        <p class="eyebrow reveal">Creative &amp; AI Digital Studio · Delft</p>
-        <h1 class="hero__title reveal">Jouw vak is top. Je website mag dat <span class="text-gradient">eindelijk laten zien.</span></h1>
-        <p class="hero__lead reveal">
+        <p class="eyebrow hero-in hero-in--1">Creative &amp; AI Digital Studio · Delft</p>
+        <h1 class="hero__title hero-in hero-in--2">Jouw vak is top. Je website mag dat <span class="text-gradient">eindelijk laten zien.</span></h1>
+        <p class="hero__lead hero-in hero-in--3">
           Websites, branding en AI-video die niet aanvoelen als een AI-productje &mdash; maar als
           werk van een studio die weet wat jouw klant nodig heeft om te bellen of te boeken.
         </p>
-        <div class="hero__actions reveal">
-          <a href="https://wa.me/31657971118?text=Hoi%20Sami%2C%20ik%20ben%20benieuwd%20wat%20Vormiq%20voor%20mijn%20bedrijf%20kan%20betekenen." target="_blank" rel="noopener noreferrer" class="btn btn--primary">Start gratis kennismaking</a>
-          <a href="projecten.html" class="btn btn--outline">Bekijk projecten</a>
+        <div class="hero__actions hero-in hero-in--4">
+          <a href="https://wa.me/31657971118?text=Hoi%20Sami%2C%20ik%20ben%20benieuwd%20wat%20Vormiq%20voor%20mijn%20bedrijf%20kan%20betekenen." target="_blank" rel="noopener noreferrer" class="btn btn--primary" data-magnetic>Start gratis kennismaking</a>
+          <a href="projecten.html" class="btn btn--outline" data-magnetic>Bekijk projecten</a>
         </div>
       </div>
       <div class="hero__cards">
-        <div class="glass-card reveal">
+        <div class="glass-card hero-in hero-in--3">
           <p class="eyebrow" style="color:hsl(0 0% 100% / 0.65);">Actief sinds</p>
           <p style="font-family:var(--font-display);font-size:2rem;margin-top:0.35rem;font-weight:700;">2020</p>
           <p class="muted" style="margin-top:0.25rem;font-size:0.85rem;">Zes jaar experimenteren in creatieve technologie</p>
         </div>
-        <div class="glass-card glass-card--accent reveal">
+        <div class="glass-card glass-card--accent hero-in hero-in--4">
           <p style="font-size:0.9rem;line-height:var(--lh-relaxed);position:relative;">
             Websites, branding en AI-video &mdash; persoonlijk gebouwd door Sami, niet door een los team of ticketsysteem.
           </p>
@@ -300,7 +305,7 @@
           <a href="projecten.html" class="project-row__link mt-3" style="display:inline-flex;">Bekijk project &rarr;</a>
         </div>
         <div class="project-row__preview">
-          <video src="salute1.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          <video src="salute1.mp4" autoplay muted loop playsinline preload="none"></video>
         </div>
       </div>
 
@@ -313,7 +318,7 @@
           <a href="projecten.html" class="project-row__link mt-3" style="display:inline-flex;">Bekijk project &rarr;</a>
         </div>
         <div class="project-row__preview">
-          <video src="donvito.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          <video src="donvito.mp4" autoplay muted loop playsinline preload="none"></video>
         </div>
       </div>
     </div>
@@ -393,7 +398,7 @@
       vanaf &euro;2 per seconde en onderhoud vanaf &euro;50 per maand. Alle instapprijzen op &eacute;&eacute;n pagina.
     </p>
     <div class="mt-10">
-      <a href="prijzen.html" class="btn btn--primary">Bekijk alle prijzen</a>
+      <a href="prijzen.html" class="btn btn--primary" data-magnetic>Bekijk alle prijzen</a>
     </div>
   </div>
 </section>
@@ -423,7 +428,7 @@
       </div>
       <div class="accordion-item">
         <button class="accordion-trigger" aria-expanded="false"><span>Bouwen jullie ook webshops?</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
-        <div class="accordion-panel"><div class="accordion-panel-inner"><p>Ja, webshops zijn een aparte, premium dienst &mdash; niet iets dat in de Starter past. We kijken samen naar productstructuur, betaalmethoden en conversie.</p></div></div>
+        <div class="accordion-panel"><div class="accordion-panel-inner"><p>Ja, webshops zijn een aparte dienst vanaf &euro;750 &mdash; niet iets dat in de Starter past. We kijken samen naar productstructuur, betaalmethoden en conversie.</p></div></div>
       </div>
       <div class="accordion-item">
         <button class="accordion-trigger" aria-expanded="false"><span>Werken jullie alleen in Delft?</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
@@ -441,8 +446,8 @@
       <h2 style="color:white;" class="mt-3">Klaar om jouw bedrijf online sterker neer te zetten?</h2>
       <p class="final-cta__lead">Vertel over je bedrijf, en we denken vrijblijvend met je mee.</p>
       <div class="final-cta__actions">
-        <a href="https://wa.me/31657971118?text=Hoi%20Sami%2C%20ik%20ben%20benieuwd%20wat%20Vormiq%20voor%20mijn%20bedrijf%20kan%20betekenen." target="_blank" rel="noopener noreferrer" class="btn btn--primary">WhatsApp Sami</a>
-        <a href="mailto:vormiq@outlook.com" class="btn btn--outline">Stuur een mail</a>
+        <a href="https://wa.me/31657971118?text=Hoi%20Sami%2C%20ik%20ben%20benieuwd%20wat%20Vormiq%20voor%20mijn%20bedrijf%20kan%20betekenen." target="_blank" rel="noopener noreferrer" class="btn btn--primary" data-magnetic>WhatsApp Sami</a>
+        <a href="mailto:vormiq@outlook.com" class="btn btn--outline" data-magnetic>Stuur een mail</a>
       </div>
       <div class="final-cta__contacts">
         <a href="tel:+31657971118"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg> 0657971118</a>

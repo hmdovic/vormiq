@@ -183,6 +183,29 @@ p { line-height: var(--lh-relaxed); }
 .glass-card { background: var(--glass); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid hsl(var(--border-strong)); border-radius: var(--r-xl); padding: 1.75rem; }
 .glass-card--accent { border-color: hsl(var(--lime) / 0.3); position: relative; overflow: hidden; }
 .glass-card--accent::before { content: ""; position: absolute; top: -45%; right: -30%; width: 65%; height: 170%; background: hsl(var(--lime) / 0.15); filter: blur(55px); border-radius: 50%; }
+/* Cinematic load-in — hero is above the fold, so this runs on load, not on scroll */
+.hero-in { opacity: 0; transform: translateY(22px); filter: blur(6px); animation: heroIn 0.9s var(--ease) forwards; }
+.hero-in--1 { animation-delay: 0.05s; }
+.hero-in--2 { animation-delay: 0.16s; }
+.hero-in--3 { animation-delay: 0.30s; }
+.hero-in--4 { animation-delay: 0.42s; }
+@keyframes heroIn { to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+
+/* Ambient drifting glow behind the hero copy */
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(ellipse 640px 420px at 20% 25%, hsl(var(--violet) / 0.16), transparent 60%);
+  animation: heroDrift 16s ease-in-out infinite alternate;
+}
+@keyframes heroDrift { from { transform: translate(0, 0) scale(1); } to { transform: translate(3%, 2%) scale(1.06); } }
+
+/* Cursor-reactive glow, desktop only (see script.js) */
+.hero__glow {
+  position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0;
+  transition: opacity 0.4s var(--ease);
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), hsl(var(--lime) / 0.14), transparent 70%);
+}
+
 .hero__scroll { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); }
 .hero__scroll-pill { width: 26px; height: 42px; border-radius: var(--r-full); border: 1px solid hsl(var(--border-strong)); display: flex; justify-content: center; padding-top: 8px; }
 .hero__scroll-dot { width: 4px; height: 8px; border-radius: var(--r-full); background: hsl(var(--lime)); animation: scrollBounce 1.9s var(--ease) infinite; }
@@ -283,6 +306,8 @@ p { line-height: var(--lh-relaxed); }
 .pricing-card:hover { transform: translateY(-4px); border-color: hsl(var(--border-strong)); }
 .pricing-card--highlight { border-color: hsl(var(--lime) / 0.5); background: linear-gradient(165deg, hsl(var(--surface-2) / 0.9), hsl(var(--violet) / 0.1)); position: relative; }
 .pricing-card--highlight::before { content: "Meest gekozen"; position: absolute; top: -0.85rem; left: 2.25rem; background: hsl(var(--lime)); color: hsl(240 20% 6%); font-size: 0.72rem; font-weight: 700; padding: 0.35rem 0.9rem; border-radius: var(--r-full); }
+.pricing-card--recommend { border-color: hsl(var(--violet) / 0.5); background: linear-gradient(165deg, hsl(var(--surface-2) / 0.9), hsl(var(--lime) / 0.08)); position: relative; }
+.pricing-card--recommend::before { content: "Aanrader"; position: absolute; top: -0.85rem; left: 2.25rem; background: hsl(var(--violet)); color: hsl(0 0% 100%); font-size: 0.72rem; font-weight: 700; padding: 0.35rem 0.9rem; border-radius: var(--r-full); }
 .pricing-card__price { font-family: var(--font-display); font-size: 2.2rem; margin-top: 1rem; letter-spacing: var(--tr-tight); }
 .pricing-card__price-note { font-family: var(--font-body); font-size: 0.85rem; color: hsl(var(--fg-faint)); font-weight: 400; }
 .pricing-card__desc { margin-top: 0.5rem; color: hsl(var(--fg-muted)); font-size: 0.92rem; }
@@ -347,6 +372,13 @@ p { line-height: var(--lh-relaxed); }
 /* ---------- whatsapp float ---------- */
 .wa-float { position: fixed; bottom: 1.75rem; right: 1.75rem; z-index: 600; width: 3.5rem; height: 3.5rem; border-radius: var(--r-full); background: hsl(var(--lime)); color: hsl(240 20% 6%); display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 30px -6px hsl(var(--lime) / 0.55); transition: transform var(--dur-1) var(--ease); }
 .wa-float:hover { transform: scale(1.08); }
+.wa-float::before, .wa-float::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit;
+  border: 2px solid hsl(var(--lime) / 0.6); opacity: 0;
+  animation: waPulse 2.6s ease-out infinite;
+}
+.wa-float::after { animation-delay: 1.3s; }
+@keyframes waPulse { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.8); opacity: 0; } }
 
 /* ---------- reveal ----------
    Content stays visible by default. Only once script.js runs successfully
