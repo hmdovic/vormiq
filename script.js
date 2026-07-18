@@ -67,8 +67,12 @@
   var projectRows = document.querySelectorAll(".project-row");
   filterTabs.forEach(function (tab) {
     tab.addEventListener("click", function () {
-      filterTabs.forEach(function (t) { t.classList.remove("is-active"); });
+      filterTabs.forEach(function (t) {
+        t.classList.remove("is-active");
+        t.setAttribute("aria-pressed", "false");
+      });
       tab.classList.add("is-active");
+      tab.setAttribute("aria-pressed", "true");
       var filter = tab.dataset.filter;
       projectRows.forEach(function (row) {
         var show = filter === "all" || row.dataset.category === filter;
@@ -144,6 +148,43 @@
       status.classList.add("is-success");
       form.reset();
     });
+  }
+
+  /* Motion extras — skipped entirely for reduced-motion or touch/coarse pointers */
+  var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var hasFinePointer = window.matchMedia("(pointer: fine)").matches;
+
+  if (!prefersReducedMotion && hasFinePointer) {
+    /* Magnetic buttons — nudge toward the cursor within a small radius */
+    document.querySelectorAll("[data-magnetic]").forEach(function (btn) {
+      var strength = 0.35;
+      btn.addEventListener("mousemove", function (e) {
+        var rect = btn.getBoundingClientRect();
+        var x = e.clientX - (rect.left + rect.width / 2);
+        var y = e.clientY - (rect.top + rect.height / 2);
+        btn.style.transform = "translate(" + (x * strength).toFixed(1) + "px, " + (y * strength).toFixed(1) + "px)";
+      });
+      btn.addEventListener("mouseleave", function () {
+        btn.style.transform = "";
+      });
+    });
+
+    /* Hero glow follows the cursor */
+    var hero = document.getElementById("hero");
+    var heroGlow = hero && hero.querySelector(".hero__glow");
+    if (hero && heroGlow) {
+      hero.addEventListener("mousemove", function (e) {
+        var rect = hero.getBoundingClientRect();
+        var x = ((e.clientX - rect.left) / rect.width) * 100;
+        var y = ((e.clientY - rect.top) / rect.height) * 100;
+        heroGlow.style.setProperty("--mx", x + "%");
+        heroGlow.style.setProperty("--my", y + "%");
+        heroGlow.style.opacity = "1";
+      });
+      hero.addEventListener("mouseleave", function () {
+        heroGlow.style.opacity = "0";
+      });
+    }
   }
 
   /* Animated stat counters */
