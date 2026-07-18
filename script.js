@@ -185,6 +185,34 @@
         heroGlow.style.opacity = "0";
       });
     }
+
+    /* Spotlight highlight that tracks the cursor on cards */
+    document.querySelectorAll(".bento-card, .pricing-card").forEach(function (card) {
+      card.addEventListener("mousemove", function (e) {
+        var rect = card.getBoundingClientRect();
+        card.style.setProperty("--mx", (e.clientX - rect.left) + "px");
+        card.style.setProperty("--my", (e.clientY - rect.top) + "px");
+      });
+    });
+  }
+
+  /* Hero video parallax on scroll — pure scroll-driven, fine on touch too,
+     only skipped for reduced-motion */
+  if (!prefersReducedMotion) {
+    var heroVideo = document.querySelector(".hero__video");
+    var heroSection = document.getElementById("hero");
+    if (heroVideo && heroSection) {
+      var ticking = false;
+      window.addEventListener("scroll", function () {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () {
+          var progress = Math.min(window.scrollY / heroSection.offsetHeight, 1);
+          heroVideo.style.transform = "scale(" + (1 + progress * 0.12) + ")";
+          ticking = false;
+        });
+      }, { passive: true });
+    }
   }
 
   /* Animated stat counters */
