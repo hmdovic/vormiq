@@ -137,7 +137,7 @@ p { line-height: var(--lh-relaxed); }
 .navbar.is-scrolled { padding-block: 0.8rem; background: hsl(240 10% 4% / 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom-color: hsl(var(--border)); }
 .navbar__inner { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
 .navbar__logo { display: flex; align-items: center; gap: 0.6rem; font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; }
-.navbar__logo img { width: 30px; height: auto; }
+.navbar__logo img { width: 38px; height: auto; }
 .navbar__links { display: none; align-items: center; gap: 2.2rem; }
 .navbar__links a { font-size: 0.9rem; font-weight: 500; color: hsl(var(--fg-muted)); transition: color var(--dur-1); }
 .navbar__links a:hover { color: hsl(var(--fg)); }
@@ -215,7 +215,7 @@ p { line-height: var(--lh-relaxed); }
 .bento-card--feature { background: linear-gradient(160deg, hsl(var(--surface-2) / 0.9), hsl(var(--violet) / 0.14)); border-color: hsl(var(--lime) / 0.35); }
 .bento-card__icon { width: 46px; height: 46px; border-radius: var(--r-md); display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, hsl(var(--lime) / 0.18), hsl(var(--violet) / 0.18)); border: 1px solid hsl(var(--border-strong)); color: hsl(var(--lime)); flex-shrink: 0; }
 .bento-card__tag { display: inline-block; width: fit-content; font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: var(--tr-wide); text-transform: uppercase; color: hsl(var(--violet)); padding: 0.3rem 0.75rem; border-radius: var(--r-full); border: 1px solid hsl(var(--violet) / 0.4); background: hsl(var(--violet) / 0.1); }
-.bento-card__price { margin-top: auto; padding-top: 1rem; border-top: 1px solid hsl(var(--border)); font-family: var(--font-display); font-size: 1.15rem; color: hsl(var(--lime)); }
+.bento-card__price { display: block; margin-top: auto; padding-top: 1rem; border-top: 1px solid hsl(var(--border)); font-family: var(--font-display); font-size: 0.95rem; font-weight: 600; color: hsl(var(--lime)); transition: gap var(--dur-1); }
 .bento-card__price span { font-family: var(--font-body); font-size: 0.82rem; color: hsl(var(--fg-faint)); font-weight: 400; }
 
 /* ---------- process rail ---------- */
