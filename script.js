@@ -148,6 +148,16 @@
       status.classList.add("is-success");
       form.reset();
     });
+
+    /* Hide the floating WhatsApp bubble while a form field has focus — on small
+       screens it sits over the corner of the "Bericht" textarea otherwise. */
+    var waFloat = document.querySelector(".wa-float");
+    if (waFloat) {
+      form.querySelectorAll("input, textarea, select").forEach(function (field) {
+        field.addEventListener("focus", function () { waFloat.classList.add("is-hidden"); });
+        field.addEventListener("blur", function () { waFloat.classList.remove("is-hidden"); });
+      });
+    }
   }
 
   /* Motion extras — skipped entirely for reduced-motion or touch/coarse pointers */
@@ -192,6 +202,33 @@
         var rect = card.getBoundingClientRect();
         card.style.setProperty("--mx", (e.clientX - rect.left) + "px");
         card.style.setProperty("--my", (e.clientY - rect.top) + "px");
+      });
+    });
+
+    /* 3D tilt — perspective rotate + glare, following the cursor. Reserved for
+       the "screen" showcases (bento cards, project previews, highlighted pricing)
+       so it reads as a premium detail rather than a gimmick applied everywhere. */
+    document.querySelectorAll(".bento-card, .project-row__preview, .pricing-card--highlight, .pricing-card--recommend").forEach(function (el) {
+      el.classList.add("tilt-3d");
+      var maxDeg = el.classList.contains("project-row__preview") ? 10 : 6;
+      var lift = el.classList.contains("pricing-card") ? "translateY(-4px)" : (el.classList.contains("bento-card") ? "translateY(-4px)" : "");
+
+      el.addEventListener("mouseenter", function () {
+        el.classList.add("is-tilting");
+      });
+      el.addEventListener("mousemove", function (e) {
+        var rect = el.getBoundingClientRect();
+        var px = (e.clientX - rect.left) / rect.width;
+        var py = (e.clientY - rect.top) / rect.height;
+        var rotateY = (px - 0.5) * maxDeg * 2;
+        var rotateX = (0.5 - py) * maxDeg * 2;
+        el.style.transform = "perspective(1000px) rotateX(" + rotateX.toFixed(2) + "deg) rotateY(" + rotateY.toFixed(2) + "deg) " + lift;
+        el.style.setProperty("--glare-x", (px * 100) + "%");
+        el.style.setProperty("--glare-y", (py * 100) + "%");
+      });
+      el.addEventListener("mouseleave", function () {
+        el.classList.remove("is-tilting");
+        el.style.transform = "";
       });
     });
   }
