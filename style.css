@@ -104,9 +104,12 @@ p { line-height: var(--lh-relaxed); }
 .muted { color: hsl(var(--fg-muted)); }
 .faint { color: hsl(var(--fg-faint)); }
 .text-gradient {
-  background: linear-gradient(100deg, hsl(var(--lime)) 10%, hsl(var(--violet)) 90%);
+  background: linear-gradient(100deg, hsl(var(--lime)) 10%, hsl(var(--violet)) 45%, hsl(var(--lime)) 90%);
+  background-size: 220% auto;
   -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: gradientSweep 6s ease-in-out infinite;
 }
+@keyframes gradientSweep { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 .text-center { text-align: center; }
 .mx-auto { margin-inline: auto; }
 
@@ -183,6 +186,11 @@ p { line-height: var(--lh-relaxed); }
 .glass-card { background: var(--glass); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); border: 1px solid hsl(var(--border-strong)); border-radius: var(--r-xl); padding: 1.75rem; }
 .glass-card--accent { border-color: hsl(var(--lime) / 0.3); position: relative; overflow: hidden; }
 .glass-card--accent::before { content: ""; position: absolute; top: -45%; right: -30%; width: 65%; height: 170%; background: hsl(var(--lime) / 0.15); filter: blur(55px); border-radius: 50%; }
+/* Uses the standalone `translate` property (not `transform`) so it layers
+   independently on top of the .hero-in load-in animation without clobbering it. */
+.hero__cards .glass-card { animation: cardFloat 5.5s ease-in-out infinite; }
+.hero__cards .glass-card:nth-child(2) { animation-delay: -2.75s; }
+@keyframes cardFloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -9px; } }
 /* Cinematic load-in — hero is above the fold, so this runs on load, not on scroll */
 .hero-in { opacity: 0; transform: translateY(22px); filter: blur(6px); animation: heroIn 0.9s var(--ease) forwards; }
 .hero-in--1 { animation-delay: 0.05s; }
@@ -233,6 +241,12 @@ p { line-height: var(--lh-relaxed); }
   transition: transform var(--dur-2) var(--ease), border-color var(--dur-2), background var(--dur-2);
 }
 .bento-card:hover { transform: translateY(-4px); border-color: hsl(var(--border-strong)); background: hsl(var(--surface-2) / 0.7); }
+.bento-card::after, .pricing-card::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0;
+  transition: opacity 0.35s var(--ease); border-radius: inherit;
+  background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), hsl(var(--lime) / 0.12), transparent 70%);
+}
+.bento-card:hover::after, .pricing-card:hover::after { opacity: 1; }
 .bento-card--wide { grid-column: span 1; }
 @media (min-width: 1100px) { .bento-card--wide { grid-column: span 2; } }
 .bento-card--feature { background: linear-gradient(160deg, hsl(var(--surface-2) / 0.9), hsl(var(--violet) / 0.14)); border-color: hsl(var(--lime) / 0.35); }
@@ -302,7 +316,7 @@ p { line-height: var(--lh-relaxed); }
 @media (min-width: 900px) { .pricing-grid { grid-template-columns: repeat(3, 1fr); } }
 .pricing-grid--wide { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
 @media (min-width: 700px) { .pricing-grid--wide { grid-template-columns: repeat(2, 1fr); } }
-.pricing-card { padding: 2.25rem; border-radius: var(--r-xl); border: 1px solid hsl(var(--border)); background: hsl(var(--surface) / 0.55); display: flex; flex-direction: column; transition: transform var(--dur-2) var(--ease), border-color var(--dur-2); }
+.pricing-card { position: relative; padding: 2.25rem; border-radius: var(--r-xl); border: 1px solid hsl(var(--border)); background: hsl(var(--surface) / 0.55); display: flex; flex-direction: column; transition: transform var(--dur-2) var(--ease), border-color var(--dur-2); }
 .pricing-card:hover { transform: translateY(-4px); border-color: hsl(var(--border-strong)); }
 .pricing-card--highlight { border-color: hsl(var(--lime) / 0.5); background: linear-gradient(165deg, hsl(var(--surface-2) / 0.9), hsl(var(--violet) / 0.1)); position: relative; }
 .pricing-card--highlight::before { content: "Meest gekozen"; position: absolute; top: -0.85rem; left: 2.25rem; background: hsl(var(--lime)); color: hsl(240 20% 6%); font-size: 0.72rem; font-weight: 700; padding: 0.35rem 0.9rem; border-radius: var(--r-full); }
@@ -379,6 +393,30 @@ p { line-height: var(--lh-relaxed); }
 }
 .wa-float::after { animation-delay: 1.3s; }
 @keyframes waPulse { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.8); opacity: 0; } }
+
+/* ---------- promo ribbon (bottom-left, mirrors the WhatsApp float) ---------- */
+.promo-ribbon-wrap { position: fixed; bottom: 0; left: 0; width: 190px; height: 190px; overflow: hidden; z-index: 590; pointer-events: none; }
+.promo-ribbon {
+  position: absolute; bottom: 40px; left: -52px; width: 240px; padding-block: 0.5rem;
+  transform: rotate(-45deg); transform-origin: center;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.1rem;
+  pointer-events: auto; text-align: center;
+  background: linear-gradient(100deg, hsl(var(--lime)), hsl(var(--violet)), hsl(var(--lime)));
+  background-size: 220% auto;
+  color: hsl(240 20% 6%); font-family: var(--font-mono); font-weight: 700; font-size: 0.72rem;
+  letter-spacing: 0.03em; text-transform: uppercase;
+  box-shadow: 0 10px 28px -8px hsl(var(--violet) / 0.55);
+  animation: ribbonShimmer 5s linear infinite;
+  transition: transform var(--dur-1) var(--ease);
+}
+.promo-ribbon:hover { transform: rotate(-45deg) scale(1.06); }
+.promo-ribbon strong { font-family: var(--font-display); font-size: 0.92rem; letter-spacing: var(--tr-tight); text-transform: none; }
+@keyframes ribbonShimmer { 0% { background-position: 0% 50%; } 100% { background-position: 220% 50%; } }
+@media (max-width: 560px) {
+  .promo-ribbon-wrap { width: 140px; height: 140px; }
+  .promo-ribbon { bottom: 28px; left: -50px; width: 190px; font-size: 0.62rem; }
+  .promo-ribbon strong { font-size: 0.78rem; }
+}
 
 /* ---------- reveal ----------
    Content stays visible by default. Only once script.js runs successfully
