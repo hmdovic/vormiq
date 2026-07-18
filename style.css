@@ -394,29 +394,6 @@ p { line-height: var(--lh-relaxed); }
 .wa-float::after { animation-delay: 1.3s; }
 @keyframes waPulse { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.8); opacity: 0; } }
 
-/* ---------- promo ribbon (bottom-left, mirrors the WhatsApp float) ---------- */
-.promo-ribbon-wrap { position: fixed; bottom: 0; left: 0; width: 190px; height: 190px; overflow: hidden; z-index: 590; pointer-events: none; }
-.promo-ribbon {
-  position: absolute; bottom: 40px; left: -52px; width: 240px; padding-block: 0.5rem;
-  transform: rotate(-45deg); transform-origin: center;
-  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.1rem;
-  pointer-events: auto; text-align: center;
-  background: linear-gradient(100deg, hsl(var(--lime)), hsl(var(--violet)), hsl(var(--lime)));
-  background-size: 220% auto;
-  color: hsl(240 20% 6%); font-family: var(--font-mono); font-weight: 700; font-size: 0.72rem;
-  letter-spacing: 0.03em; text-transform: uppercase;
-  box-shadow: 0 10px 28px -8px hsl(var(--violet) / 0.55);
-  animation: ribbonShimmer 5s linear infinite;
-  transition: transform var(--dur-1) var(--ease);
-}
-.promo-ribbon:hover { transform: rotate(-45deg) scale(1.06); }
-.promo-ribbon strong { font-family: var(--font-display); font-size: 0.92rem; letter-spacing: var(--tr-tight); text-transform: none; }
-@keyframes ribbonShimmer { 0% { background-position: 0% 50%; } 100% { background-position: 220% 50%; } }
-@media (max-width: 560px) {
-  .promo-ribbon-wrap { width: 140px; height: 140px; }
-  .promo-ribbon { bottom: 28px; left: -50px; width: 190px; font-size: 0.62rem; }
-  .promo-ribbon strong { font-size: 0.78rem; }
-}
 
 /* ---------- reveal ----------
    Content stays visible by default. Only once script.js runs successfully
