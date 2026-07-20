@@ -11,9 +11,20 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,440;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link rel="preload" as="image" href="assets/hero-poster.jpg" fetchpriority="high" />
+<link rel="preload" as="video" href="assets/hero.mp4" type="video/mp4" />
 <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body class="is-loading">
+
+<a href="#top" class="skip-link">Ga naar inhoud</a>
+
+<div class="preloader" id="preloader" aria-hidden="true">
+  <div class="preloader__mark">
+    <img src="assets/mark-white.png" alt="" />
+  </div>
+  <div class="preloader__line"><span id="preloaderFill"></span></div>
+</div>
 
 <div class="grain" aria-hidden="true"></div>
 <div class="progress-bar" aria-hidden="true"><div class="progress-bar__fill" id="progressFill"></div></div>
@@ -54,7 +65,7 @@
   <!-- ============ HERO ============ -->
   <section class="hero" id="hero">
     <div class="hero__media">
-      <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="assets/hero-poster.jpg">
+      <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="assets/hero-poster.jpg" fetchpriority="high" disablepictureinpicture>
         <source src="assets/hero.mp4" type="video/mp4" />
       </video>
       <div class="hero__scrim"></div>
@@ -99,6 +110,7 @@
         <figure class="portfolio-item reveal" data-tilt>
           <div class="portfolio-item__media">
             <img src="assets/project-night.jpg" alt="Glazen veranda bij avondlicht, warme verlichting, zwart aluminium profiel" loading="lazy" />
+            <span class="portfolio-item__view">Bekijk detail <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
           <figcaption>
             <span class="portfolio-item__index">01 &mdash; Avond</span>
@@ -109,6 +121,7 @@
         <figure class="portfolio-item portfolio-item--offset reveal" data-tilt>
           <div class="portfolio-item__media">
             <img src="assets/project-day.jpg" alt="Glazen veranda overdag in de tuin, schuifwanden open, groen rondom" loading="lazy" />
+            <span class="portfolio-item__view">Bekijk detail <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
           <figcaption>
             <span class="portfolio-item__index">02 &mdash; Overdag</span>
@@ -152,7 +165,7 @@
           <p>Volledig open, of volledig beschut &mdash; uw keuze, per moment.</p>
         </article>
 
-        <article class="service-card reveal">
+        <article class="service-card service-card--half reveal">
           <div class="service-card__icon">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.5M12 19v2.5M21.5 12H19M5 12H2.5M18.4 5.6l-1.8 1.8M7.4 16.6l-1.8 1.8M18.4 18.4l-1.8-1.8M7.4 7.4 5.6 5.6" stroke-linecap="round"/></svg>
           </div>
@@ -160,7 +173,7 @@
           <p>Koken, zitten, samenzijn &mdash; buiten net zo comfortabel als binnen.</p>
         </article>
 
-        <article class="service-card service-card--wide reveal">
+        <article class="service-card service-card--half reveal">
           <div class="service-card__icon">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M15.5 3.5 20.5 8.5 8 21H3v-5L15.5 3.5Z" stroke-linecap="round" stroke-linejoin="round"/><path d="M13 6 18 11" stroke-linecap="round"/></svg>
           </div>
@@ -176,10 +189,10 @@
     <div class="wrap">
       <div class="why-grid">
         <div class="why-media reveal" data-tilt>
-          <img src="assets/project-night.jpg" alt="Detail van het aluminium profiel bij avondlicht" loading="lazy" />
+          <img src="assets/project-night-detail.jpg" alt="Detail van het aluminium profiel en verlichting bij avondlicht" loading="lazy" />
           <div class="why-media__badge">
-            <span class="why-media__badge-num">6+</span>
-            <span class="why-media__badge-label">jaar<br />vakmanschap</span>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2 3 7v6c0 5 4 8.5 9 9 5-.5 9-4 9-9V7l-9-5Z" stroke-linejoin="round"/><path d="m8.5 12 2.5 2.5 4.5-4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="why-media__badge-label">Elk detail<br />gecontroleerd</span>
           </div>
         </div>
 
@@ -190,23 +203,23 @@
           <ul class="why-list">
             <li class="reveal">
               <span class="why-list__num">01</span>
-              <div><h4>Vakmanschap</h4><p>Elk detail handmatig gecontroleerd, niet automatisch afgevinkt.</p></div>
+              <div><h3>Vakmanschap</h3><p>Elk detail handmatig gecontroleerd, niet automatisch afgevinkt.</p></div>
             </li>
             <li class="reveal">
               <span class="why-list__num">02</span>
-              <div><h4>Maatwerk</h4><p>Op millimeter gemaakt voor uw woning &mdash; nooit uit een catalogus.</p></div>
+              <div><h3>Maatwerk</h3><p>Op millimeter gemaakt voor uw woning &mdash; nooit uit een catalogus.</p></div>
             </li>
             <li class="reveal">
               <span class="why-list__num">03</span>
-              <div><h4>Premium materialen</h4><p>Aluminium en glas die tegen weer, tijd en decennia gebruik kunnen.</p></div>
+              <div><h3>Premium materialen</h3><p>Aluminium en glas die tegen weer, tijd en decennia gebruik kunnen.</p></div>
             </li>
             <li class="reveal">
               <span class="why-list__num">04</span>
-              <div><h4>Persoonlijke aanpak</h4><p>&Eacute;&eacute;n aanspreekpunt, van eerste gesprek tot laatste schroef.</p></div>
+              <div><h3>Persoonlijke aanpak</h3><p>&Eacute;&eacute;n aanspreekpunt, van eerste gesprek tot laatste schroef.</p></div>
             </li>
             <li class="reveal">
               <span class="why-list__num">05</span>
-              <div><h4>Perfecte afwerking</h4><p>Wat u ziet op de tekening, is precies wat er komt te staan.</p></div>
+              <div><h3>Perfecte afwerking</h3><p>Wat u ziet op de tekening, is precies wat er komt te staan.</p></div>
             </li>
           </ul>
         </div>
@@ -225,27 +238,27 @@
       <ol class="process">
         <li class="process__step reveal">
           <span class="process__num">01</span>
-          <h4>Consultatie</h4>
+          <h3>Consultatie</h3>
           <p>We beginnen met luisteren &mdash; naar uw huis, uw tuin, uw manier van leven.</p>
         </li>
         <li class="process__step reveal">
           <span class="process__num">02</span>
-          <h4>Opmeting</h4>
+          <h3>Opmeting</h3>
           <p>Millimeter-nauwkeurig, op locatie.</p>
         </li>
         <li class="process__step reveal">
           <span class="process__num">03</span>
-          <h4>Ontwerp</h4>
+          <h3>Ontwerp</h3>
           <p>Een voorstel dat past bij de architectuur die er al staat.</p>
         </li>
         <li class="process__step reveal">
           <span class="process__num">04</span>
-          <h4>Plaatsing</h4>
+          <h3>Plaatsing</h3>
           <p>Vakwerk, meestal binnen enkele dagen afgerond.</p>
         </li>
         <li class="process__step reveal">
           <span class="process__num">05</span>
-          <h4>Oplevering</h4>
+          <h3>Oplevering</h3>
           <p>Geen werk is klaar totdat het perfect is.</p>
         </li>
       </ol>
@@ -255,7 +268,7 @@
   <!-- ============ FINAL CTA / CONTACT ============ -->
   <section class="final-cta" id="contact">
     <div class="final-cta__media">
-      <img src="assets/project-night.jpg" alt="" aria-hidden="true" />
+      <img src="assets/project-day.jpg" alt="" aria-hidden="true" />
       <div class="final-cta__scrim"></div>
     </div>
     <div class="wrap final-cta__inner">
@@ -303,6 +316,7 @@
     </nav>
     <div class="footer__contact">
       <a href="mailto:info@maveranda.nl">info@maveranda.nl</a>
+      <a href="https://wa.me/31600000000">+31 6 00 00 00 00</a>
       <span>Nederland</span>
     </div>
   </div>
@@ -312,7 +326,17 @@
   </div>
 </footer>
 
+<a href="https://wa.me/31600000000?text=Hallo%2C%20ik%20ben%20ge%C3%AFnteresseerd%20in%20een%20veranda%20op%20maat."
+   target="_blank" rel="noopener noreferrer" class="wa-float" id="waFloat" aria-label="WhatsApp ons">
+  <span class="wa-float__ring"></span>
+  <span class="wa-float__icon">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12.01 2C6.48 2 2 6.48 2 12.01c0 1.99.58 3.85 1.58 5.42L2 22l4.7-1.53a9.96 9.96 0 0 0 5.31 1.53c5.53 0 10.01-4.48 10.01-10.01C22.02 6.48 17.54 2 12.01 2Zm5.83 14.2c-.25.7-1.24 1.29-2.02 1.46-.54.11-1.24.2-3.6-.77-2.98-1.24-4.9-4.28-5.05-4.48-.15-.2-1.2-1.6-1.2-3.05s.75-2.16 1.02-2.46c.25-.28.55-.35.73-.35h.53c.17 0 .4-.03.62.48.25.6.85 2.06.92 2.21.07.15.12.33.02.53-.1.2-.15.33-.3.5-.15.18-.31.4-.44.53-.15.15-.3.31-.13.6.17.3.75 1.24 1.62 2.01 1.11.99 2.05 1.3 2.35 1.45.3.15.47.13.65-.08.17-.2.72-.84.92-1.13.2-.28.4-.23.65-.13.27.1 1.72.81 2.02.96.3.15.5.23.57.35.08.13.08.73-.17 1.43Z"/></svg>
+  </span>
+  <span class="wa-float__label">WhatsApp ons</span>
+</a>
+
 <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
 
 <script src="vendor/gsap.min.js"></script>
 <script src="vendor/ScrollTrigger.min.js"></script>
