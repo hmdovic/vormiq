@@ -4,6 +4,46 @@
   var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var hasFinePointer = window.matchMedia("(pointer: fine)").matches;
 
+  /* ---------- preloader — a brief, deliberate arrival moment ---------- */
+  var preloader = document.getElementById("preloader");
+  var heroReady = false;
+  function startHeroReveal() {
+    if (heroReady) return;
+    heroReady = true;
+    if (window.gsap) {
+      gsap.utils.toArray(".reveal-line__inner").forEach(function (el, i) {
+        gsap.to(el, { y: "0%", duration: 1.1, ease: "power4.out", delay: 0.1 + i * 0.12 });
+      });
+    } else {
+      document.querySelectorAll(".reveal-line__inner").forEach(function (el) { el.style.transform = "translateY(0)"; });
+    }
+    document.querySelectorAll(".hero .reveal-up").forEach(function (el) {
+      var delay = parseFloat(el.dataset.delay || "0");
+      setTimeout(function () { el.classList.add("is-visible"); }, delay * 1000);
+    });
+  }
+
+  if (preloader) {
+    if (prefersReducedMotion) {
+      preloader.remove();
+      document.body.classList.remove("is-loading");
+      startHeroReveal();
+    } else {
+      requestAnimationFrame(function () {
+        preloader.classList.add("is-ready");
+      });
+      var minHold = new Promise(function (resolve) { setTimeout(resolve, 1150); });
+      minHold.then(function () {
+        preloader.classList.add("is-done");
+        document.body.classList.remove("is-loading");
+        startHeroReveal();
+        setTimeout(function () { preloader.remove(); }, 750);
+      });
+    }
+  } else {
+    startHeroReveal();
+  }
+
   /* ---------- Lenis smooth scroll ---------- */
   var lenis = null;
   if (!prefersReducedMotion && window.Lenis) {
@@ -90,14 +130,14 @@
       });
     });
 
-    gsap.utils.toArray(".reveal-up").forEach(function (el) {
+    gsap.utils.toArray(".reveal-up:not(.hero .reveal-up)").forEach(function (el) {
       var delay = parseFloat(el.dataset.delay || "0");
-      setTimeout(function () { el.classList.add("is-visible"); }, 300 + delay * 1000);
-    });
-
-    /* hero title line reveal */
-    gsap.utils.toArray(".reveal-line__inner").forEach(function (el, i) {
-      gsap.to(el, { y: "0%", duration: 1.1, ease: "power4.out", delay: 0.15 + i * 0.12 });
+      ScrollTrigger.create({
+        trigger: el,
+        start: "top 92%",
+        onEnter: function () { setTimeout(function () { el.classList.add("is-visible"); }, delay * 1000); },
+        once: true,
+      });
     });
 
     /* services + why-list stagger within their reveal groups */
@@ -147,22 +187,27 @@
     } else {
       revealEls.forEach(function (el) { el.classList.add("is-visible"); });
     }
-    document.querySelectorAll(".reveal-line__inner").forEach(function (el) { el.style.transform = "translateY(0)"; });
   }
 
   /* ---------- fine-pointer only motion extras ---------- */
   if (!prefersReducedMotion && hasFinePointer) {
-    /* custom cursor */
+    /* dual-layer custom cursor — dot tracks tight, ring trails with lag (GSAP quickTo) */
     var cursorDot = document.getElementById("cursorDot");
-    if (cursorDot) {
+    var cursorRing = document.getElementById("cursorRing");
+    if (cursorDot && cursorRing && window.gsap) {
+      var setDotX = gsap.quickTo(cursorDot, "left", { duration: 0.12, ease: "power3.out" });
+      var setDotY = gsap.quickTo(cursorDot, "top", { duration: 0.12, ease: "power3.out" });
+      var setRingX = gsap.quickTo(cursorRing, "left", { duration: 0.45, ease: "power3.out" });
+      var setRingY = gsap.quickTo(cursorRing, "top", { duration: 0.45, ease: "power3.out" });
       window.addEventListener("mousemove", function (e) {
-        cursorDot.style.left = e.clientX + "px";
-        cursorDot.style.top = e.clientY + "px";
+        setDotX(e.clientX); setDotY(e.clientY);
+        setRingX(e.clientX); setRingY(e.clientY);
         cursorDot.classList.add("is-active");
+        cursorRing.classList.add("is-active");
       });
       document.querySelectorAll("a, button, [data-tilt]").forEach(function (el) {
-        el.addEventListener("mouseenter", function () { cursorDot.classList.add("is-hover"); });
-        el.addEventListener("mouseleave", function () { cursorDot.classList.remove("is-hover"); });
+        el.addEventListener("mouseenter", function () { cursorRing.classList.add("is-hover"); });
+        el.addEventListener("mouseleave", function () { cursorRing.classList.remove("is-hover"); });
       });
     }
 
@@ -191,6 +236,16 @@
         el.style.transform = "perspective(1200px) rotateX(" + rotateX.toFixed(2) + "deg) rotateY(" + rotateY.toFixed(2) + "deg)";
       });
       el.addEventListener("mouseleave", function () { el.style.transform = ""; });
+    });
+  }
+
+  /* ---------- WhatsApp float — hide while a form field is focused ---------- */
+  var waFloat = document.getElementById("waFloat");
+  var contactFormEl = document.getElementById("contactForm");
+  if (waFloat && contactFormEl) {
+    contactFormEl.querySelectorAll("input, textarea").forEach(function (field) {
+      field.addEventListener("focus", function () { waFloat.classList.add("is-hidden"); });
+      field.addEventListener("blur", function () { waFloat.classList.remove("is-hidden"); });
     });
   }
 
