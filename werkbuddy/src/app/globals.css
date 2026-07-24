@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f6f7f9;
+  --foreground: #10151f;
+}
+
+@theme inline {
+  --font-sans: var(--font-inter);
+
+  /* Brand — deep navy/charcoal, the professional base */
+  --color-brand-50: #f4f6f9;
+  --color-brand-100: #e6eaf1;
+  --color-brand-200: #c9d2e0;
+  --color-brand-300: #a2afc6;
+  --color-brand-400: #7c8bab;
+  --color-brand-500: #566a8c;
+  --color-brand-600: #3f4f6c;
+  --color-brand-700: #2c3852;
+  --color-brand-800: #1a2236;
+  --color-brand-900: #10151f;
+  --color-brand-950: #080b12;
+
+  /* Accent — warm amber/gold, used sparingly */
+  --color-accent-50: #fff8ea;
+  --color-accent-100: #ffedc2;
+  --color-accent-200: #ffdb8a;
+  --color-accent-300: #ffc24d;
+  --color-accent-400: #fcaa24;
+  --color-accent-500: #e8900a;
+  --color-accent-600: #c27505;
+  --color-accent-700: #995c07;
+  --color-accent-800: #7a4a0d;
+  --color-accent-900: #633f10;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-feature-settings: "cv11", "ss01";
+}
+
+::selection {
+  background: var(--color-accent-200);
+  color: var(--color-brand-900);
+}
