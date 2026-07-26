@@ -364,6 +364,30 @@ p { line-height: var(--lh-relaxed); }
 .live-work-card__desc { margin-top: 0.5rem; color: hsl(var(--fg-muted)); max-width: 32rem; }
 .live-work-card__link { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.75rem; font-size: 0.88rem; font-weight: 600; color: hsl(var(--lime)); }
 
+/* ---------- whatsapp review proof ---------- */
+.review-proof {
+  display: grid; gap: clamp(2.5rem, 2rem + 2vw, 4rem);
+  grid-template-columns: 1fr; align-items: center;
+}
+@media (min-width: 860px) { .review-proof { grid-template-columns: 1.1fr 1fr; gap: 4rem; } }
+.review-proof__stars { color: hsl(var(--lime)); font-size: 1.15rem; letter-spacing: 0.15em; text-shadow: 0 0 18px hsl(var(--lime) / 0.5); margin-top: 1rem; }
+.review-proof__quote {
+  font-family: var(--font-display); font-weight: 600; letter-spacing: var(--tr-tight);
+  line-height: var(--lh-snug); font-size: clamp(1.6rem, 1.4rem + 1vw, 2.2rem);
+  margin-top: 1.1rem; max-width: 26rem;
+}
+.review-proof__author { margin-top: 1rem; color: hsl(var(--fg-muted)); font-size: 0.95rem; }
+.review-proof__author strong { color: hsl(var(--fg)); font-weight: 600; }
+.review-proof__badges { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.75rem; }
+.review-proof__frame {
+  position: relative; border-radius: var(--r-xl); overflow: hidden; max-width: 26rem; margin-inline: auto;
+  background: hsl(var(--surface)); border: 1px solid hsl(var(--border-strong));
+  box-shadow: 0 30px 60px -30px hsl(0 0% 0% / 0.6);
+  transition: transform var(--dur-2) var(--ease), border-color var(--dur-2), box-shadow var(--dur-2) var(--ease);
+}
+.review-proof__frame:hover { transform: translateY(-6px); border-color: hsl(var(--lime) / 0.35); box-shadow: 0 40px 80px -30px hsl(0 0% 0% / 0.7), 0 0 0 1px hsl(var(--lime) / 0.12); }
+.review-proof__frame img { width: 100%; height: auto; display: block; }
+
 /* ---------- filter tabs ---------- */
 .filter-tabs { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: clamp(2rem, 1.6rem + 1.5vw, 3rem); }
 .filter-tab { padding: 0.6rem 1.25rem; border-radius: var(--r-full); border: 1px solid hsl(var(--border-strong)); font-size: 0.88rem; color: hsl(var(--fg-muted)); transition: all var(--dur-1); }
