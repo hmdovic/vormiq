@@ -388,6 +388,27 @@ p { line-height: var(--lh-relaxed); }
 .review-proof__frame:hover { transform: translateY(-6px); border-color: hsl(var(--lime) / 0.35); box-shadow: 0 40px 80px -30px hsl(0 0% 0% / 0.7), 0 0 0 1px hsl(var(--lime) / 0.12); }
 .review-proof__frame img { width: 100%; height: auto; display: block; }
 
+/* ---------- pricing teaser (bold full-bleed) ---------- */
+.pricing-teaser {
+  position: relative; overflow: hidden;
+  background:
+    radial-gradient(120% 90% at 50% 0%, hsl(var(--violet) / 0.85), transparent 65%),
+    linear-gradient(180deg, hsl(var(--violet-deep)), hsl(240 15% 6%));
+}
+.pricing-teaser__grid { display: grid; gap: 1.25rem; grid-template-columns: 1fr; max-width: 62rem; margin-inline: auto; }
+@media (min-width: 760px) { .pricing-teaser__grid { grid-template-columns: repeat(3, 1fr); } }
+.pricing-teaser__card {
+  padding: 2rem 1.75rem; border-radius: var(--r-xl); text-align: center;
+  background: hsl(0 0% 100% / 0.06); border: 1px solid hsl(0 0% 100% / 0.14);
+  transition: transform var(--dur-2) var(--ease), background var(--dur-2);
+}
+.pricing-teaser__card:hover { transform: translateY(-5px); background: hsl(0 0% 100% / 0.1); }
+.pricing-teaser__card--highlight { border-color: hsl(var(--lime) / 0.6); background: hsl(var(--lime) / 0.12); }
+.pricing-teaser__card--highlight:hover { background: hsl(var(--lime) / 0.16); }
+.pricing-teaser__label { font-family: var(--font-mono); font-size: 0.78rem; text-transform: uppercase; letter-spacing: var(--tr-wide); color: hsl(0 0% 100% / 0.65); }
+.pricing-teaser__price { font-family: var(--font-display); font-size: 2.3rem; font-weight: 700; margin-top: 0.6rem; letter-spacing: var(--tr-tight); color: hsl(0 0% 100%); }
+.pricing-teaser__desc { margin-top: 0.4rem; color: hsl(0 0% 100% / 0.72); font-size: 0.92rem; }
+
 /* ---------- filter tabs ---------- */
 .filter-tabs { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: clamp(2rem, 1.6rem + 1.5vw, 3rem); }
 .filter-tab { padding: 0.6rem 1.25rem; border-radius: var(--r-full); border: 1px solid hsl(var(--border-strong)); font-size: 0.88rem; color: hsl(var(--fg-muted)); transition: all var(--dur-1); }
