@@ -255,10 +255,11 @@
   /* Animated stat counters */
   document.querySelectorAll("[data-count-to]").forEach(function (el) {
     var target = parseFloat(el.dataset.countTo);
+    var prefix = el.dataset.countPrefix || "";
     var suffix = el.dataset.countSuffix || "";
     var done = false;
     if (!("IntersectionObserver" in window)) {
-      el.textContent = target + suffix;
+      el.textContent = prefix + target + suffix;
       return;
     }
     var obs = new IntersectionObserver(function (entries) {
@@ -271,7 +272,7 @@
             if (!start) start = ts;
             var progress = Math.min((ts - start) / duration, 1);
             var eased = 1 - Math.pow(1 - progress, 3);
-            el.textContent = Math.round(target * eased) + suffix;
+            el.textContent = prefix + Math.round(target * eased) + suffix;
             if (progress < 1) requestAnimationFrame(step);
           }
           requestAnimationFrame(step);
