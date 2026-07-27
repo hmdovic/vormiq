@@ -526,6 +526,84 @@ p { line-height: var(--lh-relaxed); }
 .modal__body { padding: 2rem; }
 .modal__close { position: absolute; top: 1.25rem; right: 1.25rem; width: 2.5rem; height: 2.5rem; border-radius: var(--r-full); background: hsl(240 10% 8% / 0.85); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; z-index: 2; }
 
+/* ---------- Sami chat assistant ---------- */
+.sami-chat-launcher {
+  position: fixed; bottom: 6.5rem; right: 1.75rem; z-index: 700;
+  width: 3.75rem; height: 3.75rem; border-radius: var(--r-full); overflow: visible;
+  border: 2px solid hsl(var(--lime) / 0.7); padding: 0; cursor: pointer;
+  box-shadow: 0 10px 30px -8px hsl(0 0% 0% / 0.6);
+  transition: transform var(--dur-1) var(--ease);
+}
+.sami-chat-launcher:hover { transform: scale(1.08); }
+.sami-chat-launcher img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; }
+.sami-chat-launcher::before, .sami-chat-launcher::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  border: 2px solid hsl(var(--lime) / 0.55); opacity: 0;
+  animation: waPulse 2.6s ease-out infinite;
+}
+.sami-chat-launcher::after { animation-delay: 1.3s; }
+.sami-chat-launcher__badge {
+  position: absolute; bottom: -4px; right: -4px; width: 1.6rem; height: 1.6rem; border-radius: 50%;
+  background: hsl(var(--lime)); color: hsl(240 20% 6%); display: flex; align-items: center; justify-content: center;
+  border: 2px solid hsl(var(--bg));
+}
+.sami-chat-launcher.is-active .sami-chat-launcher__badge { background: hsl(var(--violet)); color: #fff; }
+
+.sami-chat-panel {
+  position: fixed; bottom: 6.5rem; right: 1.75rem; z-index: 700;
+  width: min(23rem, calc(100vw - 2.5rem)); height: min(38rem, calc(100vh - 8rem));
+  background: hsl(var(--bg)); border: 1px solid hsl(var(--border-strong)); border-radius: var(--r-xl);
+  box-shadow: 0 40px 90px -20px hsl(0 0% 0% / 0.7);
+  display: flex; flex-direction: column; overflow: hidden;
+  transform-origin: bottom right; transform: scale(0.92) translateY(16px);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity var(--dur-2) var(--ease), transform var(--dur-2) var(--ease), visibility var(--dur-2);
+}
+.sami-chat-panel.is-open { opacity: 1; visibility: visible; pointer-events: auto; transform: scale(1) translateY(0); }
+@media (max-width: 480px) { .sami-chat-panel { right: 1.25rem; bottom: 1.25rem; width: calc(100vw - 2.5rem); height: calc(100vh - 7rem); } .sami-chat-launcher { bottom: 6rem; } }
+
+.sami-chat-header { display: flex; align-items: center; gap: 0.75rem; padding: 1rem 1.1rem; border-bottom: 1px solid hsl(var(--border)); background: hsl(var(--surface)); }
+.sami-chat-header__avatar { width: 2.5rem; height: 2.5rem; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.sami-chat-header__info { display: flex; flex-direction: column; line-height: 1.25; flex: 1; }
+.sami-chat-header__info span { font-size: 0.76rem; color: hsl(var(--fg-faint)); }
+.sami-chat-header__close { width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: hsl(var(--fg-muted)); transition: background var(--dur-1); }
+.sami-chat-header__close:hover { background: hsl(0 0% 100% / 0.06); }
+
+.sami-chat-progress { height: 3px; background: hsl(var(--border)); flex-shrink: 0; }
+.sami-chat-progress__bar { display: block; height: 100%; width: 0%; background: hsl(var(--lime)); transition: width var(--dur-2) var(--ease); }
+
+.sami-chat-messages { flex: 1; overflow-y: auto; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem; }
+.sami-chat-bubble { max-width: 82%; padding: 0.65rem 0.9rem; border-radius: var(--r-lg); font-size: 0.9rem; line-height: var(--lh-snug); }
+.sami-chat-bubble--bot { align-self: flex-start; background: hsl(var(--surface-2)); color: hsl(var(--fg)); border-bottom-left-radius: 0.3rem; }
+.sami-chat-bubble--user { align-self: flex-end; background: hsl(var(--violet-deep)); color: #fff; border-bottom-right-radius: 0.3rem; }
+.sami-chat-typing { display: flex; gap: 0.3rem; align-items: center; padding: 0.85rem 1rem; }
+.sami-chat-typing span { width: 6px; height: 6px; border-radius: 50%; background: hsl(var(--fg-faint)); animation: samiTyping 1.1s ease-in-out infinite; }
+.sami-chat-typing span:nth-child(2) { animation-delay: 0.15s; }
+.sami-chat-typing span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes samiTyping { 0%, 60%, 100% { opacity: 0.3; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-3px); } }
+
+.sami-chat-summary { margin-top: 0.4rem; border: 1px solid hsl(var(--border)); border-radius: var(--r-md); padding: 0.85rem 1rem; background: hsl(var(--surface) / 0.6); }
+.sami-chat-summary__row { display: flex; justify-content: space-between; gap: 1rem; font-size: 0.82rem; padding-block: 0.3rem; border-bottom: 1px solid hsl(var(--border)); }
+.sami-chat-summary__row:last-child { border-bottom: none; }
+.sami-chat-summary__row span { color: hsl(var(--fg-faint)); flex-shrink: 0; }
+.sami-chat-summary__row strong { text-align: right; font-weight: 600; }
+
+.sami-chat-final-actions { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.5rem; }
+.sami-chat-send-btn { text-align: center; width: 100%; height: 2.75rem; font-size: 0.88rem; }
+.sami-chat-restart { text-align: center; font-size: 0.82rem; color: hsl(var(--fg-faint)); padding: 0.4rem; transition: color var(--dur-1); }
+.sami-chat-restart:hover { color: hsl(var(--fg-muted)); }
+
+.sami-chat-composer { border-top: 1px solid hsl(var(--border)); background: hsl(var(--surface)); flex-shrink: 0; }
+.sami-chat-quick-replies { display: none; flex-wrap: wrap; gap: 0.5rem; padding: 0.85rem 1rem; }
+.sami-chat-chip { padding: 0.5rem 0.9rem; border-radius: var(--r-full); border: 1px solid hsl(var(--border-strong)); font-size: 0.82rem; color: hsl(var(--fg)); transition: all var(--dur-1); }
+.sami-chat-chip:hover { border-color: hsl(var(--lime) / 0.6); background: hsl(var(--lime) / 0.1); }
+.sami-chat-input-row { display: none; align-items: center; gap: 0.5rem; padding: 0.85rem 1rem; }
+.sami-chat-input-row input { flex: 1; height: 2.6rem; padding-inline: 0.9rem; border-radius: var(--r-full); border: 1px solid hsl(var(--border-strong)); background: hsl(var(--surface-2)); color: hsl(var(--fg)); font-size: 0.88rem; }
+.sami-chat-input-row input:focus { outline: 2px solid hsl(var(--lime)); outline-offset: 1px; }
+.sami-chat-input-row button { width: 2.6rem; height: 2.6rem; border-radius: 50%; background: hsl(var(--lime)); color: hsl(240 20% 6%); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+@media (prefers-reduced-motion: reduce) { .sami-chat-launcher::before, .sami-chat-launcher::after, .sami-chat-typing span { animation: none; } }
+
 /* ---------- legal pages ---------- */
 .legal-block + .legal-block { margin-top: 1.75rem; }
 .legal-block h2 { font-size: 1.15rem; }
