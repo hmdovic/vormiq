@@ -207,6 +207,18 @@ p { line-height: var(--lh-relaxed); }
 .hero-in--4 { animation-delay: 0.42s; }
 @keyframes heroIn { to { opacity: 1; transform: translateY(0); filter: blur(0); } }
 
+/* Kinetic word-mask reveal for the hero's key phrase — each word slides up out of
+   a hidden mask after the base hero-in fade settles, so the line "arrives" and then
+   the emphasized phrase snaps into focus. */
+.hero__kinetic .text-gradient { background-size: 200% 100%; transition: background-position 0.6s var(--ease); }
+.hero__kinetic:hover .text-gradient { background-position: 100% 0; }
+.hero__kinetic-word { display: inline-block; overflow: hidden; vertical-align: top; }
+.hero__kinetic-word > span { display: inline-block; transform: translateY(110%); animation: kineticWord 0.75s var(--ease) forwards; }
+.hero__kinetic-word:nth-child(1) > span { animation-delay: 0.52s; }
+.hero__kinetic-word:nth-child(2) > span { animation-delay: 0.64s; }
+.hero__kinetic-word:nth-child(3) > span { animation-delay: 0.76s; }
+@keyframes kineticWord { to { transform: translateY(0); } }
+
 /* Ambient drifting glow behind the hero copy */
 .hero::before {
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
@@ -549,6 +561,15 @@ p { line-height: var(--lh-relaxed); }
 .pricing-card--highlight::before { content: "Meest gekozen"; position: absolute; top: -0.85rem; left: 2.25rem; background: hsl(var(--accent)); color: #fff; font-size: 0.72rem; font-weight: 700; padding: 0.35rem 0.9rem; border-radius: var(--r-full); }
 .pricing-card--recommend { border-color: hsl(var(--accent-deep) / 0.4); background: linear-gradient(165deg, hsl(var(--surface-2)), hsl(var(--accent-deep) / 0.06)); position: relative; }
 .pricing-card--recommend::before { content: "Aanrader"; position: absolute; top: -0.85rem; left: 2.25rem; background: hsl(var(--accent-deep)); color: hsl(0 0% 100%); font-size: 0.72rem; font-weight: 700; padding: 0.35rem 0.9rem; border-radius: var(--r-full); }
+
+/* Holographic foil sweep — a diagonal sheen that tracks the cursor via --glare-x
+   (already set by the tilt-3d handler in script.js), layered on the existing
+   spotlight radial so the highlighted tier reads as the premium pick on hover. */
+.pricing-card--highlight::after, .pricing-card--recommend::after {
+  background:
+    linear-gradient(115deg, transparent calc(var(--glare-x, 50%) - 22%), hsl(0 0% 100% / 0.5) var(--glare-x, 50%), hsl(var(--accent-bright) / 0.22) calc(var(--glare-x, 50%) + 10%), transparent calc(var(--glare-x, 50%) + 30%)),
+    radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), hsl(var(--accent) / 0.12), transparent 70%);
+}
 .pricing-card__price { font-family: var(--font-display); font-size: 2.2rem; margin-top: 1rem; letter-spacing: var(--tr-tight); }
 .pricing-card__price-note { font-family: var(--font-body); font-size: 0.85rem; color: hsl(var(--fg-faint)); font-weight: 400; }
 .pricing-card__accordion { margin-top: 1.25rem; border-top: 1px solid hsl(var(--border)); }
