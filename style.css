@@ -634,6 +634,8 @@ p { line-height: var(--lh-relaxed); }
   background: hsl(158 40% 14%); color: #fff;
 }
 .hero-whatsapp-mock__avatar { width: 2.15rem; height: 2.15rem; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.hero-whatsapp-mock__profile { display: flex; align-items: center; gap: 0.7rem; flex: 1; min-width: 0; border-radius: var(--r-md); transition: background var(--dur-1); }
+.hero-whatsapp-mock__profile:hover { background: hsl(0 0% 100% / 0.08); }
 .hero-whatsapp-mock__info { display: flex; flex-direction: column; line-height: 1.2; flex: 1; }
 .hero-whatsapp-mock__info span { font-size: 0.72rem; color: hsl(0 0% 100% / 0.7); }
 .hero-whatsapp-mock__call {
