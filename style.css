@@ -75,18 +75,17 @@ body::before {
 .wrap { width: var(--container); margin-inline: auto; }
 .wrap--narrow { width: var(--container-narrow); margin-inline: auto; }
 .wrap--tight { width: var(--container-tight); margin-inline: auto; }
-.section { padding-block: clamp(4.5rem, 3rem + 6vw, 8rem); position: relative; }
-.section--tight { padding-block: clamp(3rem, 2.4rem + 3vw, 5rem); }
+.section { padding-block: clamp(3.5rem, 2.6rem + 4.5vw, 6rem); position: relative; }
+.section--tight { padding-block: clamp(2.5rem, 2rem + 2.5vw, 4rem); }
 .section--surface { background: hsl(var(--surface)); border-block: 1px solid hsl(var(--border)); }
 .pt-nav { padding-top: clamp(7rem, 6rem + 3vw, 9.5rem); }
 
 /* ---------- type ---------- */
 .eyebrow {
-  display: inline-flex; align-items: center; gap: 0.6rem;
-  font-family: var(--font-mono); font-size: 0.78rem; font-weight: 500;
-  text-transform: uppercase; letter-spacing: var(--tr-wide); color: hsl(var(--accent));
+  display: inline-block;
+  font-family: var(--font-body); font-size: 0.85rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.03em; color: hsl(var(--accent));
 }
-.eyebrow::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: hsl(var(--accent)); box-shadow: 0 0 14px hsl(var(--accent) / 0.9); flex-shrink: 0; }
 
 h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 600; letter-spacing: var(--tr-tight); line-height: var(--lh-tight); color: hsl(var(--fg)); }
 h1 { font-size: clamp(2.6rem, 1.9rem + 3.2vw, 5.4rem); }
@@ -241,6 +240,11 @@ p { line-height: var(--lh-relaxed); }
 .bento-card__tag { display: inline-block; width: fit-content; font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: var(--tr-wide); text-transform: uppercase; color: hsl(var(--fg-faint)); padding: 0.3rem 0.75rem; border-radius: var(--r-full); border: 1px solid hsl(var(--border-strong)); background: hsl(var(--surface)); }
 .bento-card__price { display: block; margin-top: auto; padding-top: 1rem; border-top: 1px solid hsl(var(--border)); font-family: var(--font-display); font-size: 0.95rem; font-weight: 600; color: hsl(var(--accent)); transition: gap var(--dur-1); }
 .bento-card__price span { font-family: var(--font-body); font-size: 0.82rem; color: hsl(var(--fg-faint)); font-weight: 400; }
+.bento-card__link {
+  display: inline-flex; align-items: center; margin-top: auto; padding-top: 1.1rem;
+  font-size: 0.88rem; font-weight: 600; color: hsl(var(--accent)); transition: transform var(--dur-1) var(--ease);
+}
+.bento-card:hover .bento-card__link { transform: translateX(3px); }
 
 /* ---------- process rail ---------- */
 .rail { display: flex; flex-direction: column; }
@@ -350,29 +354,26 @@ p { line-height: var(--lh-relaxed); }
 .live-work-card__desc { margin-top: 0.5rem; color: hsl(var(--fg-muted)); max-width: 32rem; }
 .live-work-card__link { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.75rem; font-size: 0.88rem; font-weight: 600; color: hsl(var(--accent)); }
 
-/* ---------- whatsapp review proof ---------- */
-.review-proof {
-  display: grid; gap: clamp(2.5rem, 2rem + 2vw, 4rem);
-  grid-template-columns: 1fr; align-items: center;
-}
-@media (min-width: 860px) { .review-proof { grid-template-columns: 1.1fr 1fr; gap: 4rem; } .review-proof--reverse > *:first-child { order: 2; } .review-proof--reverse > *:last-child { order: 1; } }
-.review-proof__stars { color: hsl(var(--accent)); font-size: 1.15rem; letter-spacing: 0.15em; text-shadow: 0 0 18px hsl(var(--accent) / 0.5); margin-top: 1rem; }
-.review-proof__quote {
-  font-family: var(--font-display); font-weight: 600; letter-spacing: var(--tr-tight);
-  line-height: var(--lh-snug); font-size: clamp(1.6rem, 1.4rem + 1vw, 2.2rem);
-  margin-top: 1.1rem; max-width: 26rem;
-}
-.review-proof__author { margin-top: 1rem; color: hsl(var(--fg-muted)); font-size: 0.95rem; }
-.review-proof__author strong { color: hsl(var(--fg)); font-weight: 600; }
-.review-proof__badges { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.75rem; }
-.review-proof__frame {
-  position: relative; border-radius: var(--r-xl); overflow: hidden; max-width: 26rem; margin-inline: auto;
+/* ---------- whatsapp review proof (compact grid) ---------- */
+.review-grid { display: grid; gap: 2.5rem 2rem; grid-template-columns: 1fr; }
+@media (min-width: 700px) { .review-grid { grid-template-columns: repeat(3, 1fr); } }
+.review-card { display: flex; flex-direction: column; }
+.review-card__frame {
+  border-radius: var(--r-lg); overflow: hidden;
   background: hsl(var(--surface)); border: 1px solid hsl(var(--border-strong));
-  box-shadow: 0 30px 60px -30px hsl(0 0% 0% / 0.14);
+  box-shadow: 0 24px 48px -28px hsl(0 0% 0% / 0.14);
   transition: transform var(--dur-2) var(--ease), border-color var(--dur-2), box-shadow var(--dur-2) var(--ease);
 }
-.review-proof__frame:hover { transform: translateY(-6px); border-color: hsl(var(--accent) / 0.35); box-shadow: 0 40px 80px -30px hsl(0 0% 0% / 0.2), 0 0 0 1px hsl(var(--accent) / 0.12); }
-.review-proof__frame img { width: 100%; height: auto; display: block; }
+.review-card__frame:hover { transform: translateY(-5px); border-color: hsl(var(--accent) / 0.35); box-shadow: 0 32px 60px -28px hsl(0 0% 0% / 0.18), 0 0 0 1px hsl(var(--accent) / 0.12); }
+.review-card__frame img { width: 100%; height: auto; display: block; }
+.review-card__stars { color: hsl(var(--accent)); font-size: 0.95rem; letter-spacing: 0.15em; margin-top: 1.25rem; }
+.review-card__quote {
+  font-family: var(--font-display); font-weight: 600; letter-spacing: var(--tr-tight);
+  line-height: var(--lh-snug); font-size: 1.15rem; margin-top: 0.65rem;
+}
+.review-card__author { margin-top: 0.65rem; color: hsl(var(--fg-muted)); font-size: 0.85rem; }
+.review-card__author strong { color: hsl(var(--fg)); font-weight: 600; }
+.review-card__badges { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.9rem; }
 
 /* ---------- pricing teaser (bold full-bleed) ---------- */
 .pricing-teaser {
@@ -580,7 +581,7 @@ p { line-height: var(--lh-relaxed); }
 .sami-chat-progress { height: 3px; background: hsl(var(--border)); flex-shrink: 0; }
 .sami-chat-progress__bar { display: block; height: 100%; width: 0%; background: hsl(var(--accent)); transition: width var(--dur-2) var(--ease); }
 
-.sami-chat-messages { flex: 1; overflow-y: auto; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem; }
+.sami-chat-messages { flex: 1; overflow-y: auto; padding: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem; background: hsl(var(--surface)) url("whatsapp-wallpaper-light.jpg") repeat; background-size: 280px auto; }
 .sami-chat-bubble { max-width: 82%; padding: 0.65rem 0.9rem; border-radius: var(--r-lg); font-size: 0.9rem; line-height: var(--lh-snug); }
 .sami-chat-bubble--bot { align-self: flex-start; background: hsl(var(--surface-2)); color: hsl(var(--fg)); border-bottom-left-radius: 0.3rem; }
 .sami-chat-bubble--user { align-self: flex-end; background: hsl(var(--accent)); color: #fff; border-bottom-right-radius: 0.3rem; }
@@ -611,7 +612,7 @@ p { line-height: var(--lh-relaxed); }
 .sami-chat-input-row input:focus { outline: 2px solid hsl(var(--accent)); outline-offset: 1px; }
 .sami-chat-input-row button { width: 2.6rem; height: 2.6rem; border-radius: 50%; background: hsl(var(--accent)); color: #fff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
-.sami-chat-launcher.is-hidden-for-hero, .sami-chat-preview.is-hidden-for-hero { opacity: 0; visibility: hidden; pointer-events: none; }
+.sami-chat-launcher.is-hidden-for-hero, .sami-chat-preview.is-hidden-for-hero, .wa-float.is-hidden-for-hero { opacity: 0; visibility: hidden; pointer-events: none; }
 
 @media (prefers-reduced-motion: reduce) { .sami-chat-launcher::before, .sami-chat-launcher::after, .sami-chat-typing span { animation: none; } }
 
@@ -638,7 +639,7 @@ p { line-height: var(--lh-relaxed); }
 .hero-whatsapp-mock__call:hover { opacity: 1; background: hsl(0 0% 100% / 0.15); }
 .hero-whatsapp-mock__messages {
   flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 0.5rem;
-  background: hsl(var(--surface));
+  background: hsl(var(--surface)) url("whatsapp-wallpaper-light.jpg") repeat; background-size: 320px auto;
 }
 .hero-whatsapp-mock__composer { background: hsl(var(--bg)); border-top: 1px solid hsl(var(--border)); flex-shrink: 0; }
 .hero-whatsapp-mock .sami-chat-bubble { font-size: 0.85rem; }
