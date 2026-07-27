@@ -169,7 +169,12 @@
     step.options.forEach(function (label) {
       var slug = label.toLowerCase();
       var card = el("button", "demo-style-card",
-        '<div class="demo-style-card__preview demo-style-card__preview--' + slug + '"></div>' +
+        '<div class="demo-style-card__preview demo-style-card__preview--' + slug + '">' +
+        '<span class="dsc__nav"><span></span><span></span><span></span></span>' +
+        '<span class="dsc__bar dsc__bar--1"></span>' +
+        '<span class="dsc__bar dsc__bar--2"></span>' +
+        '<span class="dsc__btn"></span>' +
+        "</div>" +
         '<div class="demo-style-card__label">' + label + "</div>"
       );
       card.type = "button";
