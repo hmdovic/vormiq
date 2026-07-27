@@ -369,7 +369,7 @@ p { line-height: var(--lh-relaxed); }
   display: grid; gap: clamp(2.5rem, 2rem + 2vw, 4rem);
   grid-template-columns: 1fr; align-items: center;
 }
-@media (min-width: 860px) { .review-proof { grid-template-columns: 1.1fr 1fr; gap: 4rem; } }
+@media (min-width: 860px) { .review-proof { grid-template-columns: 1.1fr 1fr; gap: 4rem; } .review-proof--reverse > *:first-child { order: 2; } .review-proof--reverse > *:last-child { order: 1; } }
 .review-proof__stars { color: hsl(var(--lime)); font-size: 1.15rem; letter-spacing: 0.15em; text-shadow: 0 0 18px hsl(var(--lime) / 0.5); margin-top: 1rem; }
 .review-proof__quote {
   font-family: var(--font-display); font-weight: 600; letter-spacing: var(--tr-tight);
