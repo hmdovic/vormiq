@@ -276,7 +276,7 @@
       '<span class="sami-chat-launcher__badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></span>' +
       '<span class="sami-chat-launcher__unread">1</span>';
 
-    var preview = el("div", "sami-chat-preview", 'Hoi 👋 Vraag me gerust iets over je website of AI avatar &mdash; ik denk graag met je mee.<button type="button" class="sami-chat-preview__close" aria-label="Sluiten">&times;</button>');
+    var preview = el("div", "sami-chat-preview", 'Hoi 👋 Stel gerust een vraag!<button type="button" class="sami-chat-preview__close" aria-label="Sluiten">&times;</button>');
 
     var panel = el("div", "sami-chat-panel");
     panel.innerHTML =
@@ -360,8 +360,10 @@
     var mock = el("div", "hero-whatsapp-mock hero-in hero-in--3");
     mock.innerHTML =
       '<div class="hero-whatsapp-mock__bar">' +
+      '<a href="https://wa.me/31657971118" target="_blank" rel="noopener noreferrer" class="hero-whatsapp-mock__profile" aria-label="Open chat met Sami op WhatsApp">' +
       '<img src="sami-portrait.jpg" alt="" class="hero-whatsapp-mock__avatar" />' +
       '<div class="hero-whatsapp-mock__info"><strong>Sami</strong><span>online</span></div>' +
+      "</a>" +
       '<a href="https://wa.me/31657971118" target="_blank" rel="noopener noreferrer" class="hero-whatsapp-mock__call" aria-label="Bel Sami via WhatsApp"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg></a>' +
       "</div>" +
       '<div class="sami-chat-messages hero-whatsapp-mock__messages"></div>' +
