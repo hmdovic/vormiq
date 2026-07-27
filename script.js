@@ -252,6 +252,46 @@
     }
   }
 
+  /* Review carousel — one review visible at a time, arrows + dots + swipe */
+  document.querySelectorAll("[data-review-carousel]").forEach(function (carousel) {
+    var track = carousel.querySelector(".review-carousel__track");
+    var slides = carousel.querySelectorAll(".review-carousel__slide");
+    var dotsWrap = carousel.querySelector(".review-carousel__dots");
+    var prevBtn = carousel.querySelector(".review-carousel__arrow--prev");
+    var nextBtn = carousel.querySelector(".review-carousel__arrow--next");
+    if (!track || !slides.length) return;
+    var index = 0;
+
+    slides.forEach(function (_, i) {
+      var dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "review-carousel__dot";
+      dot.setAttribute("aria-label", "Ga naar review " + (i + 1));
+      dot.addEventListener("click", function () { goTo(i); });
+      dotsWrap.appendChild(dot);
+    });
+    var dots = dotsWrap.querySelectorAll(".review-carousel__dot");
+
+    function goTo(i) {
+      index = (i + slides.length) % slides.length;
+      track.style.transform = "translateX(-" + index * 100 + "%)";
+      dots.forEach(function (d, di) { d.classList.toggle("is-active", di === index); });
+    }
+    prevBtn.addEventListener("click", function () { goTo(index - 1); });
+    nextBtn.addEventListener("click", function () { goTo(index + 1); });
+
+    var touchStartX = null;
+    track.addEventListener("touchstart", function (e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener("touchend", function (e) {
+      if (touchStartX === null) return;
+      var diff = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(diff) > 40) goTo(index + (diff < 0 ? 1 : -1));
+      touchStartX = null;
+    }, { passive: true });
+
+    goTo(0);
+  });
+
   /* Animated stat counters */
   document.querySelectorAll("[data-count-to]").forEach(function (el) {
     var target = parseFloat(el.dataset.countTo);

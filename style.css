@@ -355,9 +355,24 @@ p { line-height: var(--lh-relaxed); }
 .live-work-card__link { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 0.75rem; font-size: 0.88rem; font-weight: 600; color: hsl(var(--accent)); }
 
 /* ---------- whatsapp review proof (compact grid) ---------- */
-.review-grid { display: grid; gap: 2.5rem 2rem; grid-template-columns: 1fr; }
-@media (min-width: 700px) { .review-grid { grid-template-columns: repeat(3, 1fr); } }
-.review-card { display: flex; flex-direction: column; }
+/* Interactive review carousel — one review at a time, arrows + dots */
+.review-carousel { max-width: 26rem; margin-inline: auto; }
+.review-carousel__viewport { overflow: hidden; border-radius: var(--r-xl); }
+.review-carousel__track { display: flex; transition: transform 0.5s var(--ease); }
+.review-carousel__slide { flex: 0 0 100%; min-width: 0; }
+.review-carousel__nav { display: flex; align-items: center; justify-content: center; gap: 1.25rem; margin-top: 1.75rem; }
+.review-carousel__arrow {
+  width: 2.75rem; height: 2.75rem; border-radius: 50%; flex-shrink: 0;
+  border: 1px solid hsl(var(--border-strong)); display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; line-height: 1; color: hsl(var(--fg)); transition: background var(--dur-1), color var(--dur-1), border-color var(--dur-1);
+}
+.review-carousel__arrow:hover { background: hsl(var(--accent)); color: #fff; border-color: transparent; }
+.review-carousel__dots { display: flex; align-items: center; gap: 0.5rem; }
+.review-carousel__dot { width: 8px; height: 8px; border-radius: var(--r-full); background: hsl(var(--border-strong)); transition: all var(--dur-2) var(--ease); }
+.review-carousel__dot.is-active { width: 22px; background: hsl(var(--accent)); }
+
+.review-card { display: flex; flex-direction: column; text-align: center; align-items: center; }
+.review-card__frame { width: 100%; }
 .review-card__frame {
   border-radius: var(--r-lg); overflow: hidden;
   background: hsl(var(--surface)); border: 1px solid hsl(var(--border-strong));
