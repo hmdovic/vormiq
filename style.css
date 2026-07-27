@@ -46,6 +46,7 @@
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 [id] { scroll-margin-top: 6rem; }
 body {
+  position: relative;
   background: hsl(var(--bg));
   color: hsl(var(--fg));
   font-family: var(--font-body);
@@ -65,10 +66,16 @@ input, textarea, select { font: inherit; }
   *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
 }
 
-/* backdrop — deliberately quiet: a single, barely-there tint near the top for depth, nothing else */
+/* backdrop — a soft green gradient wash running the full page height, so sections read as one continuous canvas instead of stacked flat blocks */
 body::before {
-  content: ""; position: fixed; inset: 0; z-index: -2;
-  background: radial-gradient(ellipse 1100px 680px at 50% -12%, hsl(var(--accent) / 0.05), transparent 60%), hsl(var(--bg));
+  content: ""; position: absolute; inset: 0; z-index: -2; pointer-events: none;
+  background:
+    radial-gradient(ellipse 1100px 680px at 50% 0%, hsl(var(--accent) / 0.07), transparent 55%),
+    radial-gradient(ellipse 900px 620px at 8% 28%, hsl(var(--accent-bright) / 0.05), transparent 55%),
+    radial-gradient(ellipse 900px 620px at 92% 55%, hsl(var(--accent) / 0.05), transparent 55%),
+    radial-gradient(ellipse 900px 620px at 10% 78%, hsl(var(--accent-bright) / 0.05), transparent 55%),
+    radial-gradient(ellipse 1100px 680px at 50% 100%, hsl(var(--accent) / 0.06), transparent 55%),
+    hsl(var(--bg));
 }
 
 /* ---------- layout ---------- */
@@ -77,7 +84,7 @@ body::before {
 .wrap--tight { width: var(--container-tight); margin-inline: auto; }
 .section { padding-block: clamp(3.5rem, 2.6rem + 4.5vw, 6rem); position: relative; }
 .section--tight { padding-block: clamp(2.5rem, 2rem + 2.5vw, 4rem); }
-.section--surface { background: hsl(var(--surface)); border-block: 1px solid hsl(var(--border)); }
+.section--surface { background: hsl(var(--surface) / 0.82); border-block: 1px solid hsl(var(--border)); }
 .pt-nav { padding-top: clamp(7rem, 6rem + 3vw, 9.5rem); }
 
 /* ---------- type ---------- */
@@ -402,14 +409,14 @@ p { line-height: var(--lh-relaxed); }
 .live-work-card { display: block; }
 .live-work-card__mock {
   position: relative; border-radius: var(--r-xl); overflow: hidden;
-  background: hsl(var(--surface)); border: 1px solid hsl(var(--border-strong));
-  box-shadow: 0 30px 60px -30px hsl(0 0% 0% / 0.14);
+  background: hsl(var(--surface)); border: 1px solid hsl(var(--accent) / 0.16);
+  box-shadow: 0 30px 60px -30px hsl(0 0% 0% / 0.14), 0 0 0 1px hsl(var(--accent) / 0.05);
   transition: transform var(--dur-2) var(--ease), border-color var(--dur-2), box-shadow var(--dur-2) var(--ease);
 }
 .live-work-card:hover .live-work-card__mock { transform: translateY(-6px); border-color: hsl(var(--accent) / 0.4); box-shadow: 0 40px 80px -30px hsl(0 0% 0% / 0.2), 0 0 0 1px hsl(var(--accent) / 0.15); }
 .live-work-card__bar {
   display: flex; align-items: center; gap: 1rem; padding: 0.7rem 1rem;
-  background: linear-gradient(180deg, #fdfdfc, hsl(var(--surface-2)));
+  background: linear-gradient(180deg, hsl(var(--accent) / 0.06), hsl(var(--surface-2)));
   border-bottom: 1px solid hsl(var(--border));
 }
 .live-work-card__dots { display: flex; gap: 6px; flex-shrink: 0; }
