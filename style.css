@@ -618,7 +618,44 @@ p { line-height: var(--lh-relaxed); }
 .sami-chat-input-row input:focus { outline: 2px solid hsl(var(--lime)); outline-offset: 1px; }
 .sami-chat-input-row button { width: 2.6rem; height: 2.6rem; border-radius: 50%; background: hsl(var(--lime)); color: hsl(240 20% 6%); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 
+.sami-chat-launcher.is-hidden-for-hero, .sami-chat-preview.is-hidden-for-hero { opacity: 0; visibility: hidden; pointer-events: none; }
+
 @media (prefers-reduced-motion: reduce) { .sami-chat-launcher::before, .sami-chat-launcher::after, .sami-chat-typing span { animation: none; } }
+
+/* ---------- hero WhatsApp mockup (live chat demo embedded in hero) ---------- */
+.hero__cards--whatsapp { width: 100%; }
+.hero-whatsapp-mock {
+  display: flex; flex-direction: column; width: 100%; height: 27rem;
+  background: hsl(200 22% 8%); border-radius: var(--r-xl); overflow: hidden;
+  border: 1px solid hsl(0 0% 100% / 0.12); box-shadow: 0 30px 80px -20px hsl(0 0% 0% / 0.7);
+}
+.hero-whatsapp-mock__bar {
+  display: flex; align-items: center; gap: 0.7rem; padding: 0.8rem 1rem; flex-shrink: 0;
+  background: hsl(158 40% 14%); color: #fff;
+}
+.hero-whatsapp-mock__bar > svg { flex-shrink: 0; opacity: 0.85; }
+.hero-whatsapp-mock__avatar { width: 2.15rem; height: 2.15rem; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.hero-whatsapp-mock__info { display: flex; flex-direction: column; line-height: 1.2; flex: 1; }
+.hero-whatsapp-mock__info span { font-size: 0.72rem; color: hsl(0 0% 100% / 0.7); }
+.hero-whatsapp-mock__messages {
+  flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 0.5rem;
+  background:
+    radial-gradient(circle at 15% 15%, hsl(0 0% 100% / 0.03) 0, transparent 40%),
+    radial-gradient(circle at 85% 65%, hsl(0 0% 100% / 0.03) 0, transparent 40%),
+    hsl(200 20% 7%);
+}
+.hero-whatsapp-mock__composer { background: hsl(200 22% 9%); border-top: 1px solid hsl(0 0% 100% / 0.08); flex-shrink: 0; }
+.hero-whatsapp-mock .sami-chat-bubble { font-size: 0.85rem; }
+.hero-whatsapp-mock .sami-chat-bubble--bot { background: hsl(0 0% 100% / 0.08); color: hsl(0 0% 92%); }
+.hero-whatsapp-mock .sami-chat-bubble--user { background: hsl(142 45% 22%); color: hsl(0 0% 95%); }
+.hero-whatsapp-mock .sami-chat-chip { border-color: hsl(0 0% 100% / 0.22); color: hsl(0 0% 92%); font-size: 0.78rem; }
+.hero-whatsapp-mock .sami-chat-chip:hover { border-color: hsl(142 60% 45% / 0.7); background: hsl(142 45% 24% / 0.25); }
+.hero-whatsapp-mock .sami-chat-input-row input { background: hsl(0 0% 100% / 0.08); border-color: hsl(0 0% 100% / 0.15); color: hsl(0 0% 95%); }
+.hero-whatsapp-mock .sami-chat-input-row button { background: hsl(142 50% 30%); color: #fff; }
+.hero-whatsapp-mock .sami-chat-summary { background: hsl(0 0% 100% / 0.06); border-color: hsl(0 0% 100% / 0.14); }
+.hero-whatsapp-mock .sami-chat-summary__row span { color: hsl(0 0% 100% / 0.55); }
+.hero-whatsapp-mock .sami-chat-restart { color: hsl(0 0% 100% / 0.5); }
+@media (max-width: 1039px) { .hero-whatsapp-mock { height: 24rem; } }
 
 /* ---------- legal pages ---------- */
 .legal-block + .legal-block { margin-top: 1.75rem; }
