@@ -417,14 +417,16 @@
     var floating = buildFloatingWidget();
     buildHeroMockup();
 
-    /* Hide the floating launcher while the hero (with its own live mockup) is in view, to avoid two chat entry points competing on screen at once. */
+    /* Hide the floating launcher (and the plain WhatsApp button) while the hero — which already has its own live mockup — is in view, to avoid competing chat entry points on screen at once. */
     var hero = document.getElementById("hero");
+    var waFloat = document.querySelector(".wa-float");
     if (hero && floating && "IntersectionObserver" in window) {
       var heroIo = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
           var hidden = entry.isIntersecting;
           floating.launcher.classList.toggle("is-hidden-for-hero", hidden);
           floating.preview.classList.toggle("is-hidden-for-hero", hidden);
+          if (waFloat) waFloat.classList.toggle("is-hidden-for-hero", hidden);
           if (hidden) floating.panel.classList.remove("is-open");
         });
       }, { threshold: 0.15 });
