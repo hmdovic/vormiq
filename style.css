@@ -160,7 +160,7 @@ p { line-height: var(--lh-relaxed); }
 .hero__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; opacity: 0.4; }
 .hero__overlay {
   position: absolute; inset: 0; z-index: -1;
-  background: linear-gradient(115deg, hsl(var(--accent-bright) / 0.24) 0%, hsl(var(--bg) / 0.72) 42%, hsl(var(--bg)) 72%),
+  background: linear-gradient(115deg, hsl(var(--accent-bright) / 0.14) 0%, hsl(var(--bg) / 0.7) 42%, hsl(var(--bg)) 72%),
               linear-gradient(180deg, transparent 0%, hsl(var(--bg) / 0.5) 82%, hsl(var(--bg)) 100%);
 }
 .hero__grid { display: grid; gap: clamp(2.5rem, 2rem + 2vw, 4rem); }
@@ -687,18 +687,50 @@ p { line-height: var(--lh-relaxed); }
 .demo-style-card { border-radius: var(--r-lg); border: 1px solid hsl(var(--border-strong)); overflow: hidden; text-align: left; transition: transform var(--dur-1) var(--ease), border-color var(--dur-1); background: hsl(var(--surface)); }
 .demo-style-card:hover { transform: translateY(-4px); border-color: hsl(var(--accent) / 0.5); }
 .demo-style-card.is-selected { border-color: hsl(var(--accent)); }
-.demo-style-card__preview { height: 5rem; position: relative; }
+.demo-style-card__preview { height: 6.5rem; position: relative; padding: 0.65rem 0.85rem; display: flex; flex-direction: column; gap: 0.5rem; }
 .demo-style-card__label { padding: 0.85rem 1rem; font-weight: 600; font-size: 0.9rem; }
-.demo-style-card__preview--modern { background: linear-gradient(135deg, #0a0a0a, #1a1a1a); }
-.demo-style-card__preview--modern::after { content: ""; position: absolute; left: 1rem; right: 1rem; bottom: 1rem; height: 3px; background: hsl(var(--accent)); border-radius: 2px; }
-.demo-style-card__preview--luxe { background: linear-gradient(135deg, #17140d, #2a2013); }
-.demo-style-card__preview--luxe::after { content: "Aa"; position: absolute; left: 1rem; bottom: 0.4rem; font-family: "Bricolage Grotesque", serif; font-size: 1.4rem; color: #d4af6a; }
-.demo-style-card__preview--minimalistisch { background: #f2f2f0; }
-.demo-style-card__preview--minimalistisch::after { content: ""; position: absolute; left: 1rem; right: 1rem; top: 50%; height: 1px; background: #111; }
-.demo-style-card__preview--zakelijk { background: linear-gradient(135deg, #0d1b2a, #1b2f47); }
-.demo-style-card__preview--zakelijk::after { content: ""; position: absolute; inset: 0.75rem; border: 1px solid hsl(0 0% 100% / 0.25); }
-.demo-style-card__preview--speels { background: linear-gradient(135deg, hsl(var(--accent-deep) / 0.7), hsl(var(--accent-bright) / 0.7)); }
-.demo-style-card__preview--speels::after { content: ""; position: absolute; width: 1.75rem; height: 1.75rem; border-radius: 50%; background: #fff; left: 1rem; bottom: 0.65rem; }
+
+.dsc__nav { display: flex; gap: 4px; flex-shrink: 0; }
+.dsc__nav span { width: 5px; height: 5px; border-radius: 50%; }
+.dsc__bar { display: block; height: 7px; border-radius: 3px; }
+.dsc__bar--1 { width: 78%; }
+.dsc__bar--2 { width: 52%; }
+.dsc__btn { display: block; width: 34px; height: 12px; margin-top: auto; border-radius: 3px; }
+
+/* Modern — bold near-black, geometric, sharp teal accent */
+.demo-style-card__preview--modern { background: linear-gradient(150deg, #0a0a0a, #1c1c1c); }
+.demo-style-card__preview--modern .dsc__nav span { background: hsl(0 0% 100% / 0.35); }
+.demo-style-card__preview--modern .dsc__bar--1 { background: hsl(0 0% 100% / 0.92); width: 70%; }
+.demo-style-card__preview--modern .dsc__bar--2 { background: hsl(0 0% 100% / 0.4); }
+.demo-style-card__preview--modern .dsc__btn { background: hsl(var(--accent-bright)); border-radius: 3px; }
+
+/* Luxe — warm dark, serif gold accents */
+.demo-style-card__preview--luxe { background: linear-gradient(150deg, #17140d, #2a2013); }
+.demo-style-card__preview--luxe .dsc__nav span { background: #d4af6a; opacity: 0.5; }
+.demo-style-card__preview--luxe .dsc__bar--1 { background: #d4af6a; width: 60%; font-family: serif; }
+.demo-style-card__preview--luxe .dsc__bar--2 { background: hsl(0 0% 100% / 0.3); width: 40%; }
+.demo-style-card__preview--luxe .dsc__btn { background: transparent; border: 1px solid #d4af6a; width: 38px; }
+
+/* Minimalistisch — cream, ultra quiet, no button, thin rules */
+.demo-style-card__preview--minimalistisch { background: #f7f6f3; gap: 0.65rem; }
+.demo-style-card__preview--minimalistisch .dsc__nav span { background: #cfcdc6; }
+.demo-style-card__preview--minimalistisch .dsc__bar--1 { background: #1a1a1a; width: 55%; height: 6px; }
+.demo-style-card__preview--minimalistisch .dsc__bar--2 { background: #cfcdc6; width: 30%; height: 4px; }
+.demo-style-card__preview--minimalistisch .dsc__btn { background: transparent; border-bottom: 1px solid #1a1a1a; width: 30px; height: 8px; border-radius: 0; }
+
+/* Zakelijk — navy, structured, corporate */
+.demo-style-card__preview--zakelijk { background: linear-gradient(150deg, #0d1b2a, #1b2f47); }
+.demo-style-card__preview--zakelijk .dsc__nav span { background: hsl(0 0% 100% / 0.4); border-radius: 2px; }
+.demo-style-card__preview--zakelijk .dsc__bar--1 { background: hsl(0 0% 100% / 0.85); width: 65%; }
+.demo-style-card__preview--zakelijk .dsc__bar--2 { background: hsl(0 0% 100% / 0.35); }
+.demo-style-card__preview--zakelijk .dsc__btn { background: transparent; border: 1px solid hsl(0 0% 100% / 0.6); border-radius: 2px; }
+
+/* Speels — bright playful gradient, rounded everything */
+.demo-style-card__preview--speels { background: linear-gradient(150deg, hsl(var(--accent-deep) / 0.85), hsl(var(--accent-bright) / 0.75)); }
+.demo-style-card__preview--speels .dsc__nav span { background: #fff; border-radius: 50%; }
+.demo-style-card__preview--speels .dsc__bar--1 { background: #fff; width: 68%; border-radius: 6px; }
+.demo-style-card__preview--speels .dsc__bar--2 { background: hsl(0 0% 100% / 0.55); width: 45%; border-radius: 6px; }
+.demo-style-card__preview--speels .dsc__btn { background: #fff; border-radius: 999px; }
 
 .demo-input-group { margin-top: 2.25rem; max-width: 26rem; }
 .demo-input-group + .demo-input-group { margin-top: 1.1rem; }
