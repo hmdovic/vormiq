@@ -633,16 +633,17 @@ p { line-height: var(--lh-relaxed); }
   display: flex; align-items: center; gap: 0.7rem; padding: 0.8rem 1rem; flex-shrink: 0;
   background: hsl(158 40% 14%); color: #fff;
 }
-.hero-whatsapp-mock__bar > svg { flex-shrink: 0; opacity: 0.85; }
 .hero-whatsapp-mock__avatar { width: 2.15rem; height: 2.15rem; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
 .hero-whatsapp-mock__info { display: flex; flex-direction: column; line-height: 1.2; flex: 1; }
 .hero-whatsapp-mock__info span { font-size: 0.72rem; color: hsl(0 0% 100% / 0.7); }
+.hero-whatsapp-mock__call {
+  flex-shrink: 0; color: #fff; opacity: 0.9; width: 2rem; height: 2rem; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; transition: background var(--dur-1), opacity var(--dur-1);
+}
+.hero-whatsapp-mock__call:hover { opacity: 1; background: hsl(0 0% 100% / 0.12); }
 .hero-whatsapp-mock__messages {
   flex: 1; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: 0.5rem;
-  background:
-    radial-gradient(circle at 15% 15%, hsl(0 0% 100% / 0.03) 0, transparent 40%),
-    radial-gradient(circle at 85% 65%, hsl(0 0% 100% / 0.03) 0, transparent 40%),
-    hsl(200 20% 7%);
+  background: url("whatsapp-wallpaper.jpg") repeat; background-size: 320px auto;
 }
 .hero-whatsapp-mock__composer { background: hsl(200 22% 9%); border-top: 1px solid hsl(0 0% 100% / 0.08); flex-shrink: 0; }
 .hero-whatsapp-mock .sami-chat-bubble { font-size: 0.85rem; }
