@@ -246,13 +246,93 @@ p { line-height: var(--lh-relaxed); }
 }
 .bento-card:hover .bento-card__link { transform: translateX(3px); }
 
+/* ---------- bento illustrated visuals ---------- */
+.bento-visual {
+  position: relative; width: 100%; height: 6.5rem; border-radius: var(--r-lg);
+  background: hsl(var(--surface-2)); border: 1px solid hsl(var(--border));
+  overflow: hidden; display: flex; align-items: center; justify-content: center;
+}
+
+.bento-visual--avatar { gap: 0.9rem; background: linear-gradient(160deg, hsl(var(--accent) / 0.1), hsl(var(--surface-2))); }
+.bento-visual--avatar .bv-orb {
+  width: 2.6rem; height: 2.6rem; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(140deg, hsl(var(--accent)), hsl(var(--accent-bright)));
+}
+.bento-visual--avatar .bv-wave { display: flex; align-items: center; gap: 0.28rem; height: 2.3rem; }
+.bento-visual--avatar .bv-wave span { width: 4px; border-radius: var(--r-full); background: hsl(var(--accent)); animation: bv-wave 1.1s ease-in-out infinite; }
+.bento-visual--avatar .bv-wave span:nth-child(1) { height: 40%; animation-delay: 0s; }
+.bento-visual--avatar .bv-wave span:nth-child(2) { height: 80%; animation-delay: 0.1s; }
+.bento-visual--avatar .bv-wave span:nth-child(3) { height: 100%; animation-delay: 0.2s; }
+.bento-visual--avatar .bv-wave span:nth-child(4) { height: 55%; animation-delay: 0.3s; }
+.bento-visual--avatar .bv-wave span:nth-child(5) { height: 85%; animation-delay: 0.4s; }
+.bento-visual--avatar .bv-wave span:nth-child(6) { height: 35%; animation-delay: 0.5s; }
+@keyframes bv-wave { 0%, 100% { transform: scaleY(0.5); } 50% { transform: scaleY(1); } }
+
+.bento-visual--video { background: hsl(220 25% 12%); }
+.bento-visual--video .bv-play {
+  width: 2.5rem; height: 2.5rem; border-radius: 50%; background: hsl(0 0% 100% / 0.14);
+  display: flex; align-items: center; justify-content: center;
+}
+.bento-visual--video .bv-play::after {
+  content: ""; border-style: solid; border-width: 8px 0 8px 13px;
+  border-color: transparent transparent transparent hsl(0 0% 100%); margin-left: 3px;
+}
+.bento-visual--video .bv-progress { position: absolute; left: 0.9rem; right: 0.9rem; bottom: 0.8rem; height: 3px; border-radius: var(--r-full); background: hsl(0 0% 100% / 0.2); }
+.bento-visual--video .bv-progress::after { content: ""; position: absolute; inset: 0; width: 42%; border-radius: inherit; background: hsl(var(--accent-bright)); }
+
+.bento-visual--website { flex-direction: column; align-items: stretch; padding: 0.75rem 0.9rem; gap: 0.5rem; }
+.bento-visual--website .bv-nav { display: flex; gap: 0.3rem; }
+.bento-visual--website .bv-nav span { width: 6px; height: 6px; border-radius: 50%; background: hsl(var(--border-strong)); }
+.bento-visual--website .bv-bar { height: 7px; border-radius: var(--r-full); background: hsl(var(--border-strong)); }
+.bento-visual--website .bv-bar--1 { width: 70%; }
+.bento-visual--website .bv-bar--2 { width: 45%; }
+.bento-visual--website .bv-btn { margin-top: 0.15rem; width: 2.6rem; height: 8px; border-radius: var(--r-full); background: hsl(var(--accent)); }
+
+.bento-visual--branding { gap: 0.6rem; }
+.bento-visual--branding .bv-swatch { width: 2.1rem; height: 2.1rem; border-radius: var(--r-md); border: 1px solid hsl(var(--border)); }
+.bento-visual--branding .bv-swatch:nth-child(1) { background: hsl(var(--accent-deep)); transform: translateY(0.45rem); }
+.bento-visual--branding .bv-swatch:nth-child(2) { background: hsl(var(--accent)); width: 2.7rem; height: 2.7rem; }
+.bento-visual--branding .bv-swatch:nth-child(3) { background: hsl(var(--accent-bright)); transform: translateY(0.45rem); }
+
+.bento-visual--webshop { gap: 0.5rem; padding: 0.6rem; }
+.bento-visual--webshop .bv-product { width: 2.6rem; height: 4.6rem; border-radius: var(--r-md); background: hsl(var(--surface)); border: 1px solid hsl(var(--border)); display: flex; flex-direction: column; gap: 0.25rem; padding: 0.3rem; }
+.bento-visual--webshop .bv-product span { display: block; border-radius: 3px; }
+.bento-visual--webshop .bv-product span:first-child { flex: 1; background: hsl(var(--accent) / 0.45); }
+.bento-visual--webshop .bv-product span:last-child { height: 4px; background: hsl(var(--border-strong)); }
+.bento-visual--webshop .bv-cart {
+  position: absolute; top: 0.5rem; right: 0.5rem; width: 1.6rem; height: 1.6rem; border-radius: 50%;
+  background: hsl(var(--accent-deep)); color: #fff; font-size: 0.6rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.bento-visual--automation { gap: 1.4rem; }
+.bento-visual--automation .bv-node { width: 1.7rem; height: 1.7rem; border-radius: 50%; background: hsl(var(--surface)); border: 2px solid hsl(var(--border-strong)); position: relative; z-index: 1; }
+.bento-visual--automation .bv-node--active { background: hsl(var(--accent)); border-color: hsl(var(--accent)); animation: bv-pulse 1.8s ease-in-out infinite; }
+.bento-visual--automation::before { content: ""; position: absolute; left: 22%; right: 22%; top: 50%; height: 2px; background: hsl(var(--border-strong)); z-index: 0; }
+@keyframes bv-pulse { 0%, 100% { box-shadow: 0 0 0 6px hsl(var(--accent) / 0.16); } 50% { box-shadow: 0 0 0 10px hsl(var(--accent) / 0.05); } }
+
 /* ---------- process rail ---------- */
 .rail { display: flex; flex-direction: column; }
-.rail__step { display: grid; grid-template-columns: 3rem 1fr; gap: 1.5rem; padding-block: 1.85rem; border-bottom: 1px solid hsl(var(--border)); }
-.rail__step:first-child { border-top: 1px solid hsl(var(--border)); }
-.rail__num { font-family: var(--font-display); font-size: 1.5rem; color: hsl(var(--accent)); }
-.rail__step h3 { margin-bottom: 0.4rem; }
-.rail__step p { color: hsl(var(--fg-muted)); max-width: 34rem; }
+.rail__step { display: grid; grid-template-columns: 3rem 1fr; gap: 1.5rem; padding-block: 1.1rem; }
+.rail__node-col { position: relative; display: flex; justify-content: center; }
+.rail__node {
+  width: 3rem; height: 3rem; border-radius: 50%; background: hsl(var(--surface)); flex-shrink: 0;
+  border: 1px solid hsl(var(--border-strong)); color: hsl(var(--accent));
+  display: flex; align-items: center; justify-content: center; position: relative; z-index: 1;
+  transition: background var(--dur-2) var(--ease), border-color var(--dur-2), color var(--dur-2), transform var(--dur-2) var(--ease);
+}
+.rail__node-col::before { content: ""; position: absolute; top: 3rem; bottom: -1.1rem; left: 50%; width: 2px; background: hsl(var(--border)); transform: translateX(-50%); }
+.rail__step:last-child .rail__node-col::before { display: none; }
+.rail__card {
+  padding: 1.5rem 1.75rem; border-radius: var(--r-lg); border: 1px solid hsl(var(--border)); background: hsl(var(--surface));
+  transition: background var(--dur-2) var(--ease), border-color var(--dur-2), transform var(--dur-2) var(--ease);
+}
+.rail__num { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: var(--tr-wide); color: hsl(var(--fg-faint)); transition: color var(--dur-2); }
+.rail__card h3 { margin-block: 0.3rem 0.4rem; }
+.rail__card p { color: hsl(var(--fg-muted)); max-width: 32rem; transition: color var(--dur-2); }
+.rail__step.is-active .rail__node { background: hsl(var(--accent)); border-color: hsl(var(--accent)); color: #fff; transform: scale(1.08); }
+.rail__step.is-active .rail__card { background: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--accent-deep))); border-color: transparent; transform: translateX(4px); }
+.rail__step.is-active .rail__card h3, .rail__step.is-active .rail__card p, .rail__step.is-active .rail__num { color: hsl(0 0% 100% / 0.92); }
 
 /* ---------- timeline chips ---------- */
 .timeline { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 0; }

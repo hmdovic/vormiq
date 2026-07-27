@@ -292,6 +292,25 @@
     goTo(0);
   });
 
+  /* Process rail — highlights the step centered in the viewport as you scroll */
+  (function () {
+    var steps = document.querySelectorAll("[data-rail-step]");
+    if (!steps.length) return;
+    if (!("IntersectionObserver" in window)) {
+      steps[0].classList.add("is-active");
+      return;
+    }
+    var railIo = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          entry.target.classList.toggle("is-active", entry.isIntersecting);
+        });
+      },
+      { rootMargin: "-45% 0px -45% 0px" }
+    );
+    steps.forEach(function (step) { railIo.observe(step); });
+  })();
+
   /* Animated stat counters */
   document.querySelectorAll("[data-count-to]").forEach(function (el) {
     var target = parseFloat(el.dataset.countTo);
