@@ -726,8 +726,7 @@ p { line-height: var(--lh-relaxed); }
 .demo-skip:hover { color: hsl(var(--fg-muted)); }
 
 .demo-end__intro { max-width: 30rem; }
-.demo-end .hero-whatsapp-mock { max-width: 26rem; margin-top: 2.5rem; height: auto; max-height: 30rem; }
-.demo-end .hero-whatsapp-mock__messages { min-height: 14rem; }
+.demo-end__summary { margin-top: 2.25rem; max-width: 28rem; }
 .demo-end__cta { margin-top: 1.75rem; max-width: 26rem; }
 .demo-end__cta .btn { width: 100%; height: 3.75rem; font-size: 1.02rem; }
 

@@ -381,20 +381,7 @@
     }
   }
 
-  /* ---- end screen: live WhatsApp-style summary + wa.me handoff ---- */
-
-  var timeCursor = null;
-  function nextTime() {
-    if (!timeCursor) timeCursor = new Date();
-    var t = timeCursor;
-    timeCursor = new Date(timeCursor.getTime() + 60000);
-    var h = t.getHours(), m = t.getMinutes();
-    return (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m;
-  }
-
-  function bubbleHtml(text, kind) {
-    return '<div class="sami-chat-bubble sami-chat-bubble--' + kind + '">' + text + '<span class="sami-chat-bubble__time">' + nextTime() + "</span></div>";
-  }
+  /* ---- end screen: quick summary + direct wa.me handoff ---- */
 
   function buildSummaryPairs() {
     var pairs = [
@@ -408,23 +395,6 @@
     if (answers.extra) pairs.push({ q: "Nog iets dat ik moet weten?", a: answers.extra });
     pairs.push({ q: "Naam en telefoonnummer?", a: answers.name + " &middot; " + answers.phone + (answers.email ? " &middot; " + answers.email : "") });
     return pairs;
-  }
-
-  function playPairs(messagesEl, pairs, i, done) {
-    if (i >= pairs.length) { done(); return; }
-    var typing = el("div", "sami-chat-bubble sami-chat-bubble--bot sami-chat-typing", "<span></span><span></span><span></span>");
-    messagesEl.appendChild(typing);
-    messagesEl.scrollTop = messagesEl.scrollHeight;
-    window.setTimeout(function () {
-      typing.remove();
-      messagesEl.insertAdjacentHTML("beforeend", bubbleHtml(pairs[i].q, "bot"));
-      messagesEl.scrollTop = messagesEl.scrollHeight;
-      window.setTimeout(function () {
-        messagesEl.insertAdjacentHTML("beforeend", bubbleHtml(pairs[i].a, "user"));
-        messagesEl.scrollTop = messagesEl.scrollHeight;
-        window.setTimeout(function () { playPairs(messagesEl, pairs, i + 1, done); }, 280);
-      }, 420);
-    }, 380);
   }
 
   function buildWaLink() {
@@ -466,33 +436,24 @@
     updateProgress(STEPS.length, true);
     var wrap = el("div", "demo-step demo-end");
     wrap.appendChild(el("h2", "demo-step__title", "Top! Ik heb genoeg informatie om een demo voor je te maken."));
-    wrap.appendChild(el("p", "demo-step__sub demo-end__intro", "Meestal ontvang je &rsquo;m binnen enkele dagen. Sami neemt &rsquo;m persoonlijk met je door via WhatsApp."));
+    wrap.appendChild(el("p", "demo-step__sub demo-end__intro", "Controleer je gegevens en verstuur ze direct naar Sami via WhatsApp. Meestal ontvang je je demo binnen enkele dagen."));
 
-    var mock = el("div", "hero-whatsapp-mock");
-    mock.innerHTML =
-      '<div class="hero-whatsapp-mock__bar">' +
-      '<div class="hero-whatsapp-mock__profile">' +
-      '<img src="sami-portrait.jpg" alt="" class="hero-whatsapp-mock__avatar" />' +
-      '<div class="hero-whatsapp-mock__info"><strong>Sami</strong><span>samenvatting van je antwoorden</span></div>' +
-      "</div>" +
-      "</div>" +
-      '<div class="sami-chat-messages hero-whatsapp-mock__messages"></div>';
-    wrap.appendChild(mock);
+    var summary = el("div", "sami-chat-summary demo-end__summary");
+    summary.innerHTML = buildSummaryPairs().map(function (p) {
+      return '<div class="sami-chat-summary__row"><span>' + p.q + "</span><strong>" + p.a + "</strong></div>";
+    }).join("");
+    wrap.appendChild(summary);
 
     var cta = el("div", "demo-end__cta");
+    var waBtn = el("a", "btn btn--primary", "Verstuur via WhatsApp");
+    waBtn.href = buildWaLink();
+    waBtn.target = "_blank";
+    waBtn.rel = "noopener noreferrer";
+    cta.appendChild(waBtn);
     wrap.appendChild(cta);
 
     stage.appendChild(wrap);
-
-    var messagesEl = mock.querySelector(".hero-whatsapp-mock__messages");
-    playPairs(messagesEl, buildSummaryPairs(), 0, function () {
-      var waBtn = el("a", "btn btn--primary", "Verstuur via WhatsApp");
-      waBtn.href = buildWaLink();
-      waBtn.target = "_blank";
-      waBtn.rel = "noopener noreferrer";
-      cta.appendChild(waBtn);
-      burstConfetti();
-    });
+    burstConfetti();
   }
 
   showStep(0);
