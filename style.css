@@ -528,30 +528,46 @@ p { line-height: var(--lh-relaxed); }
 
 /* ---------- Sami chat assistant ---------- */
 .sami-chat-launcher {
-  position: fixed; bottom: 6.5rem; right: 1.75rem; z-index: 700;
+  position: fixed; bottom: 8rem; right: 1.75rem; z-index: 700;
   width: 3.75rem; height: 3.75rem; border-radius: var(--r-full); overflow: visible;
-  border: 2px solid hsl(var(--lime) / 0.7); padding: 0; cursor: pointer;
+  border: 2px solid hsl(var(--violet) / 0.7); padding: 0; cursor: pointer;
   box-shadow: 0 10px 30px -8px hsl(0 0% 0% / 0.6);
   transition: transform var(--dur-1) var(--ease);
 }
 .sami-chat-launcher:hover { transform: scale(1.08); }
 .sami-chat-launcher img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; }
-.sami-chat-launcher::before, .sami-chat-launcher::after {
-  content: ""; position: absolute; inset: 0; border-radius: 50%;
-  border: 2px solid hsl(var(--lime) / 0.55); opacity: 0;
-  animation: waPulse 2.6s ease-out infinite;
-}
-.sami-chat-launcher::after { animation-delay: 1.3s; }
 .sami-chat-launcher__badge {
   position: absolute; bottom: -4px; right: -4px; width: 1.6rem; height: 1.6rem; border-radius: 50%;
   background: hsl(var(--lime)); color: hsl(240 20% 6%); display: flex; align-items: center; justify-content: center;
   border: 2px solid hsl(var(--bg));
 }
 .sami-chat-launcher.is-active .sami-chat-launcher__badge { background: hsl(var(--violet)); color: #fff; }
+.sami-chat-launcher__unread {
+  position: absolute; top: -6px; left: -6px; min-width: 1.4rem; height: 1.4rem; padding-inline: 0.3rem;
+  border-radius: var(--r-full); background: hsl(2 85% 58%); color: #fff; border: 2px solid hsl(var(--bg));
+  display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700;
+  transform: scale(0); transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.sami-chat-launcher__unread.is-shown { transform: scale(1); }
+.sami-chat-preview {
+  position: fixed; bottom: 8.25rem; right: 5.75rem; z-index: 700; max-width: 15rem;
+  background: hsl(var(--surface-2)); border: 1px solid hsl(var(--border-strong)); border-radius: var(--r-lg) var(--r-lg) 0.25rem var(--r-lg);
+  padding: 0.75rem 1rem; font-size: 0.85rem; line-height: var(--lh-snug); color: hsl(var(--fg));
+  box-shadow: 0 20px 50px -14px hsl(0 0% 0% / 0.6);
+  opacity: 0; visibility: hidden; transform: translateY(8px) scale(0.96); transform-origin: bottom right;
+  transition: opacity var(--dur-2) var(--ease), transform var(--dur-2) var(--ease), visibility var(--dur-2);
+}
+.sami-chat-preview.is-shown { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+.sami-chat-preview__close {
+  position: absolute; top: -0.5rem; right: -0.5rem; width: 1.4rem; height: 1.4rem; border-radius: 50%;
+  background: hsl(var(--surface-2)); border: 1px solid hsl(var(--border-strong)); color: hsl(var(--fg-muted));
+  display: flex; align-items: center; justify-content: center; font-size: 0.7rem;
+}
+@media (max-width: 480px) { .sami-chat-preview { right: 1.25rem; bottom: 9.5rem; max-width: calc(100vw - 2.5rem); } }
 
 .sami-chat-panel {
-  position: fixed; bottom: 6.5rem; right: 1.75rem; z-index: 700;
-  width: min(23rem, calc(100vw - 2.5rem)); height: min(38rem, calc(100vh - 8rem));
+  position: fixed; bottom: 8rem; right: 1.75rem; z-index: 700;
+  width: min(23rem, calc(100vw - 2.5rem)); height: min(36rem, calc(100vh - 9.5rem));
   background: hsl(var(--bg)); border: 1px solid hsl(var(--border-strong)); border-radius: var(--r-xl);
   box-shadow: 0 40px 90px -20px hsl(0 0% 0% / 0.7);
   display: flex; flex-direction: column; overflow: hidden;
@@ -560,7 +576,7 @@ p { line-height: var(--lh-relaxed); }
   transition: opacity var(--dur-2) var(--ease), transform var(--dur-2) var(--ease), visibility var(--dur-2);
 }
 .sami-chat-panel.is-open { opacity: 1; visibility: visible; pointer-events: auto; transform: scale(1) translateY(0); }
-@media (max-width: 480px) { .sami-chat-panel { right: 1.25rem; bottom: 1.25rem; width: calc(100vw - 2.5rem); height: calc(100vh - 7rem); } .sami-chat-launcher { bottom: 6rem; } }
+@media (max-width: 480px) { .sami-chat-panel { right: 1.25rem; bottom: 1.25rem; width: calc(100vw - 2.5rem); height: calc(100vh - 7rem); } .sami-chat-launcher { bottom: 7.5rem; } }
 
 .sami-chat-header { display: flex; align-items: center; gap: 0.75rem; padding: 1rem 1.1rem; border-bottom: 1px solid hsl(var(--border)); background: hsl(var(--surface)); }
 .sami-chat-header__avatar { width: 2.5rem; height: 2.5rem; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
