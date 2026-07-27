@@ -84,7 +84,14 @@ body::before {
 .wrap--tight { width: var(--container-tight); margin-inline: auto; }
 .section { padding-block: clamp(3.5rem, 2.6rem + 4.5vw, 6rem); position: relative; }
 .section--tight { padding-block: clamp(2.5rem, 2rem + 2.5vw, 4rem); }
-.section--surface { background: hsl(var(--surface) / 0.82); border-block: 1px solid hsl(var(--border)); }
+.section--surface { background: hsl(var(--surface) / 0.82); border-block: 1px solid hsl(var(--border)); overflow: hidden; }
+.section--surface::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 1000px 560px at 15% 0%, hsl(var(--accent-bright) / 0.22), transparent 62%),
+    radial-gradient(ellipse 1000px 620px at 85% 100%, hsl(var(--accent) / 0.20), transparent 62%);
+}
+.section--surface > .wrap, .section--surface > .wrap--narrow, .section--surface > .wrap--tight { position: relative; z-index: 1; }
 .pt-nav { padding-top: clamp(7rem, 6rem + 3vw, 9.5rem); }
 
 /* ---------- type ---------- */
