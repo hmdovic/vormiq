@@ -26,6 +26,7 @@
       bot: "Hoi! Ik ben Sami&rsquo;s chatassistent 👋 Waar ben je naar op zoek?",
       options: [
         { label: "Een website", next: "web_type" },
+        { label: "Gratis demo aanvragen", href: "demo.html" },
         { label: "Een AI avatar", next: "ai_purpose" },
         { label: "Iets anders", next: "other_desc" }
       ]
@@ -194,7 +195,10 @@
           node.options.forEach(function (opt) {
             var btn = el("button", "sami-chat-chip", opt.label);
             btn.type = "button";
-            btn.addEventListener("click", function () { answer(node.field, opt.label, opt.next); });
+            btn.addEventListener("click", function () {
+              if (opt.href) { goToHref(opt.label, opt.href); return; }
+              answer(node.field, opt.label, opt.next);
+            });
             quickRepliesEl.appendChild(btn);
           });
         } else if (node.input) {
@@ -216,6 +220,15 @@
       state.key = next;
       clearComposer();
       renderStep();
+    }
+
+    function goToHref(label, href) {
+      addBubble(label, "user");
+      clearComposer();
+      addTyping(function () {
+        addBubble("Top! Ik open de gratis demo-aanvraag voor je &mdash; een paar korte vragen en je ziet hoe je nieuwe site eruit kan zien.", "bot");
+        window.setTimeout(function () { window.location.href = href; }, 900);
+      });
     }
 
     function buildSummaryLines() {
