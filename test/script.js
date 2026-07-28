@@ -284,7 +284,14 @@
         duration: 0.7, ease: "power1.out"
       }, ">-0.7");
 
-      if (window.ScrollTrigger) {
+      /* Pinning the hero for the dissolve-out works fine on desktop, but on
+         mobile the browser chrome (address bar) resizing mid-scroll fights
+         with ScrollTrigger's pin-spacer height, leaving a blank dead zone
+         after content fades but before the pin releases. Keep the pin only
+         where viewport height is stable; on mobile the hero just scrolls
+         away normally like any other section. */
+      var pinCapable = window.ScrollTrigger && window.matchMedia("(min-width: 900px)").matches;
+      if (pinCapable) {
         gsap.timeline({
           scrollTrigger: {
             trigger: ".hero",
