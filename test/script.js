@@ -450,25 +450,28 @@
   }
 
   /* =========================================================
-     WORK STACK — ken burns + settle
+     PORTFOLIO: video-modal for the AI-video-only cards
      ========================================================= */
-  if (hasGSAP && window.ScrollTrigger && !reduceMotion) {
-    document.querySelectorAll("[data-work-panel]").forEach(function (panel) {
-      var media = panel.querySelector(".work-panel__media");
-      var card = panel.querySelector(".work-panel__card");
-      gsap.fromTo(media, { scale: 1.18 }, {
-        scale: 1, ease: "none",
-        scrollTrigger: { trigger: panel, start: "top bottom", end: "top top", scrub: true }
-      });
-      gsap.fromTo(card, { y: 60, opacity: 0 }, {
-        y: 0, opacity: 1, ease: "none",
-        scrollTrigger: { trigger: panel, start: "top 85%", end: "top 40%", scrub: true }
-      });
-      gsap.to(panel, {
-        scale: 0.94, filter: "brightness(0.55)", ease: "none",
-        scrollTrigger: { trigger: panel, start: "bottom 90%", end: "bottom 10%", scrub: true }
+  var videoModal = document.querySelector("[data-video-modal]");
+  var videoModalPlayer = document.querySelector("[data-video-modal-player]");
+  if (videoModal && videoModalPlayer) {
+    var closeVideoModal = function () {
+      videoModal.classList.remove("is-open");
+      videoModalPlayer.pause();
+      videoModalPlayer.removeAttribute("src");
+    };
+    document.querySelectorAll("[data-open-video]").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        videoModalPlayer.src = btn.dataset.openVideo;
+        videoModal.classList.add("is-open");
+        var playPromise = videoModalPlayer.play();
+        if (playPromise && playPromise.catch) playPromise.catch(function () {});
       });
     });
+    var videoModalClose = document.querySelector("[data-video-modal-close]");
+    if (videoModalClose) videoModalClose.addEventListener("click", closeVideoModal);
+    videoModal.addEventListener("click", function (e) { if (e.target === videoModal) closeVideoModal(); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeVideoModal(); });
   }
 
   /* =========================================================
@@ -538,16 +541,19 @@
   }
 
   /* =========================================================
-     PRICING TILT
+     TILT + CURSOR GLOW (pricing cards, portfolio browser-cards)
      ========================================================= */
   if (!reduceMotion && window.matchMedia("(hover: hover)").matches) {
     document.querySelectorAll("[data-tilt]").forEach(function (card) {
       card.style.perspective = "800px";
+      var strength = parseFloat(card.dataset.tiltStrength) || 8;
       card.addEventListener("mousemove", function (e) {
         var r = card.getBoundingClientRect();
         var px = (e.clientX - r.left) / r.width - 0.5;
         var py = (e.clientY - r.top) / r.height - 0.5;
-        card.style.transform = "rotateY(" + (px * 8) + "deg) rotateX(" + (py * -8) + "deg) translateY(-4px)";
+        card.style.transform = "rotateY(" + (px * strength) + "deg) rotateX(" + (py * -strength) + "deg) translateY(-4px)";
+        card.style.setProperty("--mx", ((e.clientX - r.left) / r.width * 100) + "%");
+        card.style.setProperty("--my", ((e.clientY - r.top) / r.height * 100) + "%");
       });
       card.addEventListener("mouseleave", function () { card.style.transform = ""; });
     });
