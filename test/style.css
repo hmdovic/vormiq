@@ -397,6 +397,24 @@ section { position: relative; padding: var(--section-pad) var(--edge); }
 .browser-card:hover .browser-card__meta h3 svg { opacity: 1; transform: translate(0, 0); }
 .browser-card__meta p { font-size: 0.85rem; margin: 0; }
 
+/* ---------- video showcase: "never shown before" reel ---------- */
+.showcase__intro { max-width: 80rem; margin: clamp(3.5rem, 7vw, 5rem) auto 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; }
+.showcase__intro h3 { font-size: clamp(1.3rem, 2.4vw, 1.7rem); }
+.showcase-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.25rem; max-width: 80rem; margin-inline: auto; }
+.showcase-card {
+  position: relative; display: block; aspect-ratio: 9/16; max-width: 260px; border-radius: var(--r-xl); overflow: hidden;
+  border: 1px solid hsl(var(--border)); background: hsl(var(--surface));
+  transition: border-color 0.3s var(--ease), transform 0.2s var(--ease-soft);
+}
+.showcase-card:hover, .showcase-card:focus-visible { border-color: hsl(var(--accent-bright) / 0.5); }
+.showcase-card video { width: 100%; height: 100%; object-fit: cover; }
+.showcase-card__play {
+  position: absolute; inset: 0; margin: auto; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;
+  border-radius: 50%; background: hsl(0 0% 100% / 0.14); backdrop-filter: blur(6px); color: #fff;
+  opacity: 0; transform: scale(0.8); transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.showcase-card:hover .showcase-card__play { opacity: 1; transform: scale(1); }
+
 .video-modal {
   position: fixed; inset: 0; z-index: 70; display: flex; align-items: center; justify-content: center; padding: 2rem;
   background: hsl(var(--bg) / 0.92); backdrop-filter: blur(14px);

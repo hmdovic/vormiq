@@ -437,6 +437,31 @@
   }
 
   /* =========================================================
+     PORTFOLIO: lazy-play videos only once scrolled near view
+     ========================================================= */
+  var lazyVideos = document.querySelectorAll("[data-lazy-video]");
+  if (lazyVideos.length && "IntersectionObserver" in window) {
+    var lazyVideoObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var v = entry.target;
+        if (entry.isIntersecting) {
+          if (v.preload !== "auto") v.preload = "auto";
+          var p = v.play();
+          if (p && p.catch) p.catch(function () {});
+        } else {
+          v.pause();
+        }
+      });
+    }, { rootMargin: "200px 0px 200px 0px", threshold: 0 });
+    lazyVideos.forEach(function (v) { lazyVideoObserver.observe(v); });
+  } else {
+    lazyVideos.forEach(function (v) {
+      var p = v.play();
+      if (p && p.catch) p.catch(function () {});
+    });
+  }
+
+  /* =========================================================
      PORTFOLIO: video-modal for the AI-video-only cards
      ========================================================= */
   var videoModal = document.querySelector("[data-video-modal]");
