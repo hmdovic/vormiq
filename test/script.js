@@ -155,7 +155,7 @@
           revealObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
+    }, { threshold: 0, rootMargin: "0px 0px 25% 0px" });
     document.querySelectorAll("[data-reveal]").forEach(function (el) { revealObserver.observe(el); });
   } else {
     document.querySelectorAll("[data-reveal]").forEach(function (el) { el.classList.add("is-in"); });
@@ -336,7 +336,7 @@
           show(result, 1900);
         }
       });
-    }, { threshold: 0.45 });
+    }, { threshold: 0, rootMargin: "0px 0px 35% 0px" });
     machineObs.observe(machineStage);
 
     var outButtons = machineStage.querySelectorAll(".machine__node--out");
@@ -479,7 +479,7 @@
           proofObserver.unobserve(el);
         }
       });
-    }, { threshold: 0.25 });
+    }, { threshold: 0, rootMargin: "0px 0px 30% 0px" });
     document.querySelectorAll("[data-wa-mock]").forEach(function (el) { proofObserver.observe(el); });
   }
 
