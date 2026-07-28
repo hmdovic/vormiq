@@ -139,9 +139,24 @@
     </div>
 
     <div class="machine__outputs">
-      <div class="machine__node machine__node--out" data-machine-item="out1"><p>Social clips</p></div>
-      <div class="machine__node machine__node--out" data-machine-item="out2"><p>AI Avatar</p></div>
-      <div class="machine__node machine__node--out" data-machine-item="out3"><p>Website-content</p></div>
+      <button type="button" class="machine__node machine__node--out" data-machine-item="out1">
+        <span class="machine__out-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg></span>
+        <p>Social clips</p>
+        <span class="machine__out-note">Automatisch geknipt uit jouw ene opname &mdash; geen extra werk aan jouw kant.</span>
+      </button>
+      <button type="button" class="machine__node machine__node--out machine__node--avatar" data-machine-item="out2">
+        <span class="machine__out-icon machine__out-icon--avatar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="18" x2="12" y2="21"/></svg>
+        </span>
+        <span class="machine__out-wave" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+        <p>AI Avatar</p>
+        <span class="machine__out-note">Geen camera nodig &mdash; jij hoeft niks op te nemen. Wij bouwen 'm van script tot kloppende lipsync.</span>
+      </button>
+      <button type="button" class="machine__node machine__node--out" data-machine-item="out3">
+        <span class="machine__out-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v12H6l-2 3V4z"/></svg></span>
+        <p>Website-content</p>
+        <span class="machine__out-note">Teksten en beelden die meteen op je site en socials passen.</span>
+      </button>
     </div>
 
     <div class="machine__result" data-machine-item="result">

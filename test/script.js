@@ -351,6 +351,15 @@
       });
     }, { threshold: 0.45 });
     machineObs.observe(machineStage);
+
+    var outButtons = machineStage.querySelectorAll(".machine__node--out");
+    outButtons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var wasOpen = btn.classList.contains("is-open");
+        outButtons.forEach(function (b) { b.classList.remove("is-open"); });
+        if (!wasOpen) btn.classList.add("is-open");
+      });
+    });
   }
 
   /* =========================================================
