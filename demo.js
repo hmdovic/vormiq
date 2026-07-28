@@ -161,6 +161,14 @@
     return wrap;
   }
 
+  var STYLE_ACCENTS = {
+    modern: "#1c1c1c",
+    luxe: "#8a6a2f",
+    minimalistisch: "#c9c6bd",
+    zakelijk: "#1b2f47",
+    speels: "hsl(var(--accent-bright))"
+  };
+
   function renderStyleStep(step, index) {
     var wrap = el("div", "demo-step");
     wrap.appendChild(el("h2", "demo-step__title", step.title));
@@ -182,7 +190,20 @@
         if (card.classList.contains("is-selected")) return;
         answers[step.field] = label;
         card.classList.add("is-selected");
-        window.setTimeout(function () { goTo(index + 1); }, 320);
+
+        var stageRect = stage.getBoundingClientRect();
+        var cardRect = card.getBoundingClientRect();
+        var flash = el("div", "demo-style-flash");
+        flash.style.background = STYLE_ACCENTS[slug] || "hsl(var(--accent))";
+        flash.style.setProperty("--fx", (((cardRect.left + cardRect.width / 2 - stageRect.left) / stageRect.width) * 100) + "%");
+        flash.style.setProperty("--fy", (((cardRect.top + cardRect.height / 2 - stageRect.top) / stageRect.height) * 100) + "%");
+        stage.appendChild(flash);
+        requestAnimationFrame(function () { flash.classList.add("is-growing"); });
+
+        window.setTimeout(function () {
+          flash.classList.add("is-fading");
+          goTo(index + 1);
+        }, 380);
       });
       grid.appendChild(card);
     });

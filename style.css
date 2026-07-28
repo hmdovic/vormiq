@@ -830,6 +830,19 @@ p { line-height: var(--lh-relaxed); }
 .demo-step.is-leaving { animation: demoStepOut 0.22s var(--ease) forwards; }
 @keyframes demoStepIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: none; } }
 @keyframes demoStepOut { to { opacity: 0; transform: translateX(-20px); } }
+
+/* Themed wash — expands from the clicked style card in that style's own color,
+   so the flow feels personalized to the chosen aesthetic for a beat before the
+   next question appears. */
+.demo-flow__stage { position: relative; overflow: hidden; border-radius: var(--r-lg); }
+.demo-style-flash {
+  position: absolute; inset: 0; z-index: 5; pointer-events: none; opacity: 1;
+  clip-path: circle(0% at var(--fx, 50%) var(--fy, 50%));
+  transition: clip-path 0.5s var(--ease);
+}
+.demo-style-flash.is-growing { clip-path: circle(140% at var(--fx, 50%) var(--fy, 50%)); }
+.demo-style-flash.is-fading { opacity: 0; transition: opacity 0.4s var(--ease); }
+@media (prefers-reduced-motion: reduce) { .demo-style-flash { display: none; } }
 .demo-step__title { font-size: clamp(1.65rem, 1.35rem + 1.3vw, 2.4rem); max-width: 32rem; }
 .demo-step__sub { color: hsl(var(--fg-muted)); margin-top: 0.65rem; max-width: 30rem; }
 
