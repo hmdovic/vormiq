@@ -405,29 +405,52 @@ p { line-height: var(--lh-relaxed); }
 .pull-quote { font-family: var(--font-display); font-size: clamp(1.3rem, 1.15rem + 0.6vw, 1.7rem); line-height: var(--lh-snug); letter-spacing: var(--tr-tight); }
 
 /* ---------- project index ---------- */
-.project-index { border-top: 1px solid hsl(var(--border)); }
-.project-row {
-  display: grid; grid-template-columns: 1fr; gap: 1.25rem; padding-block: 2rem;
-  border-bottom: 1px solid hsl(var(--border)); position: relative; transition: padding-left var(--dur-2) var(--ease);
+/* Cinematic horizontal-scroll gallery. Default: a native horizontally-swipeable,
+   scroll-snapped row (works everywhere, no JS required). On desktop with a fine
+   pointer, script.js promotes this into a scroll-jacked "pinned" gallery where
+   vertical scroll drives horizontal motion — see the .is-pinned-gallery rules below. */
+.project-index {
+  display: flex; gap: 1.5rem; padding-block: 1rem 1.5rem;
+  overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; will-change: transform;
 }
-@media (min-width: 860px) { .project-row { grid-template-columns: 6rem 1fr auto; align-items: center; gap: 2rem; } }
-.project-row:hover { padding-left: 0.75rem; }
-.project-row__index { font-family: var(--font-mono); color: hsl(var(--fg-faint)); font-size: 0.95rem; }
-.project-row__main h3 { font-size: clamp(1.4rem, 1.3rem + 0.6vw, 2rem); }
+.project-index::-webkit-scrollbar { display: none; }
+.project-row {
+  position: relative; flex: 0 0 min(80vw, 620px); scroll-snap-align: start;
+  display: flex; flex-direction: column; border-radius: var(--r-xl); overflow: hidden;
+  border: 1px solid hsl(var(--border)); background: hsl(var(--surface));
+  transition: border-color var(--dur-2), transform var(--dur-2) var(--ease), box-shadow var(--dur-2) var(--ease);
+}
+.project-row:hover { border-color: hsl(var(--border-strong)); box-shadow: 0 30px 60px -30px hsl(0 0% 0% / 0.16); }
+.project-row__index {
+  position: absolute; top: 1rem; left: 1rem; z-index: 2;
+  font-family: var(--font-mono); font-size: 0.76rem; color: hsl(var(--fg-muted));
+  background: hsl(var(--bg) / 0.85); backdrop-filter: blur(4px);
+  padding: 0.3rem 0.7rem; border-radius: var(--r-full); border: 1px solid hsl(var(--border));
+}
+.project-row__main { padding: 1.5rem 1.5rem 1.75rem; display: flex; flex-direction: column; flex: 1; }
+.project-row__main h3 { font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.6rem); }
 .project-row__badges { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.6rem; }
 .badge { font-size: 0.68rem; text-transform: uppercase; letter-spacing: var(--tr-wide); padding: 0.32rem 0.8rem; border-radius: var(--r-full); border: 1px solid hsl(var(--border-strong)); color: hsl(var(--fg-muted)); font-family: var(--font-mono); }
 .badge--accent { border-color: hsl(var(--accent) / 0.4); color: hsl(var(--accent)); background: hsl(var(--accent) / 0.08); }
-.project-row__desc { margin-top: 0.6rem; color: hsl(var(--fg-muted)); max-width: 34rem; }
-.project-row__link { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; font-weight: 600; color: hsl(var(--accent)); white-space: nowrap; }
-.project-row__preview {
-  position: relative; width: 100%; max-width: 220px; aspect-ratio: 4/3; border-radius: var(--r-lg); overflow: hidden;
-  border: 1px solid hsl(var(--border-strong)); background: hsl(var(--surface));
-  opacity: 0; transform: scale(0.94); transition: opacity var(--dur-2) var(--ease), transform var(--dur-2) var(--ease);
+.project-row__desc {
+  margin-top: 0.6rem; color: hsl(var(--fg-muted));
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
-@media (min-width: 860px) { .project-row:hover .project-row__preview, .project-row:focus-within .project-row__preview { opacity: 1; transform: scale(1); } }
-.project-row__preview img, .project-row__preview video { width: 100%; height: 100%; object-fit: cover; }
-.project-row__preview--static { opacity: 1; transform: none; }
-@media (max-width: 859px) { .project-row__preview { max-width: 100%; opacity: 1; transform: none; aspect-ratio: 16/10; } }
+.project-row__link { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: auto; padding-top: 1rem; font-size: 0.88rem; font-weight: 600; color: hsl(var(--accent)); white-space: nowrap; }
+.project-row__preview {
+  position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden;
+  border: none; background: hsl(var(--surface-2)); opacity: 1; transform: none;
+}
+.project-row__preview img, .project-row__preview video {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.6s var(--ease);
+}
+.project-row:hover .project-row__preview img, .project-row:hover .project-row__preview video { transform: scale(1.045); }
+
+/* Desktop scroll-jacked mode — script.js adds this to the section wrapper */
+.project-gallery__pin { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; overflow: hidden; }
+.is-pinned-gallery .project-index { overflow: visible; scroll-snap-type: none; flex-wrap: nowrap; }
 
 /* ---------- 3D tilt (premium hover — hero/feature elements only, fine pointer + motion-safe) ---------- */
 .tilt-3d { transform-style: preserve-3d; will-change: transform; }

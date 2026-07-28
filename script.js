@@ -78,8 +78,56 @@
         var show = filter === "all" || row.dataset.category === filter;
         row.classList.toggle("is-hidden", !show);
       });
+      if (window.__recomputeProjectGallery) window.__recomputeProjectGallery();
     });
   });
+
+  /* Cinematic horizontal-scroll project gallery — desktop/fine-pointer only.
+     Default CSS already makes .project-index a native swipeable, scroll-snapped
+     row everywhere; here we promote it into a "pinned" gallery where vertical
+     scroll drives horizontal motion, for wide fine-pointer screens only. */
+  (function () {
+    var track = document.querySelector(".project-index");
+    if (!track) return;
+    var prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var hasFinePointer = window.matchMedia("(pointer: fine)").matches;
+    if (prefersReducedMotion || !hasFinePointer || window.innerWidth < 1024) return;
+
+    var outer = document.createElement("div");
+    outer.className = "project-gallery__outer is-pinned-gallery";
+    var pin = document.createElement("div");
+    pin.className = "project-gallery__pin";
+    track.parentNode.insertBefore(outer, track);
+    outer.appendChild(pin);
+    pin.appendChild(track);
+
+    var scrollDistance = 0;
+
+    function recompute() {
+      pin.style.transform = "";
+      track.style.transform = "translateX(0)";
+      var viewportWidth = pin.clientWidth;
+      scrollDistance = Math.max(0, track.scrollWidth - viewportWidth);
+      outer.style.height = (window.innerHeight + scrollDistance) + "px";
+    }
+
+    function onScroll() {
+      if (scrollDistance <= 0) return;
+      var rect = outer.getBoundingClientRect();
+      var progress = Math.min(1, Math.max(0, -rect.top / scrollDistance));
+      track.style.transform = "translateX(-" + (progress * scrollDistance).toFixed(1) + "px)";
+    }
+
+    var ticking = false;
+    window.addEventListener("scroll", function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () { onScroll(); ticking = false; });
+    });
+    window.addEventListener("resize", recompute);
+    window.__recomputeProjectGallery = recompute;
+    recompute();
+  })();
 
   /* Project detail modal */
   var modal = document.getElementById("project-modal");
