@@ -431,6 +431,48 @@
     window.addEventListener("resize", drawLines);
     setTimeout(drawLines, 50);
     if (hasGSAP && window.ScrollTrigger) ScrollTrigger.addEventListener("refresh", drawLines);
+
+    /* mobile fallback: same data, rendered as a connected vertical list
+       instead of a 2D web — the scattered layout doesn't fit narrow screens */
+    var mobileHost = document.querySelector("[data-constellation-mobile]");
+    if (mobileHost && !mobileHost.querySelector(".cm-list")) {
+      var titleMap = {};
+      nodeCards.forEach(function (card) {
+        titleMap[card.dataset.node] = card.querySelector(".node-card__title").textContent;
+      });
+      var list = document.createElement("div");
+      list.className = "cm-list";
+      list.appendChild(document.createElement("div")).className = "cm-line";
+      nodeCards.forEach(function (card) {
+        var connects = (card.dataset.connect || "").split(",").map(function (s) { return s.trim(); }).filter(Boolean);
+        var item = document.createElement("div");
+        item.className = "cm-item";
+        item.id = "cm-" + card.dataset.node;
+        item.innerHTML =
+          '<div class="cm-item__head"><span class="cm-item__icon">' + card.querySelector(".node-card__icon").innerHTML + "</span>" +
+          "<span><span class=\"cm-item__title\">" + card.querySelector(".node-card__title").textContent + "</span>" +
+          '<span class="cm-item__price">' + card.querySelector(".node-card__price").textContent + "</span></span></div>" +
+          '<p class="cm-item__desc">' + card.querySelector(".node-card__desc").textContent + "</p>" +
+          (connects.length
+            ? '<div class="cm-item__links">' + connects.map(function (c) {
+                return '<button type="button" class="cm-chip" data-cm-link="' + c + '">' + (titleMap[c] || c) + "</button>";
+              }).join("") + "</div>"
+            : "");
+        list.appendChild(item);
+      });
+      mobileHost.appendChild(list);
+      mobileHost.querySelectorAll("[data-cm-link]").forEach(function (chip) {
+        chip.addEventListener("click", function () {
+          var target = document.getElementById("cm-" + chip.dataset.cmLink);
+          if (!target) return;
+          scrollToTarget(target);
+          target.classList.remove("is-pulse");
+          void target.offsetWidth;
+          target.classList.add("is-pulse");
+          setTimeout(function () { target.classList.remove("is-pulse"); }, 1400);
+        });
+      });
+    }
   }
 
   /* =========================================================
