@@ -82,6 +82,15 @@ p { color: hsl(var(--text-dim)); line-height: 1.65; }
 }
 .tag::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: hsl(var(--accent-bright)); box-shadow: 0 0 10px hsl(var(--accent-bright) / 0.9); }
 .tag--center { justify-content: center; }
+
+/* ---------- recurring shard motif, reused outside the hero ---------- */
+.shard-field { position: absolute; inset: 0 0 auto 0; height: clamp(9rem, 22vw, 14rem); overflow: visible; pointer-events: none; z-index: -1; }
+.mini-shard {
+  position: absolute; border-radius: 4px;
+  background: linear-gradient(135deg, hsl(var(--accent-bright) / 0.6), hsl(var(--violet) / 0.45));
+  animation: miniFloat 7s ease-in-out infinite;
+}
+@keyframes miniFloat { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-12px) rotate(6deg); } }
 .text-shine {
   background: linear-gradient(100deg, hsl(var(--accent-bright)) 10%, hsl(var(--violet)) 45%, hsl(var(--accent-bright)) 80%);
   background-size: 250% 100%;
@@ -367,17 +376,48 @@ section { position: relative; padding: var(--section-pad) var(--edge); }
 /* =========================================================
    PROOF / TESTIMONIALS
    ========================================================= */
-.proof__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 72rem; margin: 0 auto clamp(3.5rem, 6vw, 5rem); }
-.proof-card {
-  margin: 0; border-radius: var(--r-xl); overflow: hidden; background: hsl(var(--surface)); border: 1px solid hsl(var(--border));
+.proof__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 72rem; margin: 0 auto clamp(3.5rem, 6vw, 5rem); position: relative; z-index: 1; }
+
+/* ---------- wa-mock: a small living WhatsApp-style card, not a screenshot ---------- */
+.wa-mock {
+  display: flex; flex-direction: column; border-radius: var(--r-xl); overflow: hidden;
+  background: hsl(var(--surface)); border: 1px solid hsl(var(--border));
   opacity: 0; transform: translateY(50px) scale(0.96); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
 }
-.proof-card.is-in { opacity: 1; transform: translateY(0) scale(1); }
-.proof-card img { width: 100%; aspect-ratio: 4/3; object-fit: contain; background: hsl(var(--bg-soft)); padding: 0.75rem; }
-.proof-card figcaption { padding: 1.4rem 1.5rem 1.7rem; }
-.proof-card__stars { color: hsl(var(--amber)); letter-spacing: 0.15em; margin: 0 0 0.6rem; font-size: 0.9rem; }
-.proof-card__quote { color: hsl(var(--text)); font-weight: 500; margin-bottom: 0.5rem; }
-.proof-card__author { font-size: 0.78rem; color: hsl(var(--text-faint)); }
+.wa-mock.is-in { opacity: 1; transform: translateY(0) scale(1); }
+
+.wa-mock__bar { display: flex; align-items: center; gap: 0.65rem; padding: 0.85rem 1.1rem; background: linear-gradient(120deg, hsl(var(--accent-deep)), hsl(var(--accent))); }
+.wa-mock__avatar {
+  width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-weight: 700; font-size: 0.92rem; color: #04120d;
+  background: hsl(var(--wa-hue, 166) 70% 75%);
+}
+.wa-mock__who { display: flex; flex-direction: column; color: #fff; line-height: 1.3; }
+.wa-mock__who strong { font-size: 0.86rem; font-weight: 600; }
+.wa-mock__who small { display: flex; align-items: center; gap: 0.35rem; font-size: 0.68rem; opacity: 0.85; }
+.wa-mock__dot { width: 6px; height: 6px; border-radius: 50%; background: #7cffb2; box-shadow: 0 0 6px #7cffb2; }
+
+.wa-mock__body { flex: 1; min-height: 9.5rem; display: flex; align-items: flex-end; padding: 1.3rem 1.1rem; background: hsl(var(--bg-soft)); }
+.wa-mock__bubble {
+  position: relative; max-width: 92%; background: hsl(0 0% 100% / 0.97); color: hsl(222 22% 15%);
+  border-radius: 3px 14px 14px 14px; padding: 0.65rem 0.85rem 0.5rem; box-shadow: 0 10px 24px -12px hsl(0 0% 0% / 0.5);
+}
+.wa-mock__typing { display: flex; gap: 4px; padding: 0.35rem 0.25rem; }
+.wa-mock__typing i { width: 6px; height: 6px; border-radius: 50%; background: hsl(222 15% 55%); animation: waTyping 1.1s ease-in-out infinite; }
+.wa-mock__typing i:nth-child(2) { animation-delay: 0.15s; }
+.wa-mock__typing i:nth-child(3) { animation-delay: 0.3s; }
+@keyframes waTyping { 0%, 60%, 100% { transform: translateY(0); opacity: 0.5; } 30% { transform: translateY(-3px); opacity: 1; } }
+
+.wa-mock__text { margin: 0; font-size: 0.87rem; line-height: 1.45; font-weight: 500; max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.5s var(--ease), opacity 0.4s var(--ease); }
+.wa-mock__meta { display: flex; align-items: center; justify-content: flex-end; gap: 0.3rem; margin-top: 0.25rem; font-size: 0.64rem; color: hsl(222 10% 45%); opacity: 0; transition: opacity 0.4s var(--ease) 0.1s; }
+.wa-mock__check { color: #53bdeb; }
+
+.wa-mock.is-typed .wa-mock__typing { display: none; }
+.wa-mock.is-typed .wa-mock__text { max-height: 6rem; opacity: 1; }
+.wa-mock.is-typed .wa-mock__meta { opacity: 1; }
+
+.wa-mock__foot { display: flex; align-items: center; justify-content: space-between; padding: 0.9rem 1.1rem 1.05rem; }
+.wa-mock__stars { color: hsl(var(--amber)); letter-spacing: 0.12em; font-size: 0.82rem; }
 
 .proof__stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; max-width: 64rem; margin-inline: auto; text-align: center; border-top: 1px solid hsl(var(--border)); padding-top: 2.5rem; }
 .proof__stats span, .proof__stat-text { display: block; font-family: var(--font-display); font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 700; color: hsl(var(--text)); }
@@ -499,5 +539,6 @@ section { position: relative; padding: var(--section-pad) var(--edge); }
 
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
-  .text-shine, .hero__scroll-track i, .machine__core-ring, .marquee__track, .machine__out-wave span, .machine__out-icon::after { animation: none !important; }
+  .text-shine, .hero__scroll-track i, .machine__core-ring, .marquee__track, .machine__out-wave span, .machine__out-icon::after,
+  .mini-shard, .wa-mock__typing i { animation: none !important; }
 }

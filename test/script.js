@@ -472,20 +472,48 @@
   }
 
   /* =========================================================
-     PROOF cards + stats
+     PROOF: wa-mock cards + stats
      ========================================================= */
   if ("IntersectionObserver" in window) {
     var proofObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry, i) {
+      entries.forEach(function (entry) {
         if (entry.isIntersecting) {
-          var idx = Array.prototype.indexOf.call(entry.target.parentNode.children, entry.target);
-          setTimeout(function () { entry.target.classList.add("is-in"); }, idx * 140);
-          proofObserver.unobserve(entry.target);
+          var el = entry.target;
+          var idx = Array.prototype.indexOf.call(el.parentNode.children, el);
+          var cardDelay = idx * 220;
+          setTimeout(function () {
+            el.classList.add("is-in");
+            var typeDelay = reduceMotion ? 0 : 750;
+            setTimeout(function () { el.classList.add("is-typed"); }, typeDelay);
+          }, cardDelay);
+          proofObserver.unobserve(el);
         }
       });
-    }, { threshold: 0.2 });
-    document.querySelectorAll("[data-proof-card]").forEach(function (el) { proofObserver.observe(el); });
+    }, { threshold: 0.25 });
+    document.querySelectorAll("[data-wa-mock]").forEach(function (el) { proofObserver.observe(el); });
   }
+
+  /* =========================================================
+     SHARD MOTIF — reused in section headers beyond the hero
+     ========================================================= */
+  document.querySelectorAll("[data-shard-field]").forEach(function (field) {
+    var count = parseInt(field.dataset.shardField, 10) || 5;
+    for (var i = 0; i < count; i++) {
+      var s = document.createElement("span");
+      s.className = "mini-shard";
+      var size = 8 + Math.random() * 15;
+      s.style.width = size + "px";
+      s.style.height = size + "px";
+      s.style.left = (Math.random() * 94) + "%";
+      s.style.top = (Math.random() * 70) + "%";
+      s.style.opacity = (0.2 + Math.random() * 0.35).toFixed(2);
+      if (!reduceMotion) {
+        s.style.animationDuration = (5.5 + Math.random() * 4) + "s";
+        s.style.animationDelay = (Math.random() * -7) + "s";
+      }
+      field.appendChild(s);
+    }
+  });
 
   /* =========================================================
      PROCESS — scrubbed line fill + active step
