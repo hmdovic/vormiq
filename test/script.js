@@ -284,35 +284,22 @@
         duration: 0.7, ease: "power1.out"
       }, ">-0.7");
 
-      /* Pinning the hero for the dissolve-out works fine on desktop, but on
-         mobile the browser chrome (address bar) resizing mid-scroll fights
-         with ScrollTrigger's pin-spacer height, leaving a blank dead zone
-         after content fades but before the pin releases. Keep the pin only
-         where viewport height is stable; on mobile the hero just scrolls
-         away normally like any other section. */
-      var pinCapable = window.ScrollTrigger && window.matchMedia("(min-width: 900px)").matches;
-      if (pinCapable) {
-        gsap.timeline({
-          scrollTrigger: {
-            trigger: ".hero",
-            start: "top top",
-            end: "+=90%",
-            scrub: 0.6,
-            pin: true,
-            pinSpacing: true
-          }
-        })
-        .to(shards, {
-          x: function () { return (Math.random() - 0.5) * spread * 2.2; },
-          y: function () { return -spread * (0.6 + Math.random() * 0.8); },
-          rotation: function () { return (Math.random() - 0.5) * 300; },
-          opacity: 0,
-          ease: "power1.in",
-          stagger: { each: 0.006, from: "random" }
-        }, 0)
-        .to(wordmark, { opacity: 0, y: -60, ease: "power1.in" }, 0)
-        .to(".hero__content", { opacity: 0, y: -40, ease: "power1.in" }, 0)
-        .to(".hero__scroll", { opacity: 0, ease: "power1.in" }, 0);
+      /* A pinned scroll-scrub dissolve was tried here (shards bursting
+         outward + content fading while the hero stays pinned), but any
+         reserved pin distance where content has already faded before the
+         pin releases reads as a blank dead page during normal-speed
+         scrolling — confirmed on both mobile and desktop. Simpler and
+         reliably gap-free: play the on-load assembly once, then let the
+         hero scroll away like every other section. */
+      if (window.ScrollTrigger) {
+        gsap.to(shards, {
+          opacity: function () { return 0.1 + Math.random() * 0.12; },
+          scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 0.6 }
+        });
+        gsap.to(wordmark, {
+          opacity: 0, y: -40,
+          scrollTrigger: { trigger: ".hero", start: "top top", end: "60% top", scrub: 0.6 }
+        });
       }
     }
   }
