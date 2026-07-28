@@ -249,6 +249,16 @@ p { line-height: var(--lh-relaxed); }
 .hero__scroll-dot { width: 4px; height: 8px; border-radius: var(--r-full); background: hsl(var(--accent)); animation: scrollBounce 1.9s var(--ease) infinite; }
 @keyframes scrollBounce { 0%,100% { transform: translateY(0); opacity: 1; } 60% { transform: translateY(12px); opacity: 0.25; } }
 
+/* On phones the text stack plus the full-height WhatsApp mock together exceed
+   one screen, pushing the mock — the hero's strongest proof/conversion element —
+   entirely below the fold. Tighten the vertical rhythm so it actually shows. */
+@media (max-width: 640px) {
+  .hero { padding-top: 5.5rem; padding-bottom: 2rem; }
+  .hero__grid { gap: 1.75rem; }
+  .hero__lead { margin-top: 1.1rem; }
+  .hero__actions { margin-top: 1.5rem; }
+}
+
 /* ---------- stat strip ---------- */
 .stats { display: grid; gap: 2rem; grid-template-columns: repeat(2, 1fr); }
 @media (min-width: 780px) { .stats { grid-template-columns: repeat(4, 1fr); } }
@@ -839,6 +849,7 @@ p { line-height: var(--lh-relaxed); }
 .hero-whatsapp-mock .sami-chat-summary__row span { color: hsl(var(--fg-faint)); }
 .hero-whatsapp-mock .sami-chat-restart { color: hsl(var(--fg-faint)); }
 @media (max-width: 1039px) { .hero-whatsapp-mock { height: 24rem; } }
+@media (max-width: 640px) { .hero-whatsapp-mock { height: 19rem; } }
 
 /* ---------- demo flow (dedicated conversational demo request page) ---------- */
 .demo-flow { min-height: calc(100svh - 5rem); display: flex; align-items: center; padding-block: 3rem; }
