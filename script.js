@@ -279,41 +279,6 @@
         el.style.transform = "";
       });
     });
-
-    /* Custom cursor — a small dot that trails the pointer with a slight lag and
-       expands with mix-blend-mode:difference over clickable elements. Only ever
-       active behind a JS-added class, so if this script fails to run the native
-       cursor is untouched. */
-    var cursorDot = document.createElement("div");
-    cursorDot.className = "custom-cursor";
-    document.body.appendChild(cursorDot);
-    document.documentElement.classList.add("has-custom-cursor");
-
-    var cx = window.innerWidth / 2, cy = window.innerHeight / 2;
-    var tx = cx, ty = cy;
-    document.addEventListener("mousemove", function (e) {
-      tx = e.clientX;
-      ty = e.clientY;
-      if (!cursorDot.classList.contains("is-visible")) cursorDot.classList.add("is-visible");
-    });
-    document.addEventListener("mouseleave", function () {
-      cursorDot.classList.remove("is-visible");
-    });
-
-    var hoverSelector = "a, button, input, textarea, select, [role='button'], .btn, [data-magnetic]";
-    document.addEventListener("mouseover", function (e) {
-      if (e.target.closest(hoverSelector)) cursorDot.classList.add("is-hovering");
-    });
-    document.addEventListener("mouseout", function (e) {
-      if (e.target.closest(hoverSelector)) cursorDot.classList.remove("is-hovering");
-    });
-
-    (function tick() {
-      cx += (tx - cx) * 0.18;
-      cy += (ty - cy) * 0.18;
-      cursorDot.style.transform = "translate(" + cx.toFixed(1) + "px, " + cy.toFixed(1) + "px) translate(-50%, -50%)";
-      requestAnimationFrame(tick);
-    })();
   }
 
   /* Hero video parallax on scroll — pure scroll-driven, fine on touch too,
