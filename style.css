@@ -225,7 +225,7 @@ section { position: relative; padding: var(--section-pad) var(--edge); }
 .hero__line { display: block; }
 .word-mask { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.1em; }
 .word-inner { display: inline-block; will-change: transform; }
-.hero__lead { max-width: 34rem; font-size: 1.18rem; line-height: 1.55; }
+.hero__lead { max-width: 36rem; font-size: clamp(1.15rem, 1.02rem + 0.6vw, 1.4rem); line-height: 1.5; }
 .hero__lead strong { color: hsl(var(--text)); font-weight: 700; }
 .hero__lead-accent { color: hsl(var(--accent-bright)); }
 .hero__actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 0.5rem; }
@@ -667,6 +667,12 @@ section { position: relative; padding: var(--section-pad) var(--edge); }
   .pricing__grid { grid-template-columns: 1fr 1fr; }
   .constellation { aspect-ratio: 620/1000; }
   .node-card { width: clamp(130px, 40vw, 170px); padding: 0.85rem 0.9rem; }
+  /* desktop --x/--y are tuned for the wide layout; pull the side columns
+     inward so cards stay inside the viewport on the narrow portrait one */
+  .node-card[data-node="automation"], .node-card[data-node="video"] { --x: 26% !important; }
+  .node-card[data-node="webshop"], .node-card[data-node="branding"] { --x: 74% !important; }
+  .node-card[data-node="website"] { --y: 10% !important; }
+  .node-card[data-node="avatar"] { --y: 90% !important; }
 }
 
 @media (max-width: 640px) {
