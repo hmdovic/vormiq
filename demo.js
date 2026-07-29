@@ -125,7 +125,7 @@
 
   function buildContinue(label, disabled) {
     var wrap = el("div", "demo-continue");
-    var btn = el("button", "btn btn--primary", label || "Doorgaan");
+    var btn = el("button", "btn btn--solid", label || "Doorgaan");
     btn.type = "button";
     if (disabled) btn.disabled = true;
     wrap.appendChild(btn);
@@ -471,7 +471,7 @@
     wrap.appendChild(summary);
 
     var cta = el("div", "demo-end__cta");
-    var waBtn = el("a", "btn btn--primary", "Verstuur via WhatsApp");
+    var waBtn = el("a", "btn btn--solid", "Verstuur via WhatsApp");
     waBtn.href = buildWaLink();
     waBtn.target = "_blank";
     waBtn.rel = "noopener noreferrer";
