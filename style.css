@@ -75,14 +75,6 @@ p { color: hsl(var(--text-dim)); line-height: 1.65; }
 ::selection { background: hsl(var(--accent) / 0.35); color: #fff; }
 
 /* ---------- utility ---------- */
-.tag {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase;
-  letter-spacing: 0.14em; color: hsl(var(--accent-bright));
-}
-.tag::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: hsl(var(--accent-bright)); box-shadow: 0 0 10px hsl(var(--accent-bright) / 0.9); }
-.tag--center { justify-content: center; }
-
 /* ---------- recurring shard motif, reused outside the hero ---------- */
 .shard-field { position: absolute; inset: 0 0 auto 0; height: clamp(9rem, 22vw, 14rem); overflow: visible; pointer-events: none; z-index: -1; }
 .mini-shard {
@@ -508,7 +500,6 @@ section { position: relative; padding: var(--section-pad) var(--edge); }
    ========================================================= */
 .demo-flow { min-height: calc(100svh - 4rem); display: flex; align-items: center; }
 .demo-flow__inner { width: 100%; max-width: 46rem; margin-inline: auto; }
-.demo-flow__eyebrow { margin-bottom: 1.5rem; }
 .demo-flow__topbar { display: flex; align-items: center; gap: 1.25rem; margin-bottom: clamp(2.25rem, 1.7rem + 2vw, 3.75rem); }
 .demo-flow__back { display: flex; align-items: center; gap: 0.4rem; color: hsl(var(--text-faint)); font-size: 0.85rem; flex-shrink: 0; transition: color var(--dur-1); }
 .demo-flow__back:hover { color: hsl(var(--text)); }
