@@ -215,6 +215,8 @@ section { position: relative; padding: var(--section-pad) var(--edge); }
 .hero__content { position: relative; max-width: 56rem; display: flex; flex-direction: column; align-items: center; gap: 1.6rem; }
 .hero__title { font-size: clamp(1.9rem, 1.3rem + 2.8vw, 3.4rem); max-width: 46rem; color: hsl(var(--text-dim)); }
 .hero__title strong { color: hsl(var(--text)); font-weight: 700; }
+.word-mask { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.1em; }
+.word-inner { display: inline-block; will-change: transform; }
 .hero__lead { max-width: 30rem; font-size: clamp(1.1rem, 1rem + 0.5vw, 1.3rem); line-height: 1.55; }
 .hero__lead-accent { color: hsl(var(--accent-bright)); }
 .hero__actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 0.5rem; }

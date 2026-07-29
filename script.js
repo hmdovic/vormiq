@@ -128,10 +128,18 @@
      HERO HEADLINE: word-by-word assemble
      ========================================================= */
   document.querySelectorAll("[data-split]").forEach(function (el) {
-    var words = el.textContent.trim().split(/\s+/);
-    el.innerHTML = words.map(function (w) {
-      return '<span class="word-mask"><span class="word-inner">' + w + "</span></span>";
-    }).join(" ");
+    var parts = [];
+    el.childNodes.forEach(function (node) {
+      var isText = node.nodeType === 3;
+      var tag = isText ? null : node.tagName.toLowerCase();
+      var cls = !isText && node.className ? ' class="' + node.className + '"' : "";
+      var words = (node.textContent || "").trim().split(/\s+/).filter(Boolean);
+      words.forEach(function (w) {
+        var word = isText ? w : "<" + tag + cls + ">" + w + "</" + tag + ">";
+        parts.push('<span class="word-mask"><span class="word-inner">' + word + "</span></span>");
+      });
+    });
+    el.innerHTML = parts.join(" ");
     var inners = el.querySelectorAll(".word-inner");
     if (reduceMotion || !hasGSAP) {
       inners.forEach(function (w) { w.style.transform = "translateY(0)"; });
