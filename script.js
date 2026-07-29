@@ -305,6 +305,34 @@
   }
 
   /* =========================================================
+     HERO: floating device mockups — real project previews
+     ========================================================= */
+  var heroDevices = document.querySelectorAll(".hero-device");
+  if (heroDevices.length) {
+    if (hasGSAP) {
+      gsap.set(heroDevices, { opacity: 0 });
+      gsap.to(heroDevices, {
+        opacity: 1, duration: reduceMotion ? 0.4 : 1.2, ease: "power2.out",
+        stagger: reduceMotion ? 0 : 0.25, delay: reduceMotion ? 0.1 : 1.4,
+        onComplete: function () {
+          /* only start the scroll-linked fade-out once the entrance is fully
+             done — creating a scrub tween earlier captures opacity:0 (its
+             pre-entrance value) as the scrub-start reference and holds the
+             cards invisible until the user scrolls */
+          if (window.ScrollTrigger && !reduceMotion) {
+            gsap.to(heroDevices, {
+              opacity: 0, ease: "power1.in",
+              scrollTrigger: { trigger: ".hero", start: "top top", end: "55% top", scrub: 0.6 }
+            });
+          }
+        }
+      });
+    } else {
+      heroDevices.forEach(function (el) { el.style.opacity = "1"; });
+    }
+  }
+
+  /* =========================================================
      SERVICES CONSTELLATION
      ========================================================= */
   var constellation = document.querySelector("[data-constellation]");
