@@ -25,11 +25,11 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
 <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 <link rel="manifest" href="manifest.json" />
-<meta name="theme-color" content="#159c82" />
+<meta name="theme-color" content="#0c1116" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet" />
 
 <link rel="stylesheet" href="style.css" />
 
@@ -78,530 +78,662 @@
 }</script>
 </head>
 <body>
-<header class="navbar">
-  <div class="wrap">
-    <nav class="navbar__inner" aria-label="Hoofdnavigatie">
-      <a href="index.html" class="navbar__logo">
-        <img src="logo-wordmark.png" alt="Vormiq" width="118" height="27" />
-      </a>
-      <ul class="navbar__links">
-        <li><a href="diensten.html">Diensten</a></li>
-        <li><a href="projecten.html">Projecten</a></li>
-        <li><a href="prijzen.html">Prijzen</a></li>
-        <li><a href="#over-sami">Over ons</a></li>
-      </ul>
-      <div class="navbar__actions">
-        <a href="#contact" class="btn btn--primary btn--sm navbar__cta">Start een project</a>
-        <button type="button" class="navbar__toggle" aria-label="Open menu" aria-expanded="false">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
-        </button>
-      </div>
-    </nav>
-  </div>
-</header>
-<div class="navbar__mobile">
-  <div class="wrap">
-    <ul>
-      <li><a href="diensten.html">Diensten</a></li>
-      <li><a href="projecten.html">Projecten</a></li>
-      <li><a href="prijzen.html">Prijzen</a></li>
-      <li><a href="#over-sami">Over ons</a></li>
-      <li style="margin-top:0.5rem;"><a href="#contact" class="btn btn--primary btn--full" style="width:100%;">Start een project</a></li>
-    </ul>
-  </div>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="progress-rail" aria-hidden="true"><span class="progress-rail__fill" data-scroll-progress></span></div>
+
+<div class="bg-field" aria-hidden="true">
+  <span class="bg-orb bg-orb--a" data-depth="0.15"></span>
+  <span class="bg-orb bg-orb--b" data-depth="0.3"></span>
+  <span class="bg-orb bg-orb--c" data-depth="0.08"></span>
+  <svg class="bg-grid" data-depth="0.05" width="100%" height="100%" aria-hidden="true">
+    <defs>
+      <pattern id="grid" width="64" height="64" patternUnits="userSpaceOnUse">
+        <path d="M 64 0 L 0 0 0 64" fill="none" stroke="currentColor" stroke-width="1"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#grid)" />
+  </svg>
 </div>
 
-<main>
+<header class="nav" data-nav>
+  <div class="nav__inner">
+    <a href="#hero" class="nav__mark" data-nav-link>
+      <img src="logo.png" alt="Vormiq" width="22" height="20" />
+      <span>Vormiq</span>
+    </a>
+    <nav class="nav__links" aria-label="Sectienavigatie">
+      <a href="#proof" data-nav-link data-section="proof">Resultaten</a>
+      <a href="#machine" data-nav-link data-section="machine">Hoe het werkt</a>
+      <a href="#work" data-nav-link data-section="work">Werk</a>
+      <a href="#services" data-nav-link data-section="services">Diensten</a>
+      <a href="#pricing" data-nav-link data-section="pricing">Prijzen</a>
+    </nav>
+    <a href="https://wa.me/31657971118?text=Hoi%20Sami%2C%20ik%20ben%20benieuwd%20wat%20Vormiq%20voor%20mijn%20bedrijf%20kan%20betekenen." target="_blank" rel="noopener noreferrer" class="nav__cta" data-magnetic>
+      <span>Start een project</span>
+    </a>
+    <button type="button" class="nav__toggle" data-nav-toggle aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </div>
+  <div class="nav__mobile" data-nav-mobile>
+    <a href="#proof" data-nav-link>Resultaten</a>
+    <a href="#machine" data-nav-link>Hoe het werkt</a>
+    <a href="#work" data-nav-link>Werk</a>
+    <a href="#services" data-nav-link>Diensten</a>
+    <a href="#pricing" data-nav-link>Prijzen</a>
+    <a href="#contact" data-nav-link>Contact</a>
+  </div>
+</header>
 
-<section class="hero" id="hero">
-  <video class="hero__video" src="header.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
-  <div class="hero__overlay" aria-hidden="true"></div>
-  <div class="hero__glow" aria-hidden="true"></div>
-  <div class="wrap">
-    <div class="hero__grid">
-      <div>
-        <p class="eyebrow hero-in hero-in--1">Creative &amp; AI Digital Studio · Delft</p>
-        <h1 class="hero__title hero-in hero-in--2">Jouw vak is top. Je website mag dat <span class="hero__kinetic"><span class="hero__kinetic-word"><span class="text-gradient">eindelijk</span></span> <span class="hero__kinetic-word"><span class="text-gradient">laten</span></span> <span class="hero__kinetic-word"><span class="text-gradient">zien.</span></span></span></h1>
-        <p class="hero__lead hero-in hero-in--3">
-          Websites, branding en AI-video die niet aanvoelen als een AI-productje &mdash; maar als
-          werk van een studio die weet wat jouw klant nodig heeft om te bellen of te boeken.
-        </p>
-        <div class="hero__actions hero-in hero-in--4">
-          <a href="https://wa.me/31657971118?text=Hoi%20Sami%2C%20ik%20ben%20benieuwd%20wat%20Vormiq%20voor%20mijn%20bedrijf%20kan%20betekenen." target="_blank" rel="noopener noreferrer" class="btn btn--primary" data-magnetic>Start gratis kennismaking</a>
-          <a href="projecten.html" class="btn btn--outline" data-magnetic>Bekijk projecten</a>
-        </div>
-      </div>
-      <div class="hero__cards"></div>
+<main id="top">
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="hero" data-scene>
+  <div class="hero__stage">
+    <div class="hero__fragments" data-fragments aria-hidden="true">
+      <!-- populated by JS: shards assembling into wordmark -->
+    </div>
+    <div class="hero__wordmark" data-hero-mark aria-hidden="true">VORMIQ</div>
+  </div>
+
+  <div class="hero__content">
+    <p class="tag tag--center" data-reveal>Creative &amp; AI Digital Studio · Delft</p>
+    <h1 class="hero__title" data-reveal>
+      <span class="hero__line">Jouw vak is top.</span>
+      <span class="hero__line hero__line--fragmented" data-split>Je website mag dat eindelijk laten zien.</span>
+    </h1>
+    <p class="hero__lead" data-reveal>
+      Websites, branding en AI-video die niet aanvoelen als een AI-productje —
+      maar als werk van een studio die weet wat jouw klant nodig heeft om te bellen of te boeken.
+    </p>
+    <div class="hero__actions" data-reveal>
+      <a href="https://wa.me/31657971118?text=Hoi%20Sami%2C%20ik%20ben%20benieuwd%20wat%20Vormiq%20voor%20mijn%20bedrijf%20kan%20betekenen." target="_blank" rel="noopener noreferrer" class="btn btn--solid" data-magnetic>Start gratis kennismaking</a>
+      <a href="#work" class="btn btn--ghost" data-magnetic data-scroll-to>Bekijk het werk</a>
     </div>
   </div>
-  <div class="hero__scroll" aria-hidden="true"><div class="hero__scroll-pill"><span class="hero__scroll-dot"></span></div></div>
+
+  <div class="hero__scroll" aria-hidden="true">
+    <span>Scroll</span>
+    <div class="hero__scroll-track"><i></i></div>
+  </div>
+</section>
+
+<!-- ================= PROOF / TESTIMONIALS ================= -->
+<section class="proof" id="proof" data-scene>
+  <div class="shard-field" data-shard-field="6" aria-hidden="true"></div>
+  <div class="proof__intro">
+    <p class="tag tag--center" data-reveal>Uit de praktijk</p>
+    <h2 data-reveal>Geen reviewsite. <span class="text-shine">Gewoon WhatsApp.</span></h2>
+  </div>
+
+  <div class="proof__grid">
+    <div class="wa-mock" data-wa-mock style="--wa-hue:166">
+      <div class="wa-mock__bar">
+        <span class="wa-mock__avatar">M</span>
+        <span class="wa-mock__who"><strong>MA Veranda</strong><small><span class="wa-mock__dot"></span>Review</small></span>
+      </div>
+      <div class="wa-mock__body">
+        <div class="wa-mock__bubble">
+          <span class="wa-mock__typing" aria-hidden="true"><i></i><i></i><i></i></span>
+          <p class="wa-mock__text">Het is prachtig, ik vond het mooi.</p>
+          <span class="wa-mock__meta">21:27 <svg class="wa-mock__check" width="14" height="10" viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5.5 4.5 9 11 1.5"/><path d="M5.5 5.5 9 9 15.5 1.5"/></svg></span>
+        </div>
+      </div>
+      <div class="wa-mock__foot">
+        <span class="wa-mock__stars" aria-hidden="true">★★★★★</span>
+        <span class="badge badge--accent">Geverifieerd</span>
+      </div>
+    </div>
+
+    <div class="wa-mock" data-wa-mock style="--wa-hue:258">
+      <div class="wa-mock__bar">
+        <span class="wa-mock__avatar">B</span>
+        <span class="wa-mock__who"><strong>B-Opperdiensten</strong><small><span class="wa-mock__dot"></span>Review</small></span>
+      </div>
+      <div class="wa-mock__body">
+        <div class="wa-mock__bubble">
+          <span class="wa-mock__typing" aria-hidden="true"><i></i><i></i><i></i></span>
+          <p class="wa-mock__text">Bedankt man, door jou krijg ik steeds meer aanvragen.</p>
+          <span class="wa-mock__meta">06:01 <svg class="wa-mock__check" width="14" height="10" viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5.5 4.5 9 11 1.5"/><path d="M5.5 5.5 9 9 15.5 1.5"/></svg></span>
+        </div>
+      </div>
+      <div class="wa-mock__foot">
+        <span class="wa-mock__stars" aria-hidden="true">★★★★★</span>
+        <span class="badge badge--accent">Geverifieerd</span>
+      </div>
+    </div>
+
+    <div class="wa-mock" data-wa-mock style="--wa-hue:32">
+      <div class="wa-mock__bar">
+        <span class="wa-mock__avatar">A</span>
+        <span class="wa-mock__who"><strong>Alvero Atelier</strong><small><span class="wa-mock__dot"></span>Review</small></span>
+      </div>
+      <div class="wa-mock__body">
+        <div class="wa-mock__bubble">
+          <span class="wa-mock__typing" aria-hidden="true"><i></i><i></i><i></i></span>
+          <p class="wa-mock__text">Bedankt voor de AI avatars, niet te onderscheiden van het echte!</p>
+          <span class="wa-mock__meta">14:03 <svg class="wa-mock__check" width="14" height="10" viewBox="0 0 16 11" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 5.5 4.5 9 11 1.5"/><path d="M5.5 5.5 9 9 15.5 1.5"/></svg></span>
+        </div>
+      </div>
+      <div class="wa-mock__foot">
+        <span class="wa-mock__stars" aria-hidden="true">★★★★★</span>
+        <span class="badge badge--accent">Geverifieerd</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="proof__stats" data-reveal>
+    <div><span data-count-to="50" data-count-prefix="€">0</span><p>Website, vanaf p/mnd</p></div>
+    <div><span data-count-to="1" data-count-suffix=" werkdag">0</span><p>Live binnen</p></div>
+    <div><span data-count-to="6" data-count-suffix="+ jaar">0</span><p>Actief sinds 2020</p></div>
+    <div><span class="proof__stat-text">Direct met Sami</span><p>Geen tussenpersoon</p></div>
+  </div>
 </section>
 
 <div class="marquee" aria-hidden="true">
   <div class="marquee__track">
-    <span><em>Websites</em> Branding <em>AI Avatars</em> AI-video <em>Automatiseringen</em> Webshops <em>Onderhoud</em></span>
-    <span><em>Websites</em> Branding <em>AI Avatars</em> AI-video <em>Automatiseringen</em> Webshops <em>Onderhoud</em></span>
+    <span>Websites</span><span>·</span><span>Branding</span><span>·</span><span>AI Avatars</span><span>·</span><span>AI-video</span><span>·</span><span>Automatiseringen</span><span>·</span><span>Webshops</span><span>·</span>
+    <span>Websites</span><span>·</span><span>Branding</span><span>·</span><span>AI Avatars</span><span>·</span><span>AI-video</span><span>·</span><span>Automatiseringen</span><span>·</span><span>Webshops</span><span>·</span>
   </div>
 </div>
 
-<!-- PROJECTEN PREVIEW -->
-<section class="section section--surface" id="werk">
-  <div class="wrap">
-    <div class="mb-8 reveal">
-      <p class="eyebrow">Uitgelicht werk</p>
-      <h2 class="mt-3" style="max-width:32rem;">Echte projecten, <span class="text-gradient">geen verzonnen resultaten</span></h2>
+<!-- ================= PROCESS ================= -->
+<section class="process" id="process" data-scene>
+  <div class="process__intro">
+    <p class="tag" data-reveal>Werkwijze</p>
+    <h2 data-reveal>Van kennismaking <span class="text-shine">tot livegang</span></h2>
+  </div>
+
+  <div class="process__path" data-process-path>
+    <svg class="process__line" viewBox="0 0 4 800" preserveAspectRatio="none" aria-hidden="true">
+      <line x1="2" y1="0" x2="2" y2="800" class="process__line-track" />
+      <line x1="2" y1="0" x2="2" y2="800" class="process__line-fill" data-process-fill />
+    </svg>
+
+    <div class="process__step" data-process-step>
+      <span class="process__num">01</span>
+      <h3>Kennismaking</h3>
+      <p>We bespreken je bedrijf, je doelen en waar je nu tegenaan loopt.</p>
+    </div>
+    <div class="process__step" data-process-step>
+      <span class="process__num">02</span>
+      <h3>Strategie</h3>
+      <p>Samen bepalen we de juiste aanpak &mdash; wat past bij jouw situatie en budget.</p>
+    </div>
+    <div class="process__step" data-process-step>
+      <span class="process__num">03</span>
+      <h3>Design</h3>
+      <p>We ontwerpen een visuele richting die klopt met wie je bent en wat je doet.</p>
+    </div>
+    <div class="process__step" data-process-step>
+      <span class="process__num">04</span>
+      <h3>Ontwikkeling</h3>
+      <p>De website, video of automatisering wordt gebouwd: snel en technisch solide.</p>
+    </div>
+    <div class="process__step" data-process-step>
+      <span class="process__num">05</span>
+      <h3>Livegang</h3>
+      <p>Je project gaat live, en je weet precies wat de volgende stap is.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PORTFOLIO ================= -->
+<section class="work" id="work" data-scene>
+  <div class="work__intro">
+    <p class="tag" data-reveal>Uitgelicht werk</p>
+    <h2 data-reveal>Echte projecten. <span class="text-shine">Geen verzonnen resultaten.</span></h2>
+  </div>
+
+  <div class="browser-grid">
+
+    <a class="browser-card" data-reveal data-tilt href="https://maveranda.nl" target="_blank" rel="noopener noreferrer">
+      <div class="browser-card__chrome">
+        <span class="browser-card__dots"><span></span><span></span><span></span></span>
+        <span class="browser-card__url"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>maveranda.nl</span>
+        <span class="browser-card__badge"><span></span>Live</span>
+      </div>
+      <div class="browser-card__viewport">
+        <video src="maveranda-preview.mp4" poster="maveranda-preview-poster.jpg" muted loop playsinline preload="none" data-lazy-video></video>
+      </div>
+      <div class="browser-card__meta">
+        <span class="badge">Outdoor living</span>
+        <h3>MA Veranda <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></h3>
+        <p>Veranda&rsquo;s en overkappingen op maat, met een luxe uitstraling.</p>
+      </div>
+    </a>
+
+    <a class="browser-card" data-reveal data-tilt href="https://b-opperdiensten.nl" target="_blank" rel="noopener noreferrer">
+      <div class="browser-card__chrome">
+        <span class="browser-card__dots"><span></span><span></span><span></span></span>
+        <span class="browser-card__url"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>b-opperdiensten.nl</span>
+        <span class="browser-card__badge"><span></span>Live</span>
+      </div>
+      <div class="browser-card__viewport">
+        <video src="b-opperdiensten.mp4" poster="b-opperdiensten-poster.jpg" muted loop playsinline preload="none" data-lazy-video></video>
+      </div>
+      <div class="browser-card__meta">
+        <span class="badge">Lokale dienstverlening</span>
+        <h3>B-Opperdiensten <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></h3>
+        <p>Duidelijk aanbod en &eacute;&eacute;n knop naar een gratis inspectie.</p>
+      </div>
+    </a>
+
+    <a class="browser-card" data-reveal data-tilt href="https://www.thenorthafrican.store" target="_blank" rel="noopener noreferrer">
+      <div class="browser-card__chrome">
+        <span class="browser-card__dots"><span></span><span></span><span></span></span>
+        <span class="browser-card__url"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>thenorthafrican.store</span>
+        <span class="browser-card__badge"><span></span>Live</span>
+      </div>
+      <div class="browser-card__viewport">
+        <video src="northafrican.mp4" poster="northafrican-poster.jpg" muted loop playsinline preload="none" data-lazy-video></video>
+      </div>
+      <div class="browser-card__meta">
+        <span class="badge">Retail</span>
+        <h3>The North African Store <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></h3>
+        <p>Premium presentatie, gebouwd rond overzicht en vertrouwen.</p>
+      </div>
+    </a>
+
+    <a class="browser-card" data-reveal data-tilt href="https://nowwego.nl" target="_blank" rel="noopener noreferrer">
+      <div class="browser-card__chrome">
+        <span class="browser-card__dots"><span></span><span></span><span></span></span>
+        <span class="browser-card__url"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>nowwego.nl</span>
+        <span class="browser-card__badge"><span></span>Live</span>
+      </div>
+      <div class="browser-card__viewport">
+        <video src="nowwego.mp4" poster="nowwego-poster.jpg" muted loop playsinline preload="none" data-lazy-video></video>
+      </div>
+      <div class="browser-card__meta">
+        <span class="badge">Content marketing</span>
+        <h3>NowWeGo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></h3>
+        <p>Een site die meteen laat zien wat ze maken.</p>
+      </div>
+    </a>
+
+    <button type="button" class="browser-card" data-reveal data-tilt data-open-video="alvero1.mp4" data-open-video-title="Alvero Atelier">
+      <div class="browser-card__chrome">
+        <span class="browser-card__dots"><span></span><span></span><span></span></span>
+        <span class="browser-card__url">Alvero Atelier</span>
+        <span class="browser-card__badge browser-card__badge--video"><span></span>AI Video</span>
+      </div>
+      <div class="browser-card__viewport">
+        <video src="alvero1.mp4" muted loop playsinline preload="none" data-lazy-video></video>
+        <span class="browser-card__play" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+      </div>
+      <div class="browser-card__meta">
+        <span class="badge badge--accent">Atelier / Creatief</span>
+        <h3>Alvero Atelier</h3>
+        <p>Cinematische presentatie met grote video&rsquo;s en een fullscreen mockup.</p>
+      </div>
+    </button>
+
+    <button type="button" class="browser-card" data-reveal data-tilt data-open-video="salute1.mp4" data-open-video-title="Saluté Eyewear">
+      <div class="browser-card__chrome">
+        <span class="browser-card__dots"><span></span><span></span><span></span></span>
+        <span class="browser-card__url">Salut&eacute; Eyewear</span>
+        <span class="browser-card__badge browser-card__badge--video"><span></span>AI Video</span>
+      </div>
+      <div class="browser-card__viewport">
+        <video src="salute1.mp4" muted loop playsinline preload="none" data-lazy-video></video>
+        <span class="browser-card__play" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+      </div>
+      <div class="browser-card__meta">
+        <span class="badge badge--accent">Fashion / Eyewear</span>
+        <h3>Salut&eacute; Eyewear</h3>
+        <p>Editoriale presentatie: veel zwart, veel witruimte, volle focus.</p>
+      </div>
+    </button>
+
+    <button type="button" class="browser-card" data-reveal data-tilt data-open-video="donvito.mp4" data-open-video-title="DonVito Fashion">
+      <div class="browser-card__chrome">
+        <span class="browser-card__dots"><span></span><span></span><span></span></span>
+        <span class="browser-card__url">DonVito Fashion</span>
+        <span class="browser-card__badge browser-card__badge--video"><span></span>AI Video</span>
+      </div>
+      <div class="browser-card__viewport">
+        <video src="donvito.mp4" muted loop playsinline preload="none" data-lazy-video></video>
+        <span class="browser-card__play" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+      </div>
+      <div class="browser-card__meta">
+        <span class="badge badge--accent">Fashion</span>
+        <h3>DonVito Fashion</h3>
+        <p>Volledige breedte, autoplay video en luxe typografie.</p>
+      </div>
+    </button>
+
+  </div>
+
+  <div class="showcase__intro">
+    <p class="tag" data-reveal>Video showcase</p>
+    <h3 data-reveal>Nog niet eerder <span class="text-shine">getoonde beelden</span></h3>
+  </div>
+  <div class="showcase-grid">
+    <button type="button" class="showcase-card" data-reveal data-tilt data-open-video="alvero2.mp4" data-open-video-title="Alvero Atelier">
+      <video src="alvero2.mp4" muted loop playsinline preload="none" data-lazy-video></video>
+      <span class="showcase-card__play" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+    </button>
+    <button type="button" class="showcase-card" data-reveal data-tilt data-open-video="salute2.mp4" data-open-video-title="Saluté Eyewear">
+      <video src="salute2.mp4" muted loop playsinline preload="none" data-lazy-video></video>
+      <span class="showcase-card__play" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+    </button>
+  </div>
+
+</section>
+
+<div class="video-modal" data-video-modal aria-hidden="true">
+  <button type="button" class="video-modal__close" data-video-modal-close aria-label="Sluiten">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg>
+  </button>
+  <div class="video-modal__frame">
+    <video data-video-modal-player playsinline controls></video>
+  </div>
+</div>
+
+<!-- ================= CONTENT MACHINE ================= -->
+<section class="machine" id="machine" data-scene>
+  <div class="machine__intro">
+    <p class="tag" data-reveal>Het businessmodel</p>
+    <h2 data-reveal>Eén opname. <span class="text-shine">Een systeem dat blijft leveren.</span></h2>
+    <p class="machine__lead" data-reveal>Je hoeft het niet te lezen — kijk gewoon wat er gebeurt als één video Vormiq binnenkomt.</p>
+  </div>
+
+  <div class="machine__stage" data-machine-stage>
+    <svg class="machine__lines" viewBox="0 0 1000 560" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <path class="ml ml--1" d="M120,280 C280,280 260,150 430,150" />
+      <path class="ml ml--2" d="M120,280 C280,280 260,280 430,280" />
+      <path class="ml ml--3" d="M120,280 C280,280 260,410 430,410" />
+      <path class="ml ml--4" d="M570,150 C700,150 700,150 850,180" />
+      <path class="ml ml--5" d="M570,280 C700,280 700,280 850,280" />
+      <path class="ml ml--6" d="M570,410 C700,410 700,410 850,380" />
+    </svg>
+
+    <div class="machine__node machine__node--input" data-machine-item="input">
+      <div class="machine__node-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+      </div>
+      <p>1 opname</p>
     </div>
 
-    <div class="live-work-grid">
-      <a href="https://maveranda.nl" target="_blank" rel="noopener noreferrer" class="live-work-card reveal">
-        <div class="live-work-card__mock">
-          <div class="live-work-card__bar">
-            <span class="live-work-card__dots"><span></span><span></span><span></span></span>
-            <span class="live-work-card__url"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> maveranda.nl</span>
-            <span class="live-work-card__badge"><span class="live-work-card__badge-dot"></span>Live</span>
-          </div>
-          <div class="live-work-card__media">
-            <video src="maveranda-preview.mp4" poster="maveranda-preview-poster.jpg" autoplay muted loop playsinline preload="none"></video>
-          </div>
+    <div class="machine__node machine__node--core" data-machine-item="core">
+      <span class="machine__core-ring"></span>
+      <span class="machine__core-ring machine__core-ring--2"></span>
+      <div class="machine__node-icon machine__node-icon--core">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+      </div>
+      <p>Vormiq verwerkt</p>
+    </div>
+
+    <div class="machine__outputs">
+      <button type="button" class="machine__node machine__node--out" data-machine-item="out1">
+        <span class="machine__out-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg></span>
+        <p>Social clips</p>
+        <span class="machine__out-note">Automatisch geknipt uit jouw ene opname &mdash; geen extra werk aan jouw kant.</span>
+      </button>
+      <button type="button" class="machine__node machine__node--out machine__node--avatar" data-machine-item="out2">
+        <span class="machine__out-icon machine__out-icon--avatar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="18" x2="12" y2="21"/></svg>
+        </span>
+        <span class="machine__out-wave" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+        <p>AI Avatar</p>
+        <span class="machine__out-note">Geen camera nodig &mdash; jij hoeft niks op te nemen. Wij bouwen 'm van script tot kloppende lipsync.</span>
+      </button>
+      <button type="button" class="machine__node machine__node--out" data-machine-item="out3">
+        <span class="machine__out-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v12H6l-2 3V4z"/></svg></span>
+        <p>Website-content</p>
+        <span class="machine__out-note">Teksten en beelden die meteen op je site en socials passen.</span>
+      </button>
+    </div>
+
+    <div class="machine__result" data-machine-item="result">
+      <span class="machine__result-count" data-count-to="128" data-count-suffix="+">0</span>
+      <p>bereikte klanten &amp; leads</p>
+    </div>
+  </div>
+
+  <p class="machine__caption" data-reveal>Zo werkt elk project bij Vormiq: input eenmaal goed neerzetten, output die blijft groeien.</p>
+</section>
+
+<!-- ================= SERVICES CONSTELLATION ================= -->
+<section class="services" id="services" data-scene>
+  <div class="shard-field" data-shard-field="5" aria-hidden="true"></div>
+  <div class="services__intro">
+    <p class="tag" data-reveal>De aanpak</p>
+    <h2 data-reveal>Geen sjabloon. <span class="text-shine">Zes diensten die op elkaar inspelen.</span></h2>
+    <p class="services__lead" data-reveal>Wat doe je, voor wie, en waar loop je nu tegenaan? Daaruit volgt één dienst — of een combinatie ervan. Beweeg over een dienst om de verbanden te zien.</p>
+  </div>
+
+  <div class="constellation" data-constellation>
+    <svg class="constellation__lines" data-constellation-lines viewBox="0 0 1000 620" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+
+    <button class="node-card" data-node="website" data-connect="webshop,branding,automation" style="--x:50%; --y:8%;">
+      <span class="node-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v12H6l-2 3V4z"/></svg></span>
+      <span class="node-card__title">Website</span>
+      <span class="node-card__price">Vanaf €50/mnd</span>
+      <span class="node-card__desc">Op maat, met hosting, updates en onderhoud inbegrepen. Live binnen &eacute;&eacute;n werkdag.</span>
+    </button>
+
+    <button class="node-card" data-node="webshop" data-connect="website,automation" style="--x:87%; --y:30%;">
+      <span class="node-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></span>
+      <span class="node-card__title">Webshop</span>
+      <span class="node-card__price">Vanaf €100/mnd</span>
+      <span class="node-card__desc">Maatwerk productstructuur, betaalmethoden en conversiegerichte opbouw.</span>
+    </button>
+
+    <button class="node-card" data-node="branding" data-connect="website,video" style="--x:87%; --y:76%;">
+      <span class="node-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 011.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C22 6.012 17.522 2 12 2z"/></svg></span>
+      <span class="node-card__title">Branding</span>
+      <span class="node-card__price">Vanaf €100</span>
+      <span class="node-card__desc">Positionering, logo, kleuren en typografie, vastgelegd in heldere guidelines.</span>
+    </button>
+
+    <button class="node-card" data-node="avatar" data-connect="video,automation" style="--x:50%; --y:92%;">
+      <span class="node-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="18" x2="12" y2="21"/></svg></span>
+      <span class="node-card__title">AI Avatars</span>
+      <span class="node-card__price">€2/sec</span>
+      <span class="node-card__desc">Een sprekende digitale versie van jou of je merk, met kloppende lipsync.</span>
+    </button>
+
+    <button class="node-card" data-node="video" data-connect="avatar,branding" style="--x:13%; --y:76%;">
+      <span class="node-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></span>
+      <span class="node-card__title">AI Video&rsquo;s</span>
+      <span class="node-card__price">Vanaf €150</span>
+      <span class="node-card__desc">Creatieve video voor social of commercial &mdash; AI als hulpmiddel, niet als product.</span>
+    </button>
+
+    <button class="node-card" data-node="automation" data-connect="website,webshop,avatar" style="--x:13%; --y:30%;">
+      <span class="node-card__icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></span>
+      <span class="node-card__title">AI Automatiseringen</span>
+      <span class="node-card__price">Vanaf €150</span>
+      <span class="node-card__desc">Leadopvolging en planning automatiseren, zodat jij tijd overhoudt.</span>
+    </button>
+
+    <div class="constellation__hub">
+      <img src="logo.png" alt="" width="30" height="28" />
+    </div>
+  </div>
+
+  <div class="text-center" data-reveal>
+    <a href="#contact" class="btn btn--outline" data-magnetic data-scroll-to>Welke dienst past bij jou?</a>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="about" id="about" data-scene>
+  <div class="about__media">
+    <div class="about__media-frame" data-parallax-inner>
+      <img src="sami-portrait.jpg" alt="Sami, oprichter van Vormiq" loading="lazy" />
+    </div>
+  </div>
+  <div class="about__content">
+    <p class="tag" data-reveal>Over Sami</p>
+    <h2 data-reveal>Vormiq is <span class="text-shine">niet begonnen als startup-idee</span></h2>
+    <p class="pull-quote" data-reveal>&ldquo;Elk project draait om hoe een merk voelt en overkomt &mdash; of dat nu via een website, video of AI avatar is.&rdquo;</p>
+    <p data-reveal>Sinds 2020 houdt Sami zich bezig met logo design, websites, branding en creatieve technologie. Vormiq is ontstaan uit jaren experimenteren en ontwikkelen &mdash; niet uit een plotseling idee.</p>
+    <p data-reveal>Die achtergrond is precies waarom Vormiq verder kijkt dan alleen een website: elk project draait om vertrouwen opbouwen, of dat nu via tekst, beeld of AI is.</p>
+  </div>
+</section>
+
+<!-- ================= PRICING ================= -->
+<section class="pricing" id="pricing" data-scene>
+  <div class="shard-field" data-shard-field="5" aria-hidden="true"></div>
+  <div class="pricing__intro">
+    <p class="tag tag--center" data-reveal>Prijzen</p>
+    <h2 data-reveal>Duidelijk, <span class="text-shine">zonder kleine lettertjes</span></h2>
+    <p class="pricing__lead" data-reveal>&Eacute;&eacute;n vast bedrag per maand. Hosting, updates en onderhoud zitten er al in.</p>
+  </div>
+
+  <div class="pricing__grid">
+    <div class="price-card price-card--highlight" data-tilt>
+      <p class="price-card__label">Website</p>
+      <p class="price-card__value">€50<span>/mnd</span></p>
+      <p class="price-card__desc">Alles inbegrepen, live binnen &eacute;&eacute;n werkdag.</p>
+    </div>
+    <div class="price-card" data-tilt>
+      <p class="price-card__label">Webshop</p>
+      <p class="price-card__value">€100<span>/mnd</span></p>
+      <p class="price-card__desc">Maatwerk, inclusief hosting &amp; onderhoud.</p>
+    </div>
+    <div class="price-card" data-tilt>
+      <p class="price-card__label">Branding</p>
+      <p class="price-card__value">€100<span>+</span></p>
+      <p class="price-card__desc">Logo, kleuren en heldere guidelines.</p>
+    </div>
+    <div class="price-card" data-tilt>
+      <p class="price-card__label">AI Video&rsquo;s</p>
+      <p class="price-card__value">€150<span>+</span></p>
+      <p class="price-card__desc">Storyboard, productie en montage.</p>
+    </div>
+    <div class="price-card" data-tilt>
+      <p class="price-card__label">AI Avatars</p>
+      <p class="price-card__value">€2<span>/sec</span></p>
+      <p class="price-card__desc">Script, regie en montage inbegrepen.</p>
+    </div>
+    <div class="price-card" data-tilt>
+      <p class="price-card__label">AI Automatiseringen</p>
+      <p class="price-card__value">€150<span>+</span></p>
+      <p class="price-card__desc">Op maat per workflow gebouwd.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="faq" id="faq" data-scene>
+  <div class="faq__intro">
+    <p class="tag tag--center" data-reveal>Veelgestelde vragen</p>
+    <h2 data-reveal>Nog <span class="text-shine">twijfels?</span></h2>
+  </div>
+  <div class="faq__list">
+    <div class="faq-item">
+      <button class="faq-item__trigger" aria-expanded="false"><span>Hoe lang duurt het om een website te laten maken?</span><i></i></button>
+      <div class="faq-item__panel"><div><p>Een website staat meestal binnen ongeveer &eacute;&eacute;n werkdag live. Een uitgebreider traject duurt langer, afhankelijk van het aantal pagina&rsquo;s en de gewenste strategie.</p></div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-item__trigger" aria-expanded="false"><span>Wat kost een AI Avatar video?</span><i></i></button>
+      <div class="faq-item__panel"><div><p>Een AI Avatar video met lipsync kost &euro;2 per seconde. Voor een avatar van 60 seconden betaal je dus &euro;120.</p></div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-item__trigger" aria-expanded="false"><span>Waarom is een website &euro;50 per maand in plaats van een vaste bouwprijs?</span><i></i></button>
+      <div class="faq-item__panel"><div><p>Zo betaal je niet in &eacute;&eacute;n keer een groot bedrag, en zit alles &mdash; bouwen, hosten, updaten, onderhoud &mdash; in die ene vaste rekening.</p></div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-item__trigger" aria-expanded="false"><span>Kan ik later uitbreiden?</span><i></i></button>
+      <div class="faq-item__panel"><div><p>Ja. Je website of webshop groeit mee: meer pagina&rsquo;s, extra functionaliteit of een uitgebreidere strategie passen we in overleg aan, inclusief de prijs.</p></div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-item__trigger" aria-expanded="false"><span>Bouwen jullie ook webshops?</span><i></i></button>
+      <div class="faq-item__panel"><div><p>Ja, webshops zijn een aparte dienst vanaf &euro;100 per maand, alles inbegrepen.</p></div></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-item__trigger" aria-expanded="false"><span>Werken jullie alleen in Delft?</span><i></i></button>
+      <div class="faq-item__panel"><div><p>Vormiq is gevestigd in Delft en werkt voor ondernemers uit Delft, maar ook voor bedrijven elders in Nederland.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="contact" id="contact" data-scene>
+  <div class="shard-field" data-shard-field="6" aria-hidden="true"></div>
+  <div class="contact__inner">
+    <p class="tag tag--center" data-reveal>Contact</p>
+    <h2 data-reveal>Klaar om jouw bedrijf <span class="text-shine">online sterker neer te zetten?</span></h2>
+    <p class="contact__lead" data-reveal>Vertel over je bedrijf, en we denken vrijblijvend met je mee.</p>
+
+    <form id="contact-form" class="contact__form" data-reveal>
+      <div class="contact__grid">
+        <div class="field"><label for="naam">Naam</label><input type="text" id="naam" name="naam" required /></div>
+        <div class="field"><label for="email">E-mail</label><input type="email" id="email" name="email" required /></div>
+        <div class="field full"><label for="dienst">Dienst</label>
+          <select id="dienst" name="dienst">
+            <option value="">Kies een dienst (optioneel)</option>
+            <option>AI Avatars</option>
+            <option>AI Video's</option>
+            <option>Website</option>
+            <option>Branding</option>
+            <option>Webshops</option>
+            <option>AI Automatiseringen</option>
+          </select>
         </div>
-        <div class="live-work-card__body">
-          <h3 class="live-work-card__title">MA Veranda <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10" stroke-linecap="round" stroke-linejoin="round"/></svg></h3>
-          <p class="live-work-card__desc">Veranda&rsquo;s en overkappingen op maat. Een luxe uitstraling die past bij het vakmanschap erachter.</p>
-          <span class="live-work-card__link">Bekijk live website &rarr;</span>
-        </div>
-      </a>
+        <div class="field full"><label for="bericht">Bericht</label><textarea id="bericht" name="bericht" required></textarea></div>
+      </div>
+      <button type="submit" class="btn btn--solid btn--full">Verstuur bericht</button>
+      <p class="form-status" role="status"></p>
+    </form>
 
-      <a href="https://b-opperdiensten.nl" target="_blank" rel="noopener noreferrer" class="live-work-card reveal">
-        <div class="live-work-card__mock">
-          <div class="live-work-card__bar">
-            <span class="live-work-card__dots"><span></span><span></span><span></span></span>
-            <span class="live-work-card__url"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> b-opperdiensten.nl</span>
-            <span class="live-work-card__badge"><span class="live-work-card__badge-dot"></span>Live</span>
-          </div>
-          <div class="live-work-card__media">
-            <video src="b-opperdiensten.mp4" poster="b-opperdiensten-poster.jpg" autoplay muted loop playsinline preload="none"></video>
-          </div>
-        </div>
-        <div class="live-work-card__body">
-          <h3 class="live-work-card__title">B-Opperdiensten <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10" stroke-linecap="round" stroke-linejoin="round"/></svg></h3>
-          <p class="live-work-card__desc">Isolatiebedrijf uit Den Haag. Duidelijk aanbod en &eacute;&eacute;n knop naar een gratis inspectie.</p>
-          <span class="live-work-card__link">Bekijk live website &rarr;</span>
-        </div>
-      </a>
-    </div>
-
-    <div class="text-center mt-14 reveal">
-      <a href="projecten.html" class="btn btn--outline">Bekijk alle projecten</a>
-    </div>
-  </div>
-</section>
-
-<!-- WHATSAPP REVIEW PROOF -->
-<section class="section">
-  <div class="wrap">
-    <div class="mb-14 text-center reveal">
-      <p class="eyebrow" style="justify-content:center;">Uit de praktijk</p>
-      <h2 class="mt-3" style="max-width:28rem;margin-inline:auto;">Geen reviewsite, <span class="text-gradient">gewoon WhatsApp</span></h2>
-    </div>
-
-    <div class="review-carousel reveal" data-review-carousel>
-      <div class="review-carousel__viewport">
-        <div class="review-carousel__track">
-          <div class="review-carousel__slide">
-            <div class="review-card">
-              <div class="review-card__frame">
-                <img src="review-whatsapp-1.jpg" alt="WhatsApp-gesprek met een klant van het MA Veranda project" width="1080" height="530" loading="lazy">
-              </div>
-              <p class="review-card__stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
-              <p class="review-card__quote">&ldquo;Het is prachtig, ik vond het mooi.&rdquo;</p>
-              <p class="review-card__author">&mdash; klant, <strong>MA Veranda</strong>-project</p>
-              <div class="review-card__badges">
-                <span class="badge badge--accent">Geverifieerd</span>
-                <span class="badge">Echte klant</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="review-carousel__slide">
-            <div class="review-card">
-              <div class="review-card__frame">
-                <img src="review-whatsapp-2.jpg" alt="WhatsApp-gesprek met een klant van het B-Opperdiensten project" width="1080" height="590" loading="lazy">
-              </div>
-              <p class="review-card__stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
-              <p class="review-card__quote">&ldquo;Bedankt man, door jou krijg ik steeds meer aanvragen.&rdquo;</p>
-              <p class="review-card__author">&mdash; klant, <strong>B-Opperdiensten</strong>-project</p>
-              <div class="review-card__badges">
-                <span class="badge badge--accent">Geverifieerd</span>
-                <span class="badge">Echte klant</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="review-carousel__slide">
-            <div class="review-card">
-              <div class="review-card__frame">
-                <img src="review-whatsapp-3.jpg" alt="WhatsApp-gesprek met een klant van het Alveroatelier project" width="1080" height="316" loading="lazy">
-              </div>
-              <p class="review-card__stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
-              <p class="review-card__quote">&ldquo;Bedankt voor de AI avatars, niet te onderscheiden van het echte!&rdquo;</p>
-              <p class="review-card__author">&mdash; klant, <strong>Alveroatelier</strong>-project</p>
-              <div class="review-card__badges">
-                <span class="badge badge--accent">Geverifieerd</span>
-                <span class="badge">Echte klant</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="review-carousel__nav">
-        <button type="button" class="review-carousel__arrow review-carousel__arrow--prev" aria-label="Vorige review">&#8249;</button>
-        <div class="review-carousel__dots"></div>
-        <button type="button" class="review-carousel__arrow review-carousel__arrow--next" aria-label="Volgende review">&#8250;</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section section--tight section--surface">
-  <div class="wrap">
-    <div class="stats reveal">
-      <div><p class="stat__value"><span data-count-to="50" data-count-prefix="&euro;">0</span></p><p class="stat__label">Website, vanaf p/mnd</p></div>
-      <div><p class="stat__value"><span data-count-to="1" data-count-suffix=" werkdag">0</span></p><p class="stat__label">Live binnen</p></div>
-      <div><p class="stat__value"><span data-count-to="6" data-count-suffix="+ jaar">0</span></p><p class="stat__label">Actief sinds 2020</p></div>
-      <div><p class="stat__value">Direct met Sami</p><p class="stat__label">Geen tussenpersoon</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap">
-    <h2 class="reveal" style="max-width:38rem;">Je levert goed werk. Maar <span class="text-gradient">zegt je website dat ook?</span></h2>
-    <div class="numbered-grid">
-      <div class="reveal">
-        <span class="numbered-grid__index">01</span>
-        <h3 class="mt-4">Geen website</h3>
-        <p class="muted mt-2">Klanten zoeken je op via Google of Instagram en vinden niks terug — dus gaan ze naar de concurrent die wél gevonden wordt.</p>
-      </div>
-      <div class="reveal">
-        <span class="numbered-grid__index">02</span>
-        <h3 class="mt-4">Verouderde uitstraling</h3>
-        <p class="muted mt-2">De site ziet eruit als 2016, terwijl jouw werk anno nu top is. Dat contrast kost je geloofwaardigheid.</p>
-      </div>
-      <div class="reveal">
-        <span class="numbered-grid__index">03</span>
-        <h3 class="mt-4">Geen vertrouwen, geen klik</h3>
-        <p class="muted mt-2">Bezoekers twijfelen, sluiten het tabblad en nemen geen contact op. Niet omdat je werk niet goed is — omdat de site dat niet bewijst.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- DIENSTEN teaser -->
-<section class="section section--surface" id="diensten">
-  <div class="wrap">
-    <div class="mb-14 reveal">
-      <p class="eyebrow">De aanpak &rarr; Diensten</p>
-      <h2 class="mt-3" style="max-width:38rem;">Geen sjabloon. We luisteren eerst, <span class="text-gradient">dan bouwen we dit</span></h2>
-      <p class="lead mt-4" style="max-width:34rem;">
-        Wat doe je, voor wie, en waar loop je nu tegenaan? Daaruit volgt een van deze zes diensten &mdash;
-        of een combinatie ervan.
-      </p>
-    </div>
-
-    <div class="bento">
-
-      <div class="bento-card bento-card--wide bento-card--feature reveal">
-        <div class="bento-visual bento-visual--avatar">
-          <span class="bv-orb"></span>
-          <span class="bv-wave"><span></span><span></span><span></span><span></span><span></span><span></span></span>
-        </div>
-        <div class="bento-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="18" x2="12" y2="21"/></svg></div>
-        <span class="bento-card__tag">&euro;2/sec</span>
-        <h3>AI Avatars</h3>
-        <p class="muted">Een digitale versie van jou of je merk die spreekt namens je bedrijf, met kloppende lipsync — voor social, productuitleg of introductievideo's.</p>
-        <a href="diensten.html" class="bento-card__link">Bekijk alle diensten &rarr;</a>
-      </div>
-
-      <div class="bento-card reveal">
-        <div class="bento-visual bento-visual--website">
-          <span class="bv-nav"><span></span><span></span><span></span></span>
-          <span class="bv-bar bv-bar--1"></span>
-          <span class="bv-bar bv-bar--2"></span>
-          <span class="bv-btn"></span>
-        </div>
-        <div class="bento-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v12H6l-2 3V4z"/></svg></div>
-        <span class="bento-card__tag">Vanaf &euro;50/mnd</span>
-        <h3>Website</h3>
-        <p class="muted">Volledig op maat ontworpen, met hosting, updates en onderhoud al inbegrepen. Live binnen ongeveer &eacute;&eacute;n werkdag.</p>
-        <a href="diensten.html" class="bento-card__link">Bekijk alle diensten &rarr;</a>
-      </div>
-
-      <div class="bento-card reveal">
-        <div class="bento-visual bento-visual--webshop">
-          <span class="bv-product"><span></span><span></span></span>
-          <span class="bv-product"><span></span><span></span></span>
-          <span class="bv-cart">1</span>
-        </div>
-        <div class="bento-card__icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div>
-        <span class="bento-card__tag">Vanaf &euro;100/mnd</span>
-        <h3>Webshops</h3>
-        <p class="muted">Maatwerk webshop met eigen eisen aan productstructuur, categorie&euml;n en betaalmethoden.</p>
-        <a href="diensten.html" class="bento-card__link">Bekijk alle diensten &rarr;</a>
-      </div>
-
-    </div>
-
-    <div class="text-center mt-14 reveal">
-      <a href="diensten.html" class="btn btn--outline">Bekijk alle diensten</a>
-    </div>
-  </div>
-</section>
-
-<section class="section section--surface">
-  <div class="wrap--narrow">
-    <div class="mb-14 reveal">
-      <p class="eyebrow">Werkwijze</p>
-      <h2 class="mt-3">Van kennismaking tot <span class="text-gradient">livegang</span></h2>
-    </div>
-    <div class="rail">
-      <div class="rail__step reveal" data-rail-step>
-        <div class="rail__node-col"><span class="rail__node"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7" stroke-linecap="round"/></svg></span></div>
-        <div class="rail__card"><span class="rail__num">01</span><h3>Kennismaking</h3><p>We bespreken je bedrijf, je doelen en waar je nu tegenaan loopt.</p></div>
-      </div>
-      <div class="rail__step reveal" data-rail-step>
-        <div class="rail__node-col"><span class="rail__node"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="m14.5 9.5-2 5-5 2 2-5z" stroke-linejoin="round"/></svg></span></div>
-        <div class="rail__card"><span class="rail__num">02</span><h3>Strategie</h3><p>Samen bepalen we de juiste aanpak &mdash; wat past bij jouw situatie en budget.</p></div>
-      </div>
-      <div class="rail__step reveal" data-rail-step>
-        <div class="rail__node-col"><span class="rail__node"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m17 3 4 4-11 11H6v-4z" stroke-linejoin="round"/></svg></span></div>
-        <div class="rail__card"><span class="rail__num">03</span><h3>Design</h3><p>We ontwerpen een visuele richting die klopt met wie je bent en wat je doet.</p></div>
-      </div>
-      <div class="rail__step reveal" data-rail-step>
-        <div class="rail__node-col"><span class="rail__node"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m9 18-6-6 6-6M15 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
-        <div class="rail__card"><span class="rail__num">04</span><h3>Ontwikkeling</h3><p>De website, video of automatisering wordt gebouwd: snel en technisch solide.</p></div>
-      </div>
-      <div class="rail__step reveal" data-rail-step>
-        <div class="rail__node-col"><span class="rail__node"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4.5 16.5c-1.5 1.5-2 5-2 5s3.5-.5 5-2c.8-.8 1-2 1-2s-1.2-.2-2-1zm4.5-4.5 3-3 5.5-5.5c2 0 4 2 4 4L16 13l-3 3-4-4Zm0 0-3-1.5L3 12l4 1zm3 8-1.5-3 3.5-3.5 1 4z" stroke-linejoin="round" stroke-linecap="round"/></svg></span></div>
-        <div class="rail__card"><span class="rail__num">05</span><h3>Livegang</h3><p>Je project gaat live, en je weet precies wat de volgende stap is.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section--tight">
-  <div class="wrap--tight">
-    <div class="text-center mb-10 reveal">
-      <p class="eyebrow" style="justify-content:center;">Waarom Vormiq</p>
-      <h2 class="mt-3">Geen startup-idee. <span class="text-gradient">Jaren experimenteren.</span></h2>
-    </div>
-    <ol class="timeline">
-      <li class="reveal"><span>Nieuwsgierigheid</span></li>
-      <li class="reveal"><span>Experimenteren</span></li>
-      <li class="reveal"><span>Logo&rsquo;s</span></li>
-      <li class="reveal"><span>Websites</span></li>
-      <li class="reveal"><span>Branding</span></li>
-      <li class="reveal"><span>AI-video</span></li>
-      <li class="reveal is-final"><span>Vormiq</span></li>
-    </ol>
-  </div>
-</section>
-
-<section class="section" id="over-sami">
-  <div class="wrap">
-    <div class="about-grid">
-      <div class="about-media reveal">
-        <div class="about-media__main"><img src="sami-portrait.jpg" alt="Sami, oprichter van Vormiq" loading="lazy" /></div>
-      </div>
-      <div class="reveal">
-        <p class="eyebrow">Over Sami</p>
-        <h2 class="mt-3">Vormiq is <span class="text-gradient">niet begonnen als startup-idee</span></h2>
-        <p class="pull-quote mt-6">&ldquo;Elk project draait om hoe een merk voelt en overkomt &mdash; of dat nu via een website, video of AI avatar is.&rdquo;</p>
-        <div style="margin-top:1.5rem;display:flex;flex-direction:column;gap:1rem;">
-          <p class="lead">
-            Sinds 2020 houdt Sami zich bezig met logo design, websites, branding en creatieve technologie.
-            Vormiq is ontstaan uit jaren experimenteren en ontwikkelen &mdash; niet uit een plotseling idee.
-          </p>
-          <p class="lead">
-            Die achtergrond is precies waarom Vormiq verder kijkt dan alleen een website: elk project draait
-            om vertrouwen opbouwen, of dat nu via tekst, beeld of AI is.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PRIJZEN TEASER -->
-<section class="section pricing-teaser" id="prijzen">
-  <div class="wrap">
-    <div class="text-center mb-12 reveal">
-      <p class="eyebrow" style="justify-content:center;">Prijzen</p>
-      <h2 class="mt-3" style="color:hsl(0 0% 100%);">Duidelijk, zonder kleine lettertjes</h2>
-      <p class="lead mt-4 mx-auto" style="max-width:30rem;color:hsl(0 0% 100% / 0.75);">&Eacute;&eacute;n vast bedrag per maand. Hosting, updates en onderhoud zitten er al in.</p>
-    </div>
-    <div class="pricing-teaser__grid reveal">
-      <div class="pricing-teaser__card pricing-teaser__card--highlight">
-        <p class="pricing-teaser__label">Website</p>
-        <p class="pricing-teaser__price">Vanaf &euro;50<span class="pricing-teaser__unit">/mnd</span></p>
-        <p class="pricing-teaser__desc">Alles inbegrepen, live binnen &eacute;&eacute;n werkdag</p>
-      </div>
-      <div class="pricing-teaser__card">
-        <p class="pricing-teaser__label">Webshop</p>
-        <p class="pricing-teaser__price">Vanaf &euro;100<span class="pricing-teaser__unit">/mnd</span></p>
-        <p class="pricing-teaser__desc">Maatwerk, inclusief hosting &amp; onderhoud</p>
-      </div>
-      <div class="pricing-teaser__card">
-        <p class="pricing-teaser__label">AI Avatars</p>
-        <p class="pricing-teaser__price">&euro;2<span class="pricing-teaser__unit">/sec</span></p>
-        <p class="pricing-teaser__desc">Script, regie en montage inbegrepen</p>
-      </div>
-    </div>
-    <div class="text-center mt-12 reveal">
-      <a href="prijzen.html" class="btn btn--white" data-magnetic>Bekijk alle prijzen &amp; diensten</a>
-    </div>
-  </div>
-</section>
-
-<section class="section section--surface demo-promo">
-  <div class="wrap--narrow demo-promo__inner reveal">
-    <p class="eyebrow" style="justify-content:center;">Gratis demo</p>
-    <h2 class="mt-3">Benieuwd hoe jouw <span class="text-gradient">nieuwe website eruit kan zien?</span></h2>
-    <p class="lead mt-4 mx-auto" style="max-width:30rem;">Beantwoord een paar korte vragen. Ik maak vrijblijvend een demo van jouw website.</p>
-    <ul class="demo-promo__checks">
-      <li>Duurt ongeveer 1 minuut</li>
-      <li>Gratis</li>
-      <li>Geen verplichtingen</li>
-    </ul>
-    <div class="mt-10">
-      <a href="demo.html" class="btn btn--primary" data-magnetic>Vraag gratis demo aan</a>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap--narrow">
-    <div class="text-center mb-14 reveal">
-      <p class="eyebrow" style="justify-content:center;">Veelgestelde vragen</p>
-      <h2 class="mt-3">Nog <span class="text-gradient">twijfels?</span></h2>
-    </div>
-    <div class="accordion reveal">
-      <div class="accordion-item">
-        <button class="accordion-trigger" aria-expanded="false"><span>Hoe lang duurt het om een website te laten maken?</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
-        <div class="accordion-panel"><div class="accordion-panel-inner"><p>Een website staat meestal binnen ongeveer &eacute;&eacute;n werkdag live. Een uitgebreider traject duurt langer, afhankelijk van het aantal pagina&rsquo;s en de gewenste strategie &mdash; dat bespreken we vooraf.</p></div></div>
-      </div>
-      <div class="accordion-item">
-        <button class="accordion-trigger" aria-expanded="false"><span>Wat kost een AI Avatar video?</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
-        <div class="accordion-panel"><div class="accordion-panel-inner"><p>Een AI Avatar video met lipsync kost &euro;2 per seconde. Voor een video van 60 seconden betaal je dus &euro;120. Script, regie, lipsync-afstemming en montage zitten daarbij inbegrepen.</p></div></div>
-      </div>
-      <div class="accordion-item">
-        <button class="accordion-trigger" aria-expanded="false"><span>Waarom is een website &euro;50 per maand in plaats van een vaste bouwprijs?</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
-        <div class="accordion-panel"><div class="accordion-panel-inner"><p>Zo betaal je niet in &eacute;&eacute;n keer een groot bedrag, en zit alles &mdash; bouwen, hosten, updaten, onderhoud &mdash; in die ene vaste rekening. Geen aparte facturen achteraf voor hosting of een los onderhoudscontract.</p></div></div>
-      </div>
-      <div class="accordion-item">
-        <button class="accordion-trigger" aria-expanded="false"><span>Kan ik later uitbreiden?</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
-        <div class="accordion-panel"><div class="accordion-panel-inner"><p>Ja. Je website of webshop groeit mee: meer pagina&rsquo;s, extra functionaliteit of een uitgebreidere strategie passen we in overleg aan, inclusief de prijs.</p></div></div>
-      </div>
-      <div class="accordion-item">
-        <button class="accordion-trigger" aria-expanded="false"><span>Bouwen jullie ook webshops?</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
-        <div class="accordion-panel"><div class="accordion-panel-inner"><p>Ja, webshops zijn een aparte dienst vanaf &euro;100 per maand, alles inbegrepen. We kijken samen naar productstructuur, betaalmethoden en conversie.</p></div></div>
-      </div>
-      <div class="accordion-item">
-        <button class="accordion-trigger" aria-expanded="false"><span>Werken jullie alleen in Delft?</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></button>
-        <div class="accordion-panel"><div class="accordion-panel-inner"><p>Vormiq is gevestigd in Delft en werkt voor ondernemers uit Delft, maar ook voor bedrijven elders in Nederland. Persoonlijk contact staat voorop, waar je ook zit.</p></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT / FINAL CTA -->
-<section class="final-cta" id="contact">
-  <div class="wrap--narrow final-cta__inner">
-    <div class="reveal">
-      <p class="eyebrow" style="justify-content:center;">Contact</p>
-      <h2 class="mt-3">Klaar om jouw bedrijf <span class="text-gradient">online sterker neer te zetten?</span></h2>
-      <p class="final-cta__lead">Vertel over je bedrijf, en we denken vrijblijvend met je mee.</p>
-      <div class="final-cta__actions">
-        <a href="https://wa.me/31657971118?text=Hoi%20Sami%2C%20ik%20ben%20benieuwd%20wat%20Vormiq%20voor%20mijn%20bedrijf%20kan%20betekenen." target="_blank" rel="noopener noreferrer" class="btn btn--primary" data-magnetic>WhatsApp Sami</a>
-        <a href="mailto:vormiq@outlook.com" class="btn btn--outline" data-magnetic>Stuur een mail</a>
-      </div>
-      <div class="final-cta__contacts">
-        <a href="tel:+31657971118"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg> 0657971118</a>
-        <a href="mailto:vormiq@outlook.com"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg> vormiq@outlook.com</a>
-        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Delft, Nederland</span>
-      </div>
-    </div>
-
-    <div class="reveal glass-card" style="margin-top:3.5rem;text-align:left;max-width:40rem;margin-inline:auto;">
-      <form id="contact-form">
-        <div class="form-grid">
-          <div class="field"><label for="naam">Naam</label><input type="text" id="naam" name="naam" required /></div>
-          <div class="field"><label for="email">E-mail</label><input type="email" id="email" name="email" required /></div>
-          <div class="field full"><label for="dienst">Dienst</label>
-            <select id="dienst" name="dienst">
-              <option value="">Kies een dienst (optioneel)</option>
-              <option>AI Avatars</option>
-              <option>AI Video's</option>
-              <option>Website</option>
-              <option>Branding</option>
-              <option>Webshops</option>
-              <option>AI Automatiseringen</option>
-            </select>
-          </div>
-          <div class="field full"><label for="bericht">Bericht</label><textarea id="bericht" name="bericht" required></textarea></div>
-        </div>
-        <button type="submit" class="btn btn--primary btn--full mt-6">Verstuur bericht</button>
-        <p class="form-status" role="status"></p>
-        <p class="form-note">We reageren doorgaans binnen &eacute;&eacute;n werkdag. Liever direct contact? Gebruik de WhatsApp-knop rechtsonder.</p>
-      </form>
+    <div class="contact__direct">
+      <a href="tel:+31657971118">0657971118</a>
+      <a href="mailto:vormiq@outlook.com">vormiq@outlook.com</a>
+      <span>Delft, Nederland</span>
     </div>
   </div>
 </section>
 
 </main>
 
-<footer class="footer">
-  <div class="wrap">
-    <div class="footer__grid">
-      <div class="footer__brand">
-        <a href="index.html"><img src="logo.png" alt="Vormiq" width="26" height="24" /><span>Vormiq</span></a>
-        <p class="footer__desc">Creative &amp; AI Digital Studio uit Delft. Websites, branding en AI-video die vertrouwen opbouwen — persoonlijk gebouwd door Sami.</p>
-        <div class="footer__socials">
-          <a href="https://www.instagram.com/vormiq.nl?igsh=MTRxNmtlbGMxeXc0aA==" target="_blank" rel="noopener noreferrer" aria-label="Vormiq op Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg></a>
-          <a href="https://vm.tiktok.com/ZGd97V7A3/" target="_blank" rel="noopener noreferrer" aria-label="Vormiq op TikTok"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82a4.28 4.28 0 0 1-2.72-1.51 4.4 4.4 0 0 1-.91-2.6h-3.2v13.9a2.59 2.59 0 1 1-1.83-2.47V9.9a5.8 5.8 0 1 0 5.03 5.75V9.4a7.5 7.5 0 0 0 4.4 1.41V7.62a4.28 4.28 0 0 1-.77-1.8Z"/></svg></a>
-        </div>
-      </div>
-      <nav aria-label="Diensten">
-        <h4>Diensten</h4>
-        <ul>
-          <li><a href="diensten.html">AI Avatars</a></li>
-          <li><a href="diensten.html">AI Video's</a></li>
-          <li><a href="diensten.html">Website</a></li>
-          <li><a href="diensten.html">Branding</a></li>
-          <li><a href="diensten.html">Webshops</a></li>
-          <li><a href="diensten.html">AI Automatiseringen</a></li>
-        </ul>
-      </nav>
-      <div>
-        <h4>Contact</h4>
-        <ul class="footer__contact">
-          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Delft, Nederland</li>
-          <li><a href="mailto:vormiq@outlook.com" style="display:flex;align-items:center;gap:0.5rem;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg> vormiq@outlook.com</a></li>
-          <li><a href="tel:+31657971118" style="display:flex;align-items:center;gap:0.5rem;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg> 0657971118</a></li>
-        </ul>
+<footer class="foot">
+  <div class="foot__grid">
+    <div class="foot__brand">
+      <a href="#hero" class="foot__logo"><img src="logo.png" alt="Vormiq" width="24" height="22" /><span>Vormiq</span></a>
+      <p>Creative &amp; AI Digital Studio uit Delft. Websites, branding en AI-video die vertrouwen opbouwen — persoonlijk gebouwd door Sami.</p>
+      <div class="foot__socials">
+        <a href="https://www.instagram.com/vormiq.nl?igsh=MTRxNmtlbGMxeXc0aA==" target="_blank" rel="noopener noreferrer" aria-label="Vormiq op Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg></a>
+        <a href="https://vm.tiktok.com/ZGd97V7A3/" target="_blank" rel="noopener noreferrer" aria-label="Vormiq op TikTok"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82a4.28 4.28 0 0 1-2.72-1.51 4.4 4.4 0 0 1-.91-2.6h-3.2v13.9a2.59 2.59 0 1 1-1.83-2.47V9.9a5.8 5.8 0 1 0 5.03 5.75V9.4a7.5 7.5 0 0 0 4.4 1.41V7.62a4.28 4.28 0 0 1-.77-1.8Z"/></svg></a>
       </div>
     </div>
-    <div class="footer__bottom">
-      <span>© 2026 Vormiq. Alle rechten voorbehouden.</span>
-      <div class="links"><a href="privacybeleid.html">Privacybeleid</a><a href="algemene-voorwaarden.html">Algemene voorwaarden</a></div>
+    <nav aria-label="Diensten">
+      <h4>Diensten</h4>
+      <ul>
+        <li><a href="#services">AI Avatars</a></li>
+        <li><a href="#services">AI Video&rsquo;s</a></li>
+        <li><a href="#services">Website</a></li>
+        <li><a href="#services">Branding</a></li>
+        <li><a href="#services">Webshops</a></li>
+        <li><a href="#services">AI Automatiseringen</a></li>
+      </ul>
+    </nav>
+    <div>
+      <h4>Contact</h4>
+      <ul class="foot__contact">
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Delft, Nederland</li>
+        <li><a href="mailto:vormiq@outlook.com"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg> vormiq@outlook.com</a></li>
+        <li><a href="tel:+31657971118"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg> 0657971118</a></li>
+      </ul>
     </div>
+  </div>
+  <div class="foot__inner">
+    <span>© 2026 Vormiq. Alle rechten voorbehouden.</span>
+    <div class="foot__links"><a href="privacybeleid.html">Privacybeleid</a><a href="algemene-voorwaarden.html">Algemene voorwaarden</a></div>
   </div>
 </footer>
 
-<a href="https://wa.me/31657971118?text=Hoi%20Sami%2C%20ik%20ben%20benieuwd%20wat%20Vormiq%20voor%20mijn%20bedrijf%20kan%20betekenen." target="_blank" rel="noopener noreferrer" class="wa-float" aria-label="Stuur Sami een WhatsApp bericht">
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 3.4L3 21"/><path d="M9 10a1 1 0 0 0 1 1 4 4 0 0 0 4 4 1 1 0 0 0 1-1"/></svg>
+<a href="https://wa.me/31657971118?text=Hoi%20Sami%2C%20ik%20ben%20benieuwd%20wat%20Vormiq%20voor%20mijn%20bedrijf%20kan%20betekenen." target="_blank" rel="noopener noreferrer" class="wa-float" data-wa-float aria-label="Stuur Sami een WhatsApp bericht">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 3.4L3 21"/><path d="M9 10a1 1 0 0 0 1 1 4 4 0 0 0 4 4 1 1 0 0 0 1-1"/></svg>
 </a>
 
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
 <script src="script.js"></script>
-<script src="chatbot.js" defer></script>
 </body>
 </html>
