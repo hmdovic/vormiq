@@ -213,11 +213,11 @@ section { position: relative; padding: var(--section-pad) var(--edge); }
   border-radius: 3px; will-change: transform, opacity;
 }
 .hero__content { position: relative; max-width: 56rem; display: flex; flex-direction: column; align-items: center; gap: 1.6rem; }
-.hero__title { font-size: clamp(2.4rem, 6.6vw, 5.4rem); max-width: 44rem; }
+.hero__title { font-size: clamp(1.75rem, 1.3rem + 2.2vw, 2.75rem); max-width: 36rem; }
 .hero__line { display: block; }
 .word-mask { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.1em; }
 .word-inner { display: inline-block; will-change: transform; }
-.hero__lead { max-width: 36rem; font-size: clamp(1.15rem, 1.02rem + 0.6vw, 1.4rem); line-height: 1.5; }
+.hero__lead { max-width: 40rem; font-size: clamp(1.4rem, 1.05rem + 1.5vw, 1.9rem); line-height: 1.45; }
 .hero__lead strong { color: hsl(var(--text)); font-weight: 700; }
 .hero__lead-accent { color: hsl(var(--accent-bright)); }
 .hero__actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 0.5rem; }
