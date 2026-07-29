@@ -225,7 +225,9 @@ section { position: relative; padding: var(--section-pad) var(--edge); }
 .hero__line { display: block; }
 .word-mask { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.1em; }
 .word-inner { display: inline-block; will-change: transform; }
-.hero__lead { max-width: 34rem; font-size: 1.05rem; }
+.hero__lead { max-width: 34rem; font-size: 1.18rem; line-height: 1.55; }
+.hero__lead strong { color: hsl(var(--text)); font-weight: 700; }
+.hero__lead-accent { color: hsl(var(--accent-bright)); }
 .hero__actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 0.5rem; }
 .hero__scroll {
   position: absolute; bottom: 2.4rem; left: 50%; transform: translateX(-50%);
@@ -394,7 +396,7 @@ section { position: relative; padding: var(--section-pad) var(--edge); }
 .wa-mock__dot { width: 6px; height: 6px; border-radius: 50%; background: #7cffb2; box-shadow: 0 0 6px #7cffb2; }
 
 .wa-mock__body {
-  flex: 1; min-height: 9.5rem; display: flex; flex-direction: column; justify-content: flex-end; gap: 0.5rem; padding: 1.3rem 1.1rem;
+  flex: 1; min-height: 6.5rem; display: flex; flex-direction: column; justify-content: flex-end; gap: 0.5rem; padding: 1.1rem 1.1rem;
   background: linear-gradient(hsl(var(--bg-soft) / 0.55), hsl(var(--bg-soft) / 0.72)), url("whatsapp-wallpaper.jpg");
   background-size: 220px auto; background-repeat: repeat;
 }
