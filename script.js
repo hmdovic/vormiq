@@ -305,51 +305,6 @@
   }
 
   /* =========================================================
-     CONTENT MACHINE sequence
-     ========================================================= */
-  var machineStage = document.querySelector("[data-machine-stage]");
-  if (machineStage && "IntersectionObserver" in window) {
-    var machineDone = false;
-    var machineObs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting && !machineDone) {
-          machineDone = true;
-          var input = machineStage.querySelector('[data-machine-item="input"]');
-          var lines123 = machineStage.querySelectorAll(".ml--1,.ml--2,.ml--3");
-          var core = machineStage.querySelector('[data-machine-item="core"]');
-          var lines456 = machineStage.querySelectorAll(".ml--4,.ml--5,.ml--6");
-          var outs = machineStage.querySelectorAll(".machine__node--out");
-          var result = machineStage.querySelector('[data-machine-item="result"]');
-
-          function show(el, delay) {
-            setTimeout(function () { if (el) el.classList.add("is-in"); }, delay);
-          }
-          function live(nodeList, delay) {
-            setTimeout(function () { nodeList.forEach(function (n) { n.classList.add("is-live"); }); }, delay);
-          }
-
-          show(input, 0);
-          live(lines123, 350);
-          show(core, 650);
-          live(lines456, 1000);
-          outs.forEach(function (o, idx) { show(o, 1250 + idx * 150); });
-          show(result, 1900);
-        }
-      });
-    }, { threshold: 0, rootMargin: "0px 0px 35% 0px" });
-    machineObs.observe(machineStage);
-
-    var outButtons = machineStage.querySelectorAll(".machine__node--out");
-    outButtons.forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        var wasOpen = btn.classList.contains("is-open");
-        outButtons.forEach(function (b) { b.classList.remove("is-open"); });
-        if (!wasOpen) btn.classList.add("is-open");
-      });
-    });
-  }
-
-  /* =========================================================
      SERVICES CONSTELLATION
      ========================================================= */
   var constellation = document.querySelector("[data-constellation]");
