@@ -91,6 +91,29 @@
   }
 
   /* =========================================================
+     LEGAL PAGES: table-of-contents active-section highlight
+     ========================================================= */
+  var tocLinks = Array.prototype.slice.call(document.querySelectorAll("[data-toc-link]"));
+  if (tocLinks.length && "IntersectionObserver" in window) {
+    var tocMap = {};
+    tocLinks.forEach(function (l) { tocMap[l.getAttribute("href").slice(1)] = l; });
+    var tocObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var link = tocMap[entry.target.id];
+        if (!link) return;
+        if (entry.isIntersecting) {
+          tocLinks.forEach(function (l) { l.classList.remove("is-active"); });
+          link.classList.add("is-active");
+        }
+      });
+    }, { rootMargin: "-20% 0px -70% 0px" });
+    Object.keys(tocMap).forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) tocObserver.observe(el);
+    });
+  }
+
+  /* =========================================================
      BACKGROUND PARALLAX LAYERS
      ========================================================= */
   if (!reduceMotion) {

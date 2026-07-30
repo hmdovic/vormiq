@@ -614,6 +614,45 @@ section { position: relative; padding: var(--section-pad) var(--edge); }
 @media (prefers-reduced-motion: reduce) { .demo-step, .demo-confetti span { animation: none; } }
 
 /* =========================================================
+   LEGAL PAGES (privacy, terms)
+   ========================================================= */
+.legal-hero { max-width: 40rem; margin: 0 auto clamp(3rem, 6vw, 4.5rem); text-align: center; position: relative; }
+.legal-hero h1 { margin-bottom: 1rem; }
+.legal-hero p { max-width: 30rem; margin-inline: auto; }
+.legal-meta { display: flex; align-items: center; justify-content: center; gap: 0.6rem; margin-top: 1.25rem; font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: hsl(var(--text-faint)); }
+.legal-meta span:not(:last-child)::after { content: "\2022"; margin-left: 0.6rem; color: hsl(var(--border-strong)); }
+
+.legal-layout { display: grid; grid-template-columns: 15rem 1fr; gap: clamp(2rem, 5vw, 4rem); max-width: 64rem; margin-inline: auto; align-items: start; }
+.legal-toc { position: sticky; top: 6rem; display: flex; flex-direction: column; gap: 0.15rem; }
+.legal-toc a {
+  position: relative; padding: 0.55rem 0 0.55rem 1rem; font-size: 0.86rem; color: hsl(var(--text-faint));
+  border-left: 1px solid hsl(var(--border)); transition: color var(--dur-1), border-color var(--dur-1);
+}
+.legal-toc a::before {
+  content: ""; position: absolute; left: -1px; top: 0; bottom: 0; width: 1px; background: hsl(var(--accent-bright));
+  transform: scaleY(0); transform-origin: top; transition: transform var(--dur-2) var(--ease);
+}
+.legal-toc a:hover { color: hsl(var(--text)); }
+.legal-toc a.is-active { color: hsl(var(--text)); font-weight: 600; }
+.legal-toc a.is-active::before { transform: scaleY(1); }
+
+.legal-content { display: flex; flex-direction: column; gap: 2.75rem; max-width: 38rem; }
+.legal-block { scroll-margin-top: 6rem; padding-top: 0.5rem; border-top: 1px solid hsl(var(--border)); }
+.legal-content > .legal-block:first-child { border-top: none; padding-top: 0; }
+.legal-block h2 { font-size: 1.25rem; margin-bottom: 0.75rem; }
+.legal-block p { color: hsl(var(--text-dim)); }
+.legal-block a { color: hsl(var(--accent-bright)); transition: color var(--dur-1); }
+.legal-block a:hover { color: hsl(var(--text)); }
+
+@media (max-width: 800px) {
+  .legal-layout { grid-template-columns: 1fr; }
+  .legal-toc { position: static; flex-direction: row; flex-wrap: nowrap; overflow-x: auto; gap: 0.5rem; padding-bottom: 0.5rem; margin-bottom: 0.5rem; -webkit-overflow-scrolling: touch; }
+  .legal-toc a { flex-shrink: 0; border-left: none; border-bottom: 2px solid hsl(var(--border)); padding: 0.5rem 0.2rem; white-space: nowrap; }
+  .legal-toc a::before { left: 0; right: 0; top: auto; bottom: -2px; width: auto; height: 2px; transform: scaleX(0); }
+  .legal-toc a.is-active::before { transform: scaleX(1); }
+}
+
+/* =========================================================
    FOOTER + WA FLOAT
    ========================================================= */
 .foot { border-top: 1px solid hsl(var(--border)); padding: clamp(2.5rem, 5vw, 3.5rem) var(--edge) 2rem; position: relative; z-index: 1; }
