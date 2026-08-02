@@ -265,7 +265,7 @@ section { position: relative; padding: var(--section-pad) var(--edge); }
   position: absolute; left: var(--x); top: var(--y); transform: translate(-50%, -50%);
   width: clamp(150px, 20vw, 200px); text-align: left; padding: 1.1rem 1.2rem; border-radius: var(--r-lg);
   background: hsl(var(--surface) / 0.85); border: 1px solid hsl(var(--border)); backdrop-filter: blur(10px);
-  display: flex; flex-direction: column; gap: 0.35rem; cursor: pointer;
+  display: flex; flex-direction: column; gap: 0.35rem; cursor: pointer; text-decoration: none; color: inherit;
   transition: border-color var(--dur-1) var(--ease), transform var(--dur-1) var(--ease), box-shadow var(--dur-1) var(--ease), background var(--dur-1) var(--ease);
 }
 .node-card:active { transform: translate(-50%, -50%) scale(0.97); }
@@ -274,6 +274,7 @@ section { position: relative; padding: var(--section-pad) var(--edge); }
 .node-card__price { font-family: var(--font-mono); font-size: 0.7rem; color: hsl(var(--accent-bright)); }
 .node-card__desc { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 0.2s var(--ease), opacity 0.2s var(--ease); }
 .node-card__desc-inner { overflow: hidden; font-size: 0.78rem; color: hsl(var(--text-faint)); }
+.node-card__more { display: inline-block; margin-top: 0.3rem; color: hsl(var(--accent-bright)); font-weight: 600; }
 .node-card.is-active, .node-card:focus-visible {
   border-color: hsl(var(--accent-bright) / 0.6); background: hsl(var(--surface-2) / 0.95);
   transform: translate(-50%, -50%) scale(1.05);

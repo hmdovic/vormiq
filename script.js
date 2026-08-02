@@ -404,13 +404,16 @@
     }
 
     nodeCards.forEach(function (card) {
+      var preClickActive = false;
       card.addEventListener("mouseenter", function () { setActive(card.dataset.node); });
       card.addEventListener("mouseleave", clearActive);
       card.addEventListener("focus", function () { setActive(card.dataset.node); });
       card.addEventListener("blur", clearActive);
+      card.addEventListener("pointerdown", function () { preClickActive = card.classList.contains("is-active"); });
       card.addEventListener("click", function (e) {
+        if (card.tagName === "A") return;
         e.preventDefault();
-        var willActivate = !card.classList.contains("is-active");
+        var willActivate = !preClickActive;
         clearActive();
         if (willActivate) setActive(card.dataset.node);
       });
