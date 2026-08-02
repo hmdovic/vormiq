@@ -750,6 +750,13 @@ section { position: relative; padding: var(--section-pad) var(--edge); }
 .service-feature__icon { width: 2.75rem; height: 2.75rem; border-radius: var(--r-md); display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, hsl(var(--accent) / 0.14), hsl(var(--accent-bright) / 0.18)); color: hsl(var(--accent-bright)); margin-bottom: 1rem; }
 .service-feature h3 { font-size: 1.05rem; margin-bottom: 0.5rem; }
 .service-feature p { font-size: 0.88rem; margin: 0; }
+.service-feature__price { display: block; margin-top: 0.85rem; font-family: var(--font-mono); font-size: 0.8rem; color: hsl(var(--accent-bright)); }
+.service-feature__more { display: inline-block; margin-top: 0.5rem; font-size: 0.8rem; font-weight: 600; color: hsl(var(--accent-bright)); }
+a.service-feature { display: block; text-decoration: none; color: inherit; transition: border-color var(--dur-1) var(--ease), background var(--dur-1) var(--ease); }
+a.service-feature:active { transform: scale(0.98); }
+@media (hover: hover) and (pointer: fine) {
+  a.service-feature:hover { border-color: hsl(var(--accent-bright) / 0.5); background: hsl(var(--surface-2) / 0.7); }
+}
 
 .service-proof { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; max-width: 46rem; margin-inline: auto; }
 .service-price { max-width: 22rem; margin: 0 auto clamp(2rem, 4vw, 2.5rem); }
