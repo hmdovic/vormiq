@@ -142,13 +142,14 @@
     wrap.appendChild(el("h2", "demo-step__title", step.title));
     if (step.sub) wrap.appendChild(el("p", "demo-step__sub", step.sub));
     var grid = el("div", "demo-cards");
-    step.options.forEach(function (opt) {
+    step.options.forEach(function (opt, i) {
       var card = el("button", "demo-card",
         '<span class="demo-card__icon">' + icon(opt.icon) + "</span>" +
         '<span class="demo-card__label">' + opt.label + "</span>" +
         '<span class="demo-card__check">' + icon("check") + "</span>"
       );
       card.type = "button";
+      card.style.animationDelay = (i * 40) + "ms";
       card.addEventListener("click", function () {
         if (card.classList.contains("is-selected")) return;
         answers[step.field] = opt.label;
@@ -174,7 +175,7 @@
     wrap.appendChild(el("h2", "demo-step__title", step.title));
     if (step.sub) wrap.appendChild(el("p", "demo-step__sub", step.sub));
     var grid = el("div", "demo-style-cards");
-    step.options.forEach(function (label) {
+    step.options.forEach(function (label, i) {
       var slug = label.toLowerCase();
       var card = el("button", "demo-style-card",
         '<div class="demo-style-card__preview demo-style-card__preview--' + slug + '">' +
@@ -186,6 +187,7 @@
         '<div class="demo-style-card__label">' + label + "</div>"
       );
       card.type = "button";
+      card.style.animationDelay = (i * 40) + "ms";
       card.addEventListener("click", function () {
         if (card.classList.contains("is-selected")) return;
         answers[step.field] = label;
@@ -218,13 +220,14 @@
     var grid = el("div", "demo-cards");
     var selected = {};
     var cont = buildContinue("Doorgaan", true);
-    step.options.forEach(function (opt) {
+    step.options.forEach(function (opt, i) {
       var card = el("button", "demo-card",
         '<span class="demo-card__icon">' + icon(opt.icon) + "</span>" +
         '<span class="demo-card__label">' + opt.label + "</span>" +
         '<span class="demo-card__check">' + icon("check") + "</span>"
       );
       card.type = "button";
+      card.style.animationDelay = (i * 40) + "ms";
       card.addEventListener("click", function () {
         var isSel = card.classList.toggle("is-selected");
         if (isSel) selected[opt.label] = true; else delete selected[opt.label];
@@ -286,12 +289,13 @@
     wrap.appendChild(el("h2", "demo-step__title", step.title));
     var grid = el("div", "demo-cards");
     var urlGroupWrap = null;
-    ["Ja", "Nee"].forEach(function (label) {
+    ["Ja", "Nee"].forEach(function (label, i) {
       var card = el("button", "demo-card",
         '<span class="demo-card__label">' + label + "</span>" +
         '<span class="demo-card__check">' + icon("check") + "</span>"
       );
       card.type = "button";
+      card.style.animationDelay = (i * 40) + "ms";
       card.addEventListener("click", function () {
         Array.prototype.forEach.call(grid.querySelectorAll(".demo-card"), function (c) { c.classList.remove("is-selected"); });
         card.classList.add("is-selected");

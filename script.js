@@ -545,15 +545,31 @@
     document.querySelectorAll("[data-tilt]").forEach(function (card) {
       card.style.perspective = "800px";
       var strength = parseFloat(card.dataset.tiltStrength) || 8;
+      var hasGlow = card.classList.contains("browser-card");
+      var pressed = false;
+      var px = 0, py = 0;
+      function applyTransform() {
+        var scale = pressed ? 0.98 : 1;
+        card.style.transform = "rotateY(" + (px * strength) + "deg) rotateX(" + (py * -strength) + "deg) translateY(-4px) scale(" + scale + ")";
+      }
       card.addEventListener("mousemove", function (e) {
         var r = card.getBoundingClientRect();
-        var px = (e.clientX - r.left) / r.width - 0.5;
-        var py = (e.clientY - r.top) / r.height - 0.5;
-        card.style.transform = "rotateY(" + (px * strength) + "deg) rotateX(" + (py * -strength) + "deg) translateY(-4px)";
-        card.style.setProperty("--mx", ((e.clientX - r.left) / r.width * 100) + "%");
-        card.style.setProperty("--my", ((e.clientY - r.top) / r.height * 100) + "%");
+        card.style.transition = "none";
+        px = (e.clientX - r.left) / r.width - 0.5;
+        py = (e.clientY - r.top) / r.height - 0.5;
+        if (hasGlow) {
+          card.style.setProperty("--mx", ((e.clientX - r.left) / r.width * 100) + "%");
+          card.style.setProperty("--my", ((e.clientY - r.top) / r.height * 100) + "%");
+        }
+        applyTransform();
       });
-      card.addEventListener("mouseleave", function () { card.style.transform = ""; });
+      card.addEventListener("mousedown", function () { pressed = true; applyTransform(); });
+      card.addEventListener("mouseup", function () { pressed = false; applyTransform(); });
+      card.addEventListener("mouseleave", function () {
+        pressed = false;
+        card.style.transition = "transform 0.5s var(--ease-soft)";
+        card.style.transform = "";
+      });
     });
   }
 
@@ -598,9 +614,13 @@
       var waText = encodeURIComponent(lines.join(" "));
       window.open("https://wa.me/31657971118?text=" + waText, "_blank", "noopener");
 
-      status.textContent = "Je WhatsApp-bericht staat klaar om te versturen. Liever mail? Stuur naar vormiq@outlook.com.";
-      status.classList.add("is-success");
-      form.reset();
+      form.classList.add("is-submitting");
+      window.setTimeout(function () {
+        status.textContent = "Je WhatsApp-bericht staat klaar om te versturen. Liever mail? Stuur naar vormiq@outlook.com.";
+        status.classList.add("is-success");
+        form.reset();
+        form.classList.remove("is-submitting");
+      }, reduceMotion ? 0 : 350);
     });
 
     var waFloat = document.querySelector("[data-wa-float]");
