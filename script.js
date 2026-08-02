@@ -61,6 +61,14 @@
     });
   }
 
+  document.querySelectorAll("[data-mobile-dropdown-toggle]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var group = btn.closest("[data-mobile-dropdown]");
+      var open = group.classList.toggle("is-open");
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  });
+
   document.querySelectorAll("[data-nav-link]").forEach(function (link) {
     var href = link.getAttribute("href");
     if (!href || href.charAt(0) !== "#") return;

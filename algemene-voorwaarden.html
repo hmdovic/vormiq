@@ -55,7 +55,17 @@
     <nav class="nav__links" aria-label="Hoofdnavigatie">
       <a href="index.html#proof">Resultaten</a>
       <a href="index.html#work">Werk</a>
-      <a href="index.html#services">Diensten</a>
+      <div class="nav__dropdown">
+        <a href="index.html#services" class="nav__dropdown-trigger">Diensten <svg class="nav__dropdown-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
+        <div class="nav__dropdown-panel">
+          <a href="website.html">Website</a>
+          <a href="webshop.html">Webshop</a>
+          <a href="ai-avatars.html">AI Avatars</a>
+          <a href="ai-video.html">AI Video&rsquo;s</a>
+          <a href="index.html#services">Branding</a>
+          <a href="index.html#services">AI Automatiseringen</a>
+        </div>
+      </div>
       <a href="index.html#pricing">Prijzen</a>
       <a href="index.html#contact">Contact</a>
     </nav>
@@ -70,7 +80,22 @@
 <div class="nav__mobile" data-nav-mobile>
   <a href="index.html#proof">Resultaten</a>
   <a href="index.html#work">Werk</a>
-  <a href="index.html#services">Diensten</a>
+  <div class="nav__mobile-group" data-mobile-dropdown>
+    <button type="button" class="nav__mobile-trigger" data-mobile-dropdown-toggle aria-expanded="false">
+      <span>Diensten</span>
+      <svg class="nav__dropdown-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="nav__mobile-panel">
+      <div class="nav__mobile-panel-inner">
+        <a href="website.html">Website</a>
+        <a href="webshop.html">Webshop</a>
+        <a href="ai-avatars.html">AI Avatars</a>
+        <a href="ai-video.html">AI Video&rsquo;s</a>
+        <a href="index.html#services">Branding</a>
+        <a href="index.html#services">AI Automatiseringen</a>
+      </div>
+    </div>
+  </div>
   <a href="index.html#pricing">Prijzen</a>
   <a href="index.html#contact">Contact</a>
 </div>

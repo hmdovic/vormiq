@@ -141,10 +141,30 @@ p { color: hsl(var(--text-dim)); line-height: 1.65; }
 .nav__mark img { display: block; height: 30px; width: auto; }
 .nav__badge { font-family: var(--font-mono); font-size: 0.6rem; padding: 0.15rem 0.4rem; border-radius: var(--r-full); background: hsl(var(--accent) / 0.16); color: hsl(var(--accent-bright)); }
 .nav__links { display: flex; align-items: center; gap: 1.7rem; }
-.nav__links a { position: relative; font-size: 0.86rem; color: hsl(var(--text-dim)); transition: color var(--dur-1); }
-.nav__links a::after { content: ""; position: absolute; left: 0; bottom: -6px; width: 0; height: 1px; background: hsl(var(--accent-bright)); transition: width var(--dur-2) var(--ease); }
-.nav__links a:hover, .nav__links a.is-active { color: hsl(var(--text)); }
-.nav__links a.is-active::after { width: 100%; }
+.nav__links > a, .nav__dropdown-trigger { position: relative; font-size: 0.86rem; color: hsl(var(--text-dim)); transition: color var(--dur-1); display: flex; align-items: center; gap: 0.3rem; }
+.nav__links > a::after, .nav__dropdown-trigger::after { content: ""; position: absolute; left: 0; bottom: -6px; width: 0; height: 1px; background: hsl(var(--accent-bright)); transition: width var(--dur-2) var(--ease); }
+.nav__links > a:hover, .nav__links > a.is-active, .nav__dropdown-trigger:hover, .nav__dropdown-trigger.is-active { color: hsl(var(--text)); }
+.nav__links > a.is-active::after, .nav__dropdown-trigger.is-active::after { width: 100%; }
+
+.nav__dropdown { position: relative; }
+.nav__dropdown-chevron { transition: transform var(--dur-1) var(--ease); flex-shrink: 0; }
+.nav__dropdown-panel {
+  position: absolute; top: calc(100% + 1rem); left: 50%; transform: translateX(-50%) translateY(-6px);
+  display: flex; flex-direction: column; gap: 0.1rem; min-width: 190px; padding: 0.45rem;
+  border-radius: var(--r-lg); background: hsl(var(--surface) / 0.98); border: 1px solid hsl(var(--border-strong));
+  backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); box-shadow: 0 25px 60px -25px hsl(0 0% 0% / 0.75);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity var(--dur-1) var(--ease), transform var(--dur-1) var(--ease), visibility var(--dur-1);
+}
+.nav__dropdown-panel a { display: block; padding: 0.55rem 0.7rem; border-radius: var(--r-sm); font-size: 0.84rem; color: hsl(var(--text-dim)); transition: background var(--dur-1) var(--ease), color var(--dur-1) var(--ease); }
+.nav__dropdown-panel a:active { transform: scale(0.98); }
+@media (hover: hover) and (pointer: fine) {
+  .nav__dropdown:hover .nav__dropdown-panel, .nav__dropdown:focus-within .nav__dropdown-panel {
+    opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0);
+  }
+  .nav__dropdown:hover .nav__dropdown-chevron, .nav__dropdown:focus-within .nav__dropdown-chevron { transform: rotate(180deg); }
+  .nav__dropdown-panel a:hover { background: hsl(var(--surface-2)); color: hsl(var(--text)); }
+}
 .nav__cta {
   font-size: 0.82rem; font-weight: 600; padding: 0.6rem 1.15rem; border-radius: var(--r-full);
   background: hsl(var(--text)); color: hsl(var(--bg)); white-space: nowrap;
@@ -161,6 +181,15 @@ p { color: hsl(var(--text-dim)); line-height: 1.65; }
 }
 .nav__mobile.is-open { opacity: 1; visibility: visible; transform: translateY(0); }
 .nav__mobile a { font-family: var(--font-display); font-size: 1.6rem; font-weight: 600; }
+.nav__mobile-group { display: flex; flex-direction: column; align-items: center; }
+.nav__mobile-trigger { display: flex; align-items: center; gap: 0.45rem; font-family: var(--font-display); font-size: 1.6rem; font-weight: 600; color: hsl(var(--text)); }
+.nav__mobile-trigger:active { transform: scale(0.97); }
+.nav__mobile-group.is-open .nav__mobile-trigger .nav__dropdown-chevron { transform: rotate(180deg); }
+.nav__mobile-panel { width: 100%; display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--dur-2) var(--ease); }
+.nav__mobile-panel-inner { overflow: hidden; display: flex; flex-direction: column; align-items: center; gap: 0.85rem; }
+.nav__mobile-panel-inner a { font-size: 1.05rem; font-weight: 500; color: hsl(var(--text-dim)); }
+.nav__mobile-panel-inner a:first-child { margin-top: 1rem; }
+.nav__mobile-group.is-open .nav__mobile-panel { grid-template-rows: 1fr; }
 
 /* =========================================================
    BUTTONS
