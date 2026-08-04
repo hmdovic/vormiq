@@ -860,14 +860,10 @@ a.service-feature:active { transform: scale(0.98); }
 }
 
 .wa-float {
-  position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 40; width: 54px; height: 54px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center; background: hsl(var(--accent)); color: #04120d;
-  box-shadow: 0 12px 30px -10px hsl(var(--accent) / 0.7); transition: transform var(--dur-1) var(--ease-soft);
+  position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 40; width: 54px; height: 54px;
+  display: flex; align-items: center; justify-content: center; transition: transform var(--dur-1) var(--ease-soft);
 }
-.wa-float::after {
-  content: ""; position: absolute; inset: -8px; z-index: -1; border-radius: 50%;
-  background: hsl(var(--accent) / 0.6); filter: blur(16px); animation: floatGlow 2.8s ease-in-out infinite;
-}
+.wa-float img { width: 84px; height: 84px; object-fit: contain; pointer-events: none; }
 .wa-float:active { transform: scale(0.92); }
 @media (hover: hover) and (pointer: fine) {
   .wa-float:hover { transform: scale(1.08); }
@@ -878,19 +874,15 @@ a.service-feature:active { transform: scale(0.98); }
    ========================================================= */
 .chat-float {
   position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 41; width: 58px; height: 58px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center; background: hsl(var(--accent-bright)); color: hsl(var(--bg));
-  box-shadow: 0 12px 30px -10px hsl(var(--accent-bright) / 0.7); transition: transform var(--dur-1) var(--ease-soft);
+  display: flex; align-items: center; justify-content: center; transition: transform var(--dur-1) var(--ease-soft), background var(--dur-1), box-shadow var(--dur-1);
 }
-.chat-float::after {
-  content: ""; position: absolute; inset: -8px; z-index: -1; border-radius: 50%;
-  background: hsl(var(--accent-bright) / 0.6); filter: blur(16px); animation: floatGlow 2.8s ease-in-out infinite; animation-delay: 1.4s;
-}
-@keyframes floatGlow { 0%, 100% { opacity: 0.45; transform: scale(0.88); } 50% { opacity: 0.95; transform: scale(1.15); } }
+.chat-float__icon-open { width: 88px; height: 88px; object-fit: contain; pointer-events: none; }
 .chat-float:active { transform: scale(0.92); }
 @media (hover: hover) and (pointer: fine) {
   .chat-float:hover { transform: scale(1.08); }
 }
-.chat-float__icon-close { display: none; position: absolute; }
+.chat-float__icon-close { display: none; position: absolute; color: hsl(var(--bg)); }
+.chat-widget.is-open .chat-float { background: hsl(var(--accent-bright)); box-shadow: 0 12px 30px -10px hsl(var(--accent-bright) / 0.7); }
 .chat-widget.is-open .chat-float__icon-open { display: none; }
 .chat-widget.is-open .chat-float__icon-close { display: block; }
 .chat-widget.is-open .chat-float__badge { display: none; }
@@ -1013,5 +1005,4 @@ a.service-feature:active { transform: scale(0.98); }
   .demo-style-card:hover,
   .wa-float:hover,
   .video-modal__close:hover { transform: none !important; }
-  .wa-float::after, .chat-float::after { animation: none !important; opacity: 0.6; }
 }
