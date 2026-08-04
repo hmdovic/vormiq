@@ -43,6 +43,31 @@
     "Laatste stap voor je demo!"
   ];
 
+  var MINI_COLORS = ["#c6ff3d", "#8b5cf6", "#22c55e", "#facc15", "#38bdf8"];
+
+  function burstMini(x, y) {
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    for (var i = 0; i < 9; i++) {
+      var s = document.createElement("span");
+      s.className = "demo-mini-confetti";
+      s.style.left = x + "px";
+      s.style.top = y + "px";
+      s.style.background = MINI_COLORS[i % MINI_COLORS.length];
+      var angle = Math.random() * Math.PI * 2;
+      var dist = 34 + Math.random() * 46;
+      s.style.setProperty("--dx", (Math.cos(angle) * dist) + "px");
+      s.style.setProperty("--dy", (Math.sin(angle) * dist - 16) + "px");
+      s.style.animationDuration = (0.55 + Math.random() * 0.35) + "s";
+      document.body.appendChild(s);
+      (function (node) { window.setTimeout(function () { node.remove(); }, 1000); })(s);
+    }
+  }
+
+  function burstFromEl(target) {
+    var r = target.getBoundingClientRect();
+    burstMini(r.left + r.width / 2, r.top + r.height / 2);
+  }
+
   function stepHead(wrap, step, index) {
     wrap.appendChild(el("span", "demo-step__hype", (HYPE_MESSAGES[index] || "")));
     wrap.appendChild(el("h2", "demo-step__title", step.title));
@@ -170,6 +195,7 @@
         if (card.classList.contains("is-selected")) return;
         answers[step.field] = opt.label;
         card.classList.add("is-selected");
+        burstFromEl(card.querySelector(".demo-card__check"));
         window.setTimeout(function () { goTo(index + 1); }, 320);
       });
       grid.appendChild(card);
@@ -244,7 +270,8 @@
       card.style.animationDelay = (i * 40) + "ms";
       card.addEventListener("click", function () {
         var isSel = card.classList.toggle("is-selected");
-        if (isSel) selected[opt.label] = true; else delete selected[opt.label];
+        if (isSel) { selected[opt.label] = true; burstFromEl(card.querySelector(".demo-card__check")); }
+        else delete selected[opt.label];
         cont.btn.disabled = Object.keys(selected).length === 0;
       });
       grid.appendChild(card);
@@ -320,6 +347,7 @@
       card.addEventListener("click", function () {
         Array.prototype.forEach.call(grid.querySelectorAll(".demo-card"), function (c) { c.classList.remove("is-selected"); });
         card.classList.add("is-selected");
+        burstFromEl(card.querySelector(".demo-card__check"));
         answers.hasWebsite = label;
         if (label === "Nee") {
           answers.websiteUrl = "";
