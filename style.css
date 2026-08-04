@@ -931,33 +931,34 @@ a.service-feature:active { transform: scale(0.98); }
 }
 
 .wa-float {
-  position: fixed; bottom: 1.25rem; right: 1.25rem; z-index: 40; width: 64px; height: 64px;
-  display: flex; align-items: center; justify-content: center; transition: transform var(--dur-1) var(--ease-soft);
+  position: fixed; bottom: 1.25rem; right: 1.25rem; z-index: 40; width: 60px; height: 60px;
+  display: flex; align-items: center; justify-content: center; color: hsl(var(--accent-bright));
+  transition: transform var(--dur-1) var(--ease-soft);
 }
-.wa-float::before {
-  content: ""; position: absolute; inset: -14px; z-index: -1; border-radius: 50%;
-  background: hsl(var(--accent) / 0.55); filter: blur(20px); animation: floatBreathe 3.2s ease-in-out infinite;
+.wa-float__icon {
+  width: 100%; height: 100%; overflow: visible;
+  filter: drop-shadow(0 0 2px currentColor) drop-shadow(0 0 7px currentColor) drop-shadow(0 0 16px hsl(var(--accent-bright) / 0.85));
+  animation: floatBreathe 3.2s ease-in-out infinite;
 }
-.wa-float img { width: 122px; height: 122px; object-fit: contain; pointer-events: none; animation: floatBreathe 3.2s ease-in-out infinite; }
 .wa-float:active { transform: scale(0.92); }
 @media (hover: hover) and (pointer: fine) {
   .wa-float:hover { transform: scale(1.08); }
 }
-@keyframes floatBreathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.07); } }
+@keyframes floatBreathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
 
 /* =========================================================
    AI CHAT WIDGET
    ========================================================= */
 .chat-float {
-  position: fixed; bottom: 1.25rem; left: 1.25rem; z-index: 41; width: 68px; height: 68px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center; transition: transform var(--dur-1) var(--ease-soft), background var(--dur-1), box-shadow var(--dur-1);
+  position: fixed; bottom: 1.25rem; left: 1.25rem; z-index: 41; width: 64px; height: 64px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; color: hsl(var(--accent-bright));
+  transition: transform var(--dur-1) var(--ease-soft), background var(--dur-1), box-shadow var(--dur-1);
 }
-.chat-float::before {
-  content: ""; position: absolute; inset: -14px; z-index: -1; border-radius: 50%;
-  background: hsl(var(--accent-bright) / 0.55); filter: blur(20px); animation: floatBreathe 3.2s ease-in-out infinite; animation-delay: 1.6s;
+.chat-float__icon-open {
+  width: 100%; height: 100%; overflow: visible;
+  filter: drop-shadow(0 0 2px currentColor) drop-shadow(0 0 7px currentColor) drop-shadow(0 0 16px hsl(var(--accent-bright) / 0.85));
+  animation: floatBreathe 3.2s ease-in-out infinite; animation-delay: 1.6s;
 }
-.chat-widget.is-open .chat-float::before { display: none; }
-.chat-float__icon-open { width: 128px; height: 128px; object-fit: contain; pointer-events: none; animation: floatBreathe 3.2s ease-in-out infinite; animation-delay: 1.6s; }
 .chat-float:active { transform: scale(0.92); }
 @media (hover: hover) and (pointer: fine) {
   .chat-float:hover { transform: scale(1.08); }
@@ -1078,7 +1079,7 @@ a.service-feature:active { transform: scale(0.98); }
 
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
-  .text-shine, .hero__scroll-track i, .marquee__track, .mini-shard, .wa-mock__typing i, .nav__status-dot::before, .wa-float::before, .wa-float img, .chat-float::before, .chat-float__icon-open { animation: none !important; }
+  .text-shine, .hero__scroll-track i, .marquee__track, .mini-shard, .wa-mock__typing i, .nav__status-dot::before, .wa-float__icon, .chat-float__icon-open { animation: none !important; }
   .demo-card, .demo-style-card { animation: none !important; opacity: 1 !important; }
   .node-card:hover, .node-card.is-active, .node-card:focus-visible { transform: translate(-50%, -50%) !important; }
   .browser-card:hover .browser-card__viewport video,
