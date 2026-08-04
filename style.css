@@ -250,6 +250,12 @@ section { position: relative; padding: var(--section-pad) var(--edge); }
 .hero__lead { max-width: 30rem; font-size: clamp(1.1rem, 1rem + 0.5vw, 1.3rem); line-height: 1.55; }
 .hero__lead-accent { color: hsl(var(--accent-bright)); }
 .hero__actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; margin-top: 0.5rem; }
+.hero__trust {
+  display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; justify-content: center;
+  margin-top: 0.9rem; font-size: 0.8rem; color: hsl(var(--text-faint));
+}
+.hero__trust strong { color: hsl(var(--text-dim)); font-weight: 600; }
+.hero__trust-dot { color: hsl(var(--border-strong)); }
 .hero__scroll {
   position: absolute; bottom: 2.4rem; left: 50%; transform: translateX(-50%);
   display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
@@ -513,7 +519,6 @@ section { position: relative; padding: var(--section-pad) var(--edge); }
 /* =========================================================
    PRICING
    ========================================================= */
-.pricing__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; max-width: 68rem; margin-inline: auto; }
 .price-card {
   padding: 1.8rem; border-radius: var(--r-lg); border: 1px solid hsl(var(--border)); background: hsl(var(--surface));
   transform-style: preserve-3d; transition: border-color var(--dur-2);
@@ -919,7 +924,6 @@ a.service-feature:active { transform: scale(0.98); }
   .about { grid-template-columns: 1fr; }
   .proof__grid { grid-template-columns: 1fr; }
   .proof__stats { grid-template-columns: repeat(2, 1fr); }
-  .pricing__grid { grid-template-columns: 1fr 1fr; }
   .constellation { aspect-ratio: 620/1000; }
   .node-card { width: clamp(130px, 40vw, 170px); padding: 0.85rem 0.9rem; }
   /* desktop --x/--y are tuned for the wide layout; pull the side columns
@@ -931,7 +935,6 @@ a.service-feature:active { transform: scale(0.98); }
 }
 
 @media (max-width: 640px) {
-  .pricing__grid { grid-template-columns: 1fr; }
   .proof__stats { grid-template-columns: 1fr 1fr; }
   .contact__grid { grid-template-columns: 1fr; }
 }
