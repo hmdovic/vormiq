@@ -813,7 +813,7 @@ a.service-feature:active { transform: scale(0.98); }
    AI CHAT WIDGET
    ========================================================= */
 .chat-float {
-  position: fixed; bottom: 6.3rem; right: 1.5rem; z-index: 41; width: 54px; height: 54px; border-radius: 50%;
+  position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 41; width: 58px; height: 58px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center; background: hsl(var(--accent-bright)); color: hsl(var(--bg));
   box-shadow: 0 12px 30px -10px hsl(var(--accent-bright) / 0.7); transition: transform var(--dur-1) var(--ease-soft);
 }
@@ -824,14 +824,46 @@ a.service-feature:active { transform: scale(0.98); }
 .chat-float__icon-close { display: none; position: absolute; }
 .chat-widget.is-open .chat-float__icon-open { display: none; }
 .chat-widget.is-open .chat-float__icon-close { display: block; }
+.chat-widget.is-open .chat-float::before,
+.chat-widget.is-open .chat-float__badge { display: none; }
+
+.chat-float::before {
+  content: ""; position: absolute; inset: -6px; border-radius: 50%; pointer-events: none;
+  border: 2px solid hsl(var(--accent-bright) / 0.55); animation: chatPulse 2.6s ease-out infinite;
+}
+@keyframes chatPulse { 0% { transform: scale(0.82); opacity: 0.9; } 80%, 100% { transform: scale(1.5); opacity: 0; } }
+
+.chat-float__badge {
+  position: absolute; top: -3px; right: -3px; width: 19px; height: 19px; border-radius: 50%;
+  background: hsl(4 80% 58%); color: #fff; font-size: 0.62rem; font-weight: 700; font-family: var(--font-mono);
+  display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 2px hsl(var(--bg));
+}
+
+.chat-tip {
+  position: fixed; bottom: calc(1.5rem + 58px + 0.7rem); left: 1.5rem; z-index: 41; max-width: 230px;
+  display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 0.85rem 0.75rem 1rem;
+  background: hsl(var(--surface-2)); border: 1px solid hsl(var(--border-strong)); border-radius: var(--r-lg);
+  font-size: 0.84rem; color: hsl(var(--text)); box-shadow: 0 20px 45px -20px hsl(0 0% 0% / 0.65); cursor: pointer;
+  opacity: 0; visibility: hidden; transform: translateY(10px) scale(0.95); transform-origin: bottom left;
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease), visibility 0.3s;
+}
+.chat-tip.is-shown { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+.chat-tip span { flex: 1; }
+.chat-tip__close {
+  flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  color: hsl(var(--text-faint)); font-size: 1rem; line-height: 1; transition: background var(--dur-1), color var(--dur-1);
+}
+@media (hover: hover) and (pointer: fine) {
+  .chat-tip__close:hover { background: hsl(var(--surface)); color: hsl(var(--text)); }
+}
 
 .chat-panel {
-  position: fixed; bottom: calc(6.3rem + 54px + 0.8rem); right: 1.5rem; z-index: 41;
+  position: fixed; bottom: calc(1.5rem + 58px + 0.8rem); left: 1.5rem; z-index: 41;
   width: min(380px, calc(100vw - 2rem)); height: min(560px, calc(100vh - 10rem));
   display: flex; flex-direction: column; border-radius: var(--r-xl); overflow: hidden;
   background: hsl(var(--surface) / 0.98); border: 1px solid hsl(var(--border-strong));
   backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); box-shadow: 0 30px 70px -25px hsl(0 0% 0% / 0.75);
-  opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(16px) scale(0.96); transform-origin: bottom right;
+  opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(16px) scale(0.96); transform-origin: bottom left;
   transition: opacity 0.25s var(--ease), transform 0.25s var(--ease), visibility 0.25s;
 }
 .chat-widget.is-open .chat-panel { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0) scale(1); }
@@ -875,12 +907,13 @@ a.service-feature:active { transform: scale(0.98); }
 }
 
 @media (max-width: 480px) {
-  .chat-panel { width: 100vw; height: 100dvh; bottom: 0; right: 0; border-radius: 0; }
+  .chat-panel { width: 100vw; height: 100dvh; bottom: 0; left: 0; border-radius: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .chat-panel { transition: opacity 0.15s linear, visibility 0.15s; transform: none !important; }
   .chat-typing span { animation: none; opacity: 0.7; }
+  .chat-float::before { animation: none; display: none; }
   .chat-float:hover, .chat-panel__close:hover, .chat-panel__send:hover, .chat-panel__suggestions button:hover { transform: none !important; }
 }
 

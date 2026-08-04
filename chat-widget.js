@@ -148,13 +148,45 @@
     var suggestionsEl = widget.querySelector("[data-chat-suggestions]");
     var form = widget.querySelector("[data-chat-form]");
     var input = widget.querySelector("[data-chat-input]");
+    var tip = widget.querySelector("[data-chat-tip]");
+    var tipClose = widget.querySelector("[data-chat-tip-close]");
+    var badge = widget.querySelector("[data-chat-badge]");
 
     var opened = false;
+    var ENGAGED_KEY = "vormiq_chat_engaged";
+
+    function markEngaged() {
+      if (tip) tip.classList.remove("is-shown");
+      if (badge) badge.style.display = "none";
+      try { sessionStorage.setItem(ENGAGED_KEY, "1"); } catch (e) {}
+    }
+
+    var alreadyEngaged = false;
+    try { alreadyEngaged = sessionStorage.getItem(ENGAGED_KEY) === "1"; } catch (e) {}
+    if (alreadyEngaged && badge) badge.style.display = "none";
+    if (!alreadyEngaged && tip) {
+      window.setTimeout(function () {
+        if (!widget.classList.contains("is-open")) tip.classList.add("is-shown");
+      }, 3500);
+    }
+    if (tip) {
+      tip.addEventListener("click", function () {
+        markEngaged();
+        open();
+      });
+    }
+    if (tipClose) {
+      tipClose.addEventListener("click", function (e) {
+        e.stopPropagation();
+        markEngaged();
+      });
+    }
 
     function open() {
       widget.classList.add("is-open");
       toggle.setAttribute("aria-expanded", "true");
       panel.setAttribute("aria-hidden", "false");
+      markEngaged();
       if (!opened) {
         opened = true;
         renderNode("start");
