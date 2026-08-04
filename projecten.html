@@ -289,7 +289,7 @@
   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 3.4L3 21"/><path d="M9 10a1 1 0 0 0 1 1 4 4 0 0 0 4 4 1 1 0 0 0 1-1"/></svg>
 </a>
 
-<div class="chat-widget" data-chat-widget data-chat-endpoint="https://YOUR-WORKER-SUBDOMAIN.workers.dev">
+<div class="chat-widget" data-chat-widget>
   <div class="chat-panel" data-chat-panel aria-hidden="true">
     <div class="chat-panel__header">
       <span class="chat-panel__title">Vormiq Assistent</span>
@@ -298,11 +298,7 @@
       </button>
     </div>
     <div class="chat-panel__messages" data-chat-messages></div>
-    <div class="chat-panel__suggestions" data-chat-suggestions>
-      <button type="button" data-chat-suggestion>Wat kost een website?</button>
-      <button type="button" data-chat-suggestion>Doe de gratis demo</button>
-      <button type="button" data-chat-suggestion>Ik wil met Sami praten</button>
-    </div>
+    <div class="chat-panel__suggestions" data-chat-suggestions></div>
     <form class="chat-panel__form" data-chat-form>
       <input type="text" data-chat-input placeholder="Stel je vraag..." autocomplete="off" maxlength="500" />
       <button type="submit" class="chat-panel__send" aria-label="Verstuur">
