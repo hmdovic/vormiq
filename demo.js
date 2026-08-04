@@ -32,6 +32,23 @@
     return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + (ICON_PATHS[name] || "") + "</svg>";
   }
 
+  var HYPE_MESSAGES = [
+    "Hey! Fijn dat je er bent &#128075;",
+    "Mooi begin!",
+    "Je bent er bijna doorheen.",
+    "Goed bezig &#10024;",
+    "Nu het leukste gedeelte.",
+    "Nog een paar klikken.",
+    "Bijna klaar, laatste vraag.",
+    "Laatste stap voor je demo!"
+  ];
+
+  function stepHead(wrap, step, index) {
+    wrap.appendChild(el("span", "demo-step__hype", (HYPE_MESSAGES[index] || "")));
+    wrap.appendChild(el("h2", "demo-step__title", step.title));
+    if (step.sub) wrap.appendChild(el("p", "demo-step__sub", step.sub));
+  }
+
   var STEPS = [
     {
       id: "business", field: "business", type: "cards",
@@ -74,9 +91,9 @@
       options: ["Modern", "Luxe", "Minimalistisch", "Zakelijk", "Speels"]
     },
     {
-      id: "pages", field: "pages", type: "multi",
+      id: "pages", field: "pages", type: "multi", skippable: true,
       title: "Welke pagina&rsquo;s wil je ongeveer?",
-      sub: "Kies er zoveel als je wilt.",
+      sub: "Kies er zoveel als je wilt, of sla over als je het nog niet weet.",
       options: [
         { label: "Home", icon: "home" },
         { label: "Over ons", icon: "info" },
@@ -139,11 +156,10 @@
 
   function renderCardsStep(step, index) {
     var wrap = el("div", "demo-step");
-    wrap.appendChild(el("h2", "demo-step__title", step.title));
-    if (step.sub) wrap.appendChild(el("p", "demo-step__sub", step.sub));
+    stepHead(wrap, step, index);
     var grid = el("div", "demo-cards");
     step.options.forEach(function (opt, i) {
-      var card = el("button", "demo-card",
+      var card = el("button", "demo-card demo-card--" + (i % 5),
         '<span class="demo-card__icon">' + icon(opt.icon) + "</span>" +
         '<span class="demo-card__label">' + opt.label + "</span>" +
         '<span class="demo-card__check">' + icon("check") + "</span>"
@@ -172,8 +188,7 @@
 
   function renderStyleStep(step, index) {
     var wrap = el("div", "demo-step");
-    wrap.appendChild(el("h2", "demo-step__title", step.title));
-    if (step.sub) wrap.appendChild(el("p", "demo-step__sub", step.sub));
+    stepHead(wrap, step, index);
     var grid = el("div", "demo-style-cards");
     step.options.forEach(function (label, i) {
       var slug = label.toLowerCase();
@@ -215,13 +230,12 @@
 
   function renderMultiStep(step, index) {
     var wrap = el("div", "demo-step");
-    wrap.appendChild(el("h2", "demo-step__title", step.title));
-    if (step.sub) wrap.appendChild(el("p", "demo-step__sub", step.sub));
+    stepHead(wrap, step, index);
     var grid = el("div", "demo-cards");
     var selected = {};
     var cont = buildContinue("Doorgaan", true);
     step.options.forEach(function (opt, i) {
-      var card = el("button", "demo-card",
+      var card = el("button", "demo-card demo-card--" + (i % 5),
         '<span class="demo-card__icon">' + icon(opt.icon) + "</span>" +
         '<span class="demo-card__label">' + opt.label + "</span>" +
         '<span class="demo-card__check">' + icon("check") + "</span>"
@@ -241,13 +255,21 @@
       goTo(index + 1);
     });
     wrap.appendChild(cont.wrap);
+    if (step.skippable) {
+      var skip = el("button", "demo-skip", "Sla deze stap over");
+      skip.type = "button";
+      skip.addEventListener("click", function () {
+        answers[step.field] = [];
+        goTo(index + 1);
+      });
+      cont.wrap.appendChild(skip);
+    }
     return wrap;
   }
 
   function renderTextStep(step, index) {
     var wrap = el("div", "demo-step");
-    wrap.appendChild(el("h2", "demo-step__title", step.title));
-    if (step.sub) wrap.appendChild(el("p", "demo-step__sub", step.sub));
+    stepHead(wrap, step, index);
     var group = el("div", "demo-input-group");
     var input = el("input", "demo-input");
     input.type = "text";
@@ -267,8 +289,7 @@
 
   function renderTextareaStep(step, index) {
     var wrap = el("div", "demo-step");
-    wrap.appendChild(el("h2", "demo-step__title", step.title));
-    if (step.sub) wrap.appendChild(el("p", "demo-step__sub", step.sub));
+    stepHead(wrap, step, index);
     var group = el("div", "demo-input-group");
     var textarea = el("textarea", "demo-textarea");
     textarea.placeholder = step.placeholder || "";
@@ -286,7 +307,7 @@
 
   function renderYesNoStep(step, index) {
     var wrap = el("div", "demo-step");
-    wrap.appendChild(el("h2", "demo-step__title", step.title));
+    stepHead(wrap, step, index);
     var grid = el("div", "demo-cards");
     var urlGroupWrap = null;
     ["Ja", "Nee"].forEach(function (label, i) {
@@ -329,7 +350,7 @@
 
   function renderContactStep(step, index) {
     var wrap = el("div", "demo-step");
-    wrap.appendChild(el("h2", "demo-step__title", step.title));
+    stepHead(wrap, step, index);
     var nameGroup = el("div", "demo-input-group", '<label for="demo-name">Naam</label>');
     var nameInput = el("input", "demo-input");
     nameInput.type = "text";
@@ -375,6 +396,9 @@
     });
     cont.btn.addEventListener("click", submit);
     wrap.appendChild(cont.wrap);
+    wrap.appendChild(el("p", "demo-trust-note",
+      icon("check") + " We gebruiken dit alleen om je gratis demo naar je toe te sturen. Geen spam."
+    ));
     focusFirstInput(wrap);
     return wrap;
   }
@@ -391,20 +415,32 @@
     }
   }
 
-  function showStep(index) {
+  function showStep(index, backwards) {
     currentIndex = index;
     updateProgress(index, false);
-    stage.appendChild(buildStepNode(STEPS[index], index));
+    var node = buildStepNode(STEPS[index], index);
+    if (backwards) node.classList.add("demo-step--back");
+    stage.appendChild(node);
   }
 
-  function goTo(index) {
+  function realignScroll() {
+    var inner = document.querySelector(".demo-flow__inner");
+    if (!inner) return;
+    var top = inner.getBoundingClientRect().top;
+    if (top < -40 || top > 120) {
+      window.scrollTo({ top: window.scrollY + top - 90, behavior: "smooth" });
+    }
+  }
+
+  function goTo(index, backwards) {
     var current = stage.querySelector(".demo-step");
     function place() {
       stage.innerHTML = "";
-      if (index >= STEPS.length) { renderEnd(); } else { showStep(index); }
+      if (index >= STEPS.length) { renderEnd(); } else { showStep(index, backwards); }
+      realignScroll();
     }
     if (current) {
-      current.classList.add("is-leaving");
+      current.classList.add(backwards ? "is-leaving-back" : "is-leaving");
       window.setTimeout(place, 220);
     } else {
       place();
@@ -484,6 +520,16 @@
 
     stage.appendChild(wrap);
     burstConfetti();
+  }
+
+  var backLink = document.querySelector("[data-demo-back]");
+  if (backLink) {
+    backLink.addEventListener("click", function (e) {
+      if (currentIndex > 0) {
+        e.preventDefault();
+        goTo(currentIndex - 1, true);
+      }
+    });
   }
 
   showStep(0);
