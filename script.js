@@ -505,6 +505,15 @@
     document.querySelectorAll("[data-wa-mock]").forEach(function (el) { proofObserver.observe(el); });
   }
 
+  document.querySelectorAll("[data-wa-mock]").forEach(function (el) {
+    el.addEventListener("click", function (e) {
+      if (!el.classList.contains("is-in") || !el.classList.contains("is-typed")) return;
+      if (e.target.closest("a, button")) return;
+      el.classList.remove("is-typed");
+      window.setTimeout(function () { el.classList.add("is-typed"); }, reduceMotion ? 0 : 750);
+    });
+  });
+
   /* =========================================================
      SHARD MOTIF — reused in section headers beyond the hero
      ========================================================= */
