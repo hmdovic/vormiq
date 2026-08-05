@@ -931,40 +931,35 @@ a.service-feature:active { transform: scale(0.98); }
 }
 
 .wa-float {
-  position: fixed; bottom: 1.25rem; right: 1.25rem; z-index: 40; width: 60px; height: 60px;
-  display: flex; align-items: center; justify-content: center; color: hsl(var(--accent-bright));
-  transition: transform var(--dur-1) var(--ease-soft);
+  position: fixed; bottom: 1.25rem; right: 1.25rem; z-index: 40; width: 60px; height: 60px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; color: #04120d; isolation: isolate;
+  background: linear-gradient(135deg, hsl(var(--accent-deep)), hsl(var(--accent-bright)));
+  box-shadow: 0 14px 30px -12px hsl(var(--accent) / 0.7), 0 2px 10px hsl(0 0% 0% / 0.35);
+  transition: transform var(--dur-1) var(--ease-soft), box-shadow var(--dur-1);
 }
-.wa-float__icon {
-  width: 100%; height: 100%; overflow: visible;
-  filter: drop-shadow(0 0 2px currentColor) drop-shadow(0 0 7px currentColor) drop-shadow(0 0 16px hsl(var(--accent-bright) / 0.85));
-  animation: floatBreathe 3.2s ease-in-out infinite;
-}
+.wa-float__icon { width: 28px; height: 28px; }
 .wa-float:active { transform: scale(0.92); }
 @media (hover: hover) and (pointer: fine) {
-  .wa-float:hover { transform: scale(1.08); }
+  .wa-float:hover { transform: scale(1.08); box-shadow: 0 18px 38px -12px hsl(var(--accent) / 0.8), 0 2px 10px hsl(0 0% 0% / 0.4); }
 }
-@keyframes floatBreathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
 
 /* =========================================================
    AI CHAT WIDGET
    ========================================================= */
 .chat-float {
   position: fixed; bottom: 1.25rem; left: 1.25rem; z-index: 41; width: 64px; height: 64px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center; color: hsl(var(--accent-bright));
-  transition: transform var(--dur-1) var(--ease-soft), background var(--dur-1), box-shadow var(--dur-1);
+  display: flex; align-items: center; justify-content: center; color: #04120d; isolation: isolate;
+  background: linear-gradient(135deg, hsl(var(--violet)), hsl(var(--accent-bright)));
+  box-shadow: 0 14px 30px -12px hsl(var(--accent-bright) / 0.65), 0 2px 10px hsl(0 0% 0% / 0.35);
+  transition: transform var(--dur-1) var(--ease-soft), box-shadow var(--dur-1), background var(--dur-1);
 }
-.chat-float__icon-open {
-  width: 100%; height: 100%; overflow: visible;
-  filter: drop-shadow(0 0 2px currentColor) drop-shadow(0 0 7px currentColor) drop-shadow(0 0 16px hsl(var(--accent-bright) / 0.85));
-  animation: floatBreathe 3.2s ease-in-out infinite; animation-delay: 1.6s;
-}
+.chat-float__icon-open { width: 30px; height: 30px; }
 .chat-float:active { transform: scale(0.92); }
 @media (hover: hover) and (pointer: fine) {
-  .chat-float:hover { transform: scale(1.08); }
+  .chat-float:hover { transform: scale(1.08); box-shadow: 0 18px 38px -12px hsl(var(--accent-bright) / 0.75), 0 2px 10px hsl(0 0% 0% / 0.4); }
 }
-.chat-float__icon-close { display: none; position: absolute; color: hsl(var(--bg)); }
-.chat-widget.is-open .chat-float { background: hsl(var(--accent-bright)); box-shadow: 0 12px 30px -10px hsl(var(--accent-bright) / 0.7); }
+.chat-float__icon-close { display: none; position: absolute; color: #04120d; }
+.chat-widget.is-open .chat-float { background: hsl(var(--accent-bright)); }
 .chat-widget.is-open .chat-float__icon-open { display: none; }
 .chat-widget.is-open .chat-float__icon-close { display: block; }
 .chat-widget.is-open .chat-float__badge { display: none; }
@@ -1079,7 +1074,7 @@ a.service-feature:active { transform: scale(0.98); }
 
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
-  .text-shine, .hero__scroll-track i, .marquee__track, .mini-shard, .wa-mock__typing i, .nav__status-dot::before, .wa-float__icon, .chat-float__icon-open { animation: none !important; }
+  .text-shine, .hero__scroll-track i, .marquee__track, .mini-shard, .wa-mock__typing i, .nav__status-dot::before { animation: none !important; }
   .demo-card, .demo-style-card { animation: none !important; opacity: 1 !important; }
   .node-card:hover, .node-card.is-active, .node-card:focus-visible { transform: translate(-50%, -50%) !important; }
   .browser-card:hover .browser-card__viewport video,
