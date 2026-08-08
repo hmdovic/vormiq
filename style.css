@@ -343,6 +343,14 @@ section { position: relative; padding: var(--section-pad) var(--edge); }
   position: relative; display: flex; flex-direction: column; text-align: left; isolation: isolate;
   border-radius: var(--r-xl); overflow: hidden; background: hsl(var(--surface)); border: 1px solid hsl(var(--border));
   transition: border-color 0.35s var(--ease), box-shadow 0.35s var(--ease);
+  /* auto-fit collapses empty tracks on a trailing partial row, which
+     stretches a lone last card to the full grid width instead of
+     matching its row-mates. Capping the card's own width (with
+     margin-inline: auto to center it in its track) keeps every card
+     the same size regardless of how many land in the final row —
+     harmless on full rows since the cap sits right at their natural
+     width, and never engages on single-column mobile. */
+  max-width: 26rem; margin-inline: auto; width: 100%;
 }
 .browser-card:active { transform: scale(0.98); }
 .browser-card:focus-visible { border-color: hsl(var(--accent-bright) / 0.45); box-shadow: 0 30px 60px -25px hsl(0 0% 0% / 0.6); }
