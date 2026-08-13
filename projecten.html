@@ -180,57 +180,6 @@
       </div>
     </a>
 
-    <button type="button" class="browser-card" data-reveal data-tilt data-open-video="alvero1.mp4" data-open-video-title="Alvero Atelier">
-      <div class="browser-card__chrome">
-        <span class="browser-card__dots"><span></span><span></span><span></span></span>
-        <span class="browser-card__url">Alvero Atelier</span>
-        <span class="browser-card__badge browser-card__badge--video"><span></span>AI Video</span>
-      </div>
-      <div class="browser-card__viewport">
-        <video src="alvero1.mp4" muted loop playsinline preload="none" data-lazy-video></video>
-        <span class="browser-card__play" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
-      </div>
-      <div class="browser-card__meta">
-        <span class="badge badge--accent">Atelier / Creatief</span>
-        <h3>Alvero Atelier</h3>
-        <p>Cinematische presentatie met grote video&rsquo;s en een fullscreen mockup.</p>
-      </div>
-    </button>
-
-    <button type="button" class="browser-card" data-reveal data-tilt data-open-video="salute1.mp4" data-open-video-title="Salut&eacute; Eyewear">
-      <div class="browser-card__chrome">
-        <span class="browser-card__dots"><span></span><span></span><span></span></span>
-        <span class="browser-card__url">Salut&eacute; Eyewear</span>
-        <span class="browser-card__badge browser-card__badge--video"><span></span>AI Video</span>
-      </div>
-      <div class="browser-card__viewport">
-        <video src="salute1.mp4" muted loop playsinline preload="none" data-lazy-video></video>
-        <span class="browser-card__play" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
-      </div>
-      <div class="browser-card__meta">
-        <span class="badge badge--accent">Fashion / Eyewear</span>
-        <h3>Salut&eacute; Eyewear</h3>
-        <p>Editoriale presentatie: veel zwart, veel witruimte, volle focus.</p>
-      </div>
-    </button>
-
-    <button type="button" class="browser-card" data-reveal data-tilt data-open-video="donvito.mp4" data-open-video-title="DonVito Fashion">
-      <div class="browser-card__chrome">
-        <span class="browser-card__dots"><span></span><span></span><span></span></span>
-        <span class="browser-card__url">DonVito Fashion</span>
-        <span class="browser-card__badge browser-card__badge--video"><span></span>AI Video</span>
-      </div>
-      <div class="browser-card__viewport">
-        <video src="donvito.mp4" muted loop playsinline preload="none" data-lazy-video></video>
-        <span class="browser-card__play" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
-      </div>
-      <div class="browser-card__meta">
-        <span class="badge badge--accent">Fashion</span>
-        <h3>DonVito Fashion</h3>
-        <p>Volledige breedte, autoplay video en luxe typografie.</p>
-      </div>
-    </button>
-
   </div>
 
   <div class="showcase__intro">
@@ -265,17 +214,65 @@
   </div>
 
   <div class="showcase__intro" style="margin-top: clamp(3.5rem, 7vw, 5rem);">
-    <h3 data-reveal>Nog niet eerder <span class="text-shine">getoonde beelden</span></h3>
+    <h3 data-reveal>AI Video &mdash; <span class="text-shine">eerder gemaakt</span></h3>
+    <p class="ai-content__lead" data-reveal>Echte UGC-stijl content, met AI als productiemiddel. Vertical, precies zoals het op TikTok en Instagram hoort te staan.</p>
   </div>
-  <div class="showcase-grid">
-    <button type="button" class="showcase-card" data-reveal data-tilt data-open-video="alvero2.mp4" data-open-video-title="Alvero Atelier">
-      <video src="alvero2.mp4" muted loop playsinline preload="none" data-lazy-video></video>
-      <span class="showcase-card__play" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
-    </button>
-    <button type="button" class="showcase-card" data-reveal data-tilt data-open-video="salute2.mp4" data-open-video-title="Salut&eacute; Eyewear">
-      <video src="salute2.mp4" muted loop playsinline preload="none" data-lazy-video></video>
-      <span class="showcase-card__play" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
-    </button>
+  <div class="phone-grid">
+    <div class="phone-card-item" data-reveal>
+      <button type="button" class="phone-card" data-tilt data-open-video="alvero1.mp4" data-open-video-title="Alvero Atelier">
+        <span class="phone-card__notch" aria-hidden="true"></span>
+        <span class="phone-card__screen">
+          <video src="alvero1.mp4" poster="alvero1-poster.jpg" muted loop playsinline preload="none" data-lazy-video></video>
+        </span>
+        <span class="phone-card__play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+        <span class="badge badge--violet phone-card__tag">AI Video</span>
+      </button>
+      <p class="phone-card-item__caption"><strong>Alvero Atelier</strong> &mdash; cinematische presentatie, atelier/creatief.</p>
+    </div>
+    <div class="phone-card-item" data-reveal>
+      <button type="button" class="phone-card" data-tilt data-open-video="salute1.mp4" data-open-video-title="Salut&eacute; Eyewear">
+        <span class="phone-card__notch" aria-hidden="true"></span>
+        <span class="phone-card__screen">
+          <video src="salute1.mp4" poster="salute1-poster.jpg" muted loop playsinline preload="none" data-lazy-video></video>
+        </span>
+        <span class="phone-card__play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+        <span class="badge badge--violet phone-card__tag">AI Video</span>
+      </button>
+      <p class="phone-card-item__caption"><strong>Salut&eacute; Eyewear</strong> &mdash; editoriale presentatie, fashion.</p>
+    </div>
+    <div class="phone-card-item" data-reveal>
+      <button type="button" class="phone-card" data-tilt data-open-video="donvito.mp4" data-open-video-title="DonVito Fashion">
+        <span class="phone-card__notch" aria-hidden="true"></span>
+        <span class="phone-card__screen">
+          <video src="donvito.mp4" poster="donvito-poster.jpg" muted loop playsinline preload="none" data-lazy-video></video>
+        </span>
+        <span class="phone-card__play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+        <span class="badge badge--violet phone-card__tag">AI Video</span>
+      </button>
+      <p class="phone-card-item__caption"><strong>DonVito Fashion</strong> &mdash; luxe typografie, volle breedte.</p>
+    </div>
+    <div class="phone-card-item" data-reveal>
+      <button type="button" class="phone-card" data-tilt data-open-video="alvero2.mp4" data-open-video-title="Alvero Atelier">
+        <span class="phone-card__notch" aria-hidden="true"></span>
+        <span class="phone-card__screen">
+          <video src="alvero2.mp4" poster="alvero2-poster.jpg" muted loop playsinline preload="none" data-lazy-video></video>
+        </span>
+        <span class="phone-card__play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+        <span class="badge badge--violet phone-card__tag">AI Video</span>
+      </button>
+      <p class="phone-card-item__caption"><strong>Alvero Atelier</strong> &mdash; extra beeld, nog niet eerder getoond.</p>
+    </div>
+    <div class="phone-card-item" data-reveal>
+      <button type="button" class="phone-card" data-tilt data-open-video="salute2.mp4" data-open-video-title="Salut&eacute; Eyewear">
+        <span class="phone-card__notch" aria-hidden="true"></span>
+        <span class="phone-card__screen">
+          <video src="salute2.mp4" poster="salute2-poster.jpg" muted loop playsinline preload="none" data-lazy-video></video>
+        </span>
+        <span class="phone-card__play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20"/></svg></span>
+        <span class="badge badge--violet phone-card__tag">AI Video</span>
+      </button>
+      <p class="phone-card-item__caption"><strong>Salut&eacute; Eyewear</strong> &mdash; extra beeld, nog niet eerder getoond.</p>
+    </div>
   </div>
 
   <div class="section-cta" data-reveal>
