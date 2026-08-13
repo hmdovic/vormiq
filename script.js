@@ -484,35 +484,118 @@
   }
 
   /* =========================================================
-     PROOF: wa-mock cards + stats
+     PROOF SLIDER: one review at a time, autoplay + swipe + typing replay
      ========================================================= */
-  if ("IntersectionObserver" in window) {
-    var proofObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          var el = entry.target;
-          var idx = Array.prototype.indexOf.call(el.parentNode.children, el);
-          var cardDelay = idx * 220;
-          setTimeout(function () {
-            el.classList.add("is-in");
-            var typeDelay = reduceMotion ? 0 : 750;
-            setTimeout(function () { el.classList.add("is-typed"); }, typeDelay);
-          }, cardDelay);
-          proofObserver.unobserve(el);
-        }
-      });
-    }, { threshold: 0, rootMargin: "0px 0px 30% 0px" });
-    document.querySelectorAll("[data-wa-mock]").forEach(function (el) { proofObserver.observe(el); });
-  }
+  (function () {
+    var slider = document.querySelector("[data-slider]");
+    if (!slider) return;
+    var track = slider.querySelector("[data-slider-track]");
+    var slides = Array.prototype.slice.call(slider.querySelectorAll("[data-slider-slide]"));
+    var dots = Array.prototype.slice.call(slider.querySelectorAll("[data-slider-dot]"));
+    var prevBtn = slider.querySelector("[data-slider-prev]");
+    var nextBtn = slider.querySelector("[data-slider-next]");
+    if (!track || !slides.length) return;
 
-  document.querySelectorAll("[data-wa-mock]").forEach(function (el) {
-    el.addEventListener("click", function (e) {
-      if (!el.classList.contains("is-in") || !el.classList.contains("is-typed")) return;
-      if (e.target.closest("a, button")) return;
-      el.classList.remove("is-typed");
-      window.setTimeout(function () { el.classList.add("is-typed"); }, reduceMotion ? 0 : 750);
+    var index = 0;
+    var autoplayId = null;
+    var typedTimeout = null;
+
+    function playTyping(slide) {
+      slide.classList.remove("is-typed");
+      window.clearTimeout(typedTimeout);
+      typedTimeout = window.setTimeout(function () {
+        slide.classList.add("is-typed");
+      }, reduceMotion ? 0 : 750);
+    }
+
+    function render(silent) {
+      track.style.transform = "translateX(-" + index * 100 + "%)";
+      slides.forEach(function (s, i) {
+        var active = i === index;
+        s.setAttribute("aria-hidden", active ? "false" : "true");
+        if ("inert" in s) s.inert = !active;
+        s.querySelectorAll("a, button").forEach(function (el) { el.tabIndex = active ? 0 : -1; });
+      });
+      dots.forEach(function (d, i) {
+        d.classList.toggle("is-active", i === index);
+        d.setAttribute("aria-selected", i === index ? "true" : "false");
+      });
+      if (!silent) playTyping(slides[index]);
+    }
+
+    function goTo(i) {
+      index = (i + slides.length) % slides.length;
+      render(false);
+    }
+
+    function startAutoplay() {
+      if (reduceMotion) return;
+      stopAutoplay();
+      autoplayId = window.setInterval(function () { goTo(index + 1); }, 6000);
+    }
+    function stopAutoplay() { window.clearInterval(autoplayId); }
+    function resetAutoplay() { stopAutoplay(); startAutoplay(); }
+
+    if (prevBtn) prevBtn.addEventListener("click", function () { goTo(index - 1); resetAutoplay(); });
+    if (nextBtn) nextBtn.addEventListener("click", function () { goTo(index + 1); resetAutoplay(); });
+    dots.forEach(function (d, i) {
+      d.addEventListener("click", function () { goTo(i); resetAutoplay(); });
     });
-  });
+    slides.forEach(function (s) {
+      s.addEventListener("click", function (e) {
+        if (e.target.closest("a, button")) return;
+        playTyping(s);
+      });
+    });
+
+    slider.addEventListener("mouseenter", stopAutoplay);
+    slider.addEventListener("mouseleave", startAutoplay);
+    slider.addEventListener("focusin", stopAutoplay);
+    slider.addEventListener("focusout", startAutoplay);
+
+    // Touch swipe — the track follows the finger 1:1 while dragging, then
+    // settles on whichever slide is closest once released.
+    var startX = null;
+    track.addEventListener("touchstart", function (e) {
+      startX = e.touches[0].clientX;
+      track.setAttribute("data-dragging", "");
+      stopAutoplay();
+    }, { passive: true });
+    track.addEventListener("touchmove", function (e) {
+      if (startX === null) return;
+      var dx = e.touches[0].clientX - startX;
+      track.style.transform = "translateX(calc(-" + index * 100 + "% + " + dx + "px))";
+    }, { passive: true });
+    track.addEventListener("touchend", function (e) {
+      if (startX === null) return;
+      var dx = e.changedTouches[0].clientX - startX;
+      track.removeAttribute("data-dragging");
+      startX = null;
+      if (dx < -40) goTo(index + 1);
+      else if (dx > 40) goTo(index - 1);
+      else render(true);
+      resetAutoplay();
+    });
+
+    // Starts once the section actually scrolls into view, matching the
+    // rest of the site's reveal-on-scroll pattern instead of running
+    // offscreen from page load.
+    if ("IntersectionObserver" in window) {
+      var startObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            render(false);
+            startAutoplay();
+            startObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.3 });
+      startObserver.observe(slider);
+    } else {
+      render(false);
+      startAutoplay();
+    }
+  })();
 
   /* =========================================================
      SHARD MOTIF — reused in section headers beyond the hero

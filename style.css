@@ -238,7 +238,6 @@ section { position: relative; padding: var(--section-pad) var(--edge); }
    HERO
    ========================================================= */
 .hero {
-  position: relative;
   min-height: 100svh; display: flex; flex-direction: column; align-items: center; justify-content: center;
   text-align: center; padding-top: 6rem; overflow: hidden;
 }
@@ -278,108 +277,6 @@ section { position: relative; padding: var(--section-pad) var(--edge); }
 .hero__scroll-track i { position: absolute; top: -100%; left: 0; width: 100%; height: 100%; background: hsl(var(--accent-bright)); animation: scrollDrip 2s var(--ease) infinite; }
 @keyframes scrollDrip { to { top: 100%; } }
 
-/* ---------- hero mockup composition ----------
-   Real client work (same screenshots used in the portfolio cards further
-   down the page), not invented UI — floated around the copy, never under
-   it. Every card carries a small "Live"/"AI Avatar" badge so it reads as
-   proof, not decoration. Visible at every width: 2 small chips on mobile
-   (own compact treatment, not a shrunk desktop layout), 2 mid-size on
-   tablet, the full 4-piece composition from 1220px up. Background images
-   are only declared inside their matching @media block, so a given card's
-   image is never requested below the width it's actually shown at. */
-.hero__mockups { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
-
-.hero-mockup {
-  position: absolute;
-  display: none;
-  border-radius: var(--r-lg);
-  overflow: hidden;
-  background: hsl(var(--surface));
-  border: 1px solid hsl(var(--border-strong));
-  box-shadow: 0 30px 70px -30px hsl(0 0% 0% / 0.7);
-  opacity: 0;
-  transform: rotate(var(--rot, 0deg));
-  transition: opacity 1.1s var(--ease-soft);
-  transition-delay: var(--delay, 0s);
-}
-.hero-mockup.is-in {
-  opacity: var(--op, 1);
-  animation: heroMockupFloat 11s ease-in-out calc(var(--delay, 0s) + 0.8s) infinite;
-}
-@keyframes heroMockupFloat {
-  0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
-  50% { transform: translateY(-12px) rotate(calc(var(--rot, 0deg) + 1deg)); }
-}
-.hero-mockup__chrome { display: flex; align-items: center; gap: 0.4rem; padding: 0.42rem 0.55rem; background: hsl(var(--bg-soft)); border-bottom: 1px solid hsl(var(--border)); }
-.hero-mockup__dots { display: flex; gap: 3px; flex-shrink: 0; }
-.hero-mockup__dots span { width: 5px; height: 5px; border-radius: 50%; background: hsl(var(--border-strong)); }
-.hero-mockup__url { font-family: var(--font-mono); font-size: 0.56rem; color: hsl(var(--text-faint)); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.hero-mockup__screen { width: 100%; height: 100%; background-repeat: no-repeat; background-size: cover; background-position: top center; background-color: hsl(var(--bg-soft)); }
-.hero-mockup--phone { border-radius: 1.15rem; padding-top: 0.5rem; }
-.hero-mockup--phone .hero-mockup__screen { border-radius: 0.8rem; margin: 0 0.35rem 0.35rem; height: calc(100% - 0.85rem); }
-.hero-mockup__notch { position: absolute; top: 0.42rem; left: 50%; translate: -50% 0; width: 22px; height: 3px; border-radius: var(--r-full); background: hsl(0 0% 100% / 0.16); z-index: 2; }
-
-/* Proof badge — same dot+label language as the portfolio's browser-card
-   badges (accent = live site, violet = AI-made content), so these read
-   as the same kind of verified proof, not a fresh decorative motif. */
-.hero-mockup__badge {
-  position: absolute; top: 0.45rem; right: 0.45rem; z-index: 3;
-  display: flex; align-items: center; gap: 0.28rem;
-  font-family: var(--font-mono); font-size: 0.52rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
-  color: hsl(var(--text)); background: hsl(0 0% 0% / 0.55); backdrop-filter: blur(4px);
-  padding: 0.2rem 0.4rem; border-radius: var(--r-full); line-height: 1;
-}
-.hero-mockup__badge span { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; background: hsl(var(--accent-bright)); box-shadow: 0 0 6px hsl(var(--accent-bright) / 0.9); }
-.hero-mockup__badge--ai span { background: hsl(var(--violet)); box-shadow: 0 0 6px hsl(var(--violet) / 0.9); }
-.hero-mockup__badge-label { display: none; }
-
-/* ---- mobile (default): 2 small chips, own compact treatment ----
-   top is a fixed rem, not a %, so it clears the fixed pill nav (measured
-   ~73px tall incl. its own top offset) regardless of hero height. */
-.hero-mockup--a, .hero-mockup--d {
-  display: block; top: 5.6rem; width: clamp(56px, 17vw, 78px); aspect-ratio: 4/5; border-radius: var(--r-md);
-}
-.hero-mockup--a { right: 5%; }
-.hero-mockup--d { left: 5%; }
-.hero-mockup--a .hero-mockup__chrome, .hero-mockup--d .hero-mockup__chrome,
-.hero-mockup--a .hero-mockup__notch, .hero-mockup--d .hero-mockup__notch { display: none; }
-.hero-mockup--a .hero-mockup__screen, .hero-mockup--d .hero-mockup__screen { background-image: var(--shot); }
-.hero-mockup--a .hero-mockup__badge, .hero-mockup--d .hero-mockup__badge { top: 0.32rem; right: 0.32rem; padding: 0.28rem; }
-
-@media (min-width: 561px) and (max-width: 900px) {
-  /* small tablet / large phone: same 2 cards, a touch more room to breathe.
-     Badge label stays hidden (dot only) here too — even the larger 96px
-     card is too narrow for "AI Avatar" without wrapping or clipping. */
-  .hero-mockup--a, .hero-mockup--d { width: clamp(72px, 12vw, 96px); top: 5.8rem; }
-}
-
-@media (min-width: 901px) {
-  .hero-mockup { display: block; }
-  .hero-mockup--browser { aspect-ratio: 16/10.5; border-radius: var(--r-lg); }
-  .hero-mockup--phone { aspect-ratio: 9/18; }
-  .hero-mockup--a .hero-mockup__chrome, .hero-mockup--b .hero-mockup__chrome { display: flex; }
-  .hero-mockup--c .hero-mockup__notch, .hero-mockup--d .hero-mockup__notch { display: block; }
-  /* Label text only on the two browser cards — wide enough (130px+) to
-     hold "Live" without crowding. The phone cards stay at ~60-90px even
-     on desktop, too narrow for "AI Avatar"/"Live" without clipping, so
-     they stay dot-only at every breakpoint, not just on mobile. */
-  .hero-mockup--a .hero-mockup__badge-label, .hero-mockup--b .hero-mockup__badge-label { display: inline; }
-
-  .hero-mockup--a { top: 14%; right: 5%; width: clamp(160px, 15vw, 260px); border-radius: var(--r-lg); z-index: 2; }
-  .hero-mockup--b { top: 66%; left: 4%; width: clamp(130px, 11vw, 210px); aspect-ratio: 16/10.5; border-radius: var(--r-lg); z-index: 1; }
-  .hero-mockup--c { top: 57%; right: 9%; width: clamp(56px, 5vw, 88px); aspect-ratio: 9/18; border-radius: 1.15rem; z-index: 3; }
-  .hero-mockup--d { top: 15%; left: 7%; width: clamp(60px, 5.2vw, 96px); aspect-ratio: 9/18; border-radius: 1.15rem; z-index: 2; }
-
-  .hero-mockup--a .hero-mockup__screen,
-  .hero-mockup--b .hero-mockup__screen,
-  .hero-mockup--c .hero-mockup__screen,
-  .hero-mockup--d .hero-mockup__screen { background-image: var(--shot); }
-}
-@media (min-width: 901px) and (max-width: 1220px) {
-  .hero-mockup--c, .hero-mockup--d { display: none; }
-  .hero-mockup--a { top: 12%; right: 2%; width: clamp(150px, 16vw, 210px); }
-  .hero-mockup--b { top: 68%; left: 2%; width: clamp(120px, 12vw, 175px); }
-}
 
 .marquee { position: relative; z-index: 1; border-block: 1px solid hsl(var(--border)); overflow: hidden; padding-block: 1.1rem; background: hsl(var(--bg-soft) / 0.6); }
 .marquee__track { display: flex; gap: 0.9rem; white-space: nowrap; width: max-content; animation: marquee 26s linear infinite; }
@@ -610,19 +507,48 @@ section { position: relative; padding: var(--section-pad) var(--edge); }
 }
 
 /* =========================================================
-   PROOF / TESTIMONIALS
+   PROOF / TESTIMONIALS — a one-at-a-time review slider
    ========================================================= */
-.proof__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 72rem; margin: 0 auto clamp(3.5rem, 6vw, 5rem); position: relative; z-index: 1; }
+.proof__slider { position: relative; max-width: 27rem; margin: 0 auto clamp(3.5rem, 6vw, 5rem); z-index: 1; }
+.proof__viewport { overflow: hidden; }
+.proof__track { display: flex; transition: transform 0.65s var(--ease-soft); }
+.proof__track[data-dragging] { transition: none; }
 
 /* ---------- wa-mock: a small living WhatsApp-style card, not a screenshot ---------- */
 .wa-mock {
-  display: flex; flex-direction: column; border-radius: var(--r-xl); overflow: hidden; cursor: pointer;
+  flex: 0 0 100%; min-width: 0; display: flex; flex-direction: column; border-radius: var(--r-xl); overflow: hidden; cursor: pointer;
   background: hsl(var(--surface)); border: 1px solid hsl(var(--border));
-  opacity: 0; transform: translateY(50px) scale(0.96); transition: opacity 0.8s var(--ease), transform 0.4s var(--ease), border-color var(--dur-1);
+  transition: border-color var(--dur-1);
 }
-.wa-mock.is-in { opacity: 1; transform: translateY(0) scale(1); }
 @media (hover: hover) and (pointer: fine) {
-  .wa-mock.is-in:hover { transform: translateY(-4px); border-color: hsl(var(--accent-bright) / 0.4); }
+  .wa-mock:hover { border-color: hsl(var(--accent-bright) / 0.4); }
+}
+
+/* Arrows — same ghost-button language as .btn--ghost, sized down and
+   pinned to the slider's own edges rather than the section's. */
+.proof__arrow {
+  position: absolute; top: 50%; translate: 0 -50%; z-index: 2;
+  width: 2.6rem; height: 2.6rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: hsl(var(--surface) / 0.9); border: 1px solid hsl(var(--border-strong)); color: hsl(var(--text));
+  backdrop-filter: blur(8px); transition: transform var(--dur-1) var(--ease-soft), border-color var(--dur-1), background var(--dur-1);
+}
+.proof__arrow--prev { left: -1.3rem; }
+.proof__arrow--next { right: -1.3rem; }
+.proof__arrow:active { transform: translate(0, -50%) scale(0.92); }
+@media (hover: hover) and (pointer: fine) {
+  .proof__arrow:hover { border-color: hsl(var(--accent-bright) / 0.6); background: hsl(var(--surface-2)); }
+}
+@media (max-width: 640px) {
+  .proof__arrow { width: 2.25rem; height: 2.25rem; }
+  .proof__arrow--prev { left: -0.6rem; }
+  .proof__arrow--next { right: -0.6rem; }
+}
+
+.proof__dots { display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: 1.6rem; }
+.proof__dot { width: 8px; height: 8px; border-radius: 50%; background: hsl(var(--border-strong)); transition: width var(--dur-2) var(--ease-soft), background var(--dur-1); }
+.proof__dot.is-active { width: 22px; border-radius: var(--r-full); background: hsl(var(--accent-bright)); }
+@media (hover: hover) and (pointer: fine) {
+  .proof__dot:not(.is-active):hover { background: hsl(var(--text-faint)); }
 }
 
 .wa-mock__bar { display: flex; align-items: center; gap: 0.65rem; padding: 0.85rem 1.1rem; background: linear-gradient(120deg, hsl(var(--accent-deep)), hsl(var(--accent))); }
@@ -1122,7 +1048,6 @@ a.service-feature:active { transform: scale(0.98); }
   .nav__links { display: none; }
   .nav__toggle { display: flex; }
   .about { grid-template-columns: 1fr; }
-  .proof__grid { grid-template-columns: 1fr; }
   .proof__stats { grid-template-columns: repeat(2, 1fr); }
   .constellation { aspect-ratio: 620/1000; }
   .node-card { width: clamp(130px, 40vw, 170px); padding: 0.85rem 0.9rem; }
@@ -1142,7 +1067,8 @@ a.service-feature:active { transform: scale(0.98); }
 
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
-  .text-shine, .hero__scroll-track i, .marquee__track, .mini-shard, .wa-mock__typing i, .nav__status-dot::before, .hero-mockup { animation: none !important; }
+  .text-shine, .hero__scroll-track i, .marquee__track, .mini-shard, .wa-mock__typing i, .nav__status-dot::before { animation: none !important; }
+  .proof__track { transition: none !important; }
   .demo-card, .demo-style-card { animation: none !important; opacity: 1 !important; }
   .node-card:hover, .node-card.is-active, .node-card:focus-visible { transform: translate(-50%, -50%) !important; }
   .browser-card:hover .browser-card__viewport video,
