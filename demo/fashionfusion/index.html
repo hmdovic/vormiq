@@ -330,6 +330,18 @@ input, textarea { font: inherit; color: inherit; }
 .filter-pill.is-active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 
 .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: clamp(1.2rem, 2.5vw, 1.8rem); }
+/* minmax(230px,1fr) can't fit two columns under ~500px, so phones fell
+   back to one big photo card after another — a plain webshop scroll.
+   Force two columns instead; smaller cards, same information. */
+@media (max-width: 560px) {
+  .product-grid { grid-template-columns: repeat(2, 1fr); gap: 0.7rem 0.6rem; }
+  .product-card__name { font-size: 0.8rem; line-height: 1.25; }
+  .product-card__cat { font-size: 0.6rem; }
+  .product-card__price { font-size: 0.8rem; }
+  .product-card__meta { padding-top: 0.6rem; }
+  .product-card__tag { font-size: 0.56rem; padding: 0.24rem 0.5rem; top: 0.5rem; left: 0.5rem; }
+  .product-card__quick { font-size: 0.6rem; padding: 0.5rem; bottom: 0.5rem; left: 0.5rem; right: 0.5rem; }
+}
 
 .product-card {
   position: relative; display: flex; flex-direction: column; cursor: pointer;
@@ -489,11 +501,14 @@ input, textarea { font: inherit; color: inherit; }
 /* =========================================================
    PORTFOLIO / EDITORIAL GALLERY
    ========================================================= */
-.gallery { display: grid; grid-template-columns: repeat(6, 1fr); gap: clamp(0.8rem, 2vw, 1.4rem); }
+/* Mobile is its own layout, not the desktop grid stacked to one column
+   — six full-width photos in a row reads as a generic webshop scroll.
+   Two columns keep it a real mosaic at every width. */
+.gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(0.6rem, 2vw, 1.4rem); }
 .gallery__item {
   position: relative; border-radius: 4px; overflow: hidden; background: var(--swatch, var(--charcoal)); color: var(--paper);
-  display: flex; align-items: flex-end; padding: 1.4rem;
-  grid-column: span 6; aspect-ratio: 4/5;
+  display: flex; align-items: flex-end; padding: 1.1rem;
+  grid-column: span 1; aspect-ratio: 3/4;
 }
 .gallery__item svg { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-58%); width: 42%; opacity: 0.85; transition: transform 0.7s var(--ease-soft); }
 .gallery__item:hover svg { transform: translate(-50%,-62%) scale(1.05); }
@@ -504,6 +519,7 @@ input, textarea { font: inherit; color: inherit; }
 .gallery__item-label .eyebrow { color: rgba(240,237,229,0.65); }
 .gallery__item-label h4 { font-family: var(--font-display); font-size: clamp(1.3rem, 2.6vw, 1.9rem); text-transform: uppercase; margin-top: 0.3rem; }
 @media (min-width: 700px) {
+  .gallery { grid-template-columns: repeat(6, 1fr); }
   .gallery__item:nth-child(1) { grid-column: span 4; aspect-ratio: 3/4; }
   .gallery__item:nth-child(2) { grid-column: span 2; aspect-ratio: 3/4; }
   .gallery__item:nth-child(3) { grid-column: span 2; aspect-ratio: 1/1; }
@@ -526,14 +542,18 @@ input, textarea { font: inherit; color: inherit; }
    ABOUT
    ========================================================= */
 .about { display: flex; flex-direction: column; gap: 2.5rem; }
-.about__visual { position: relative; aspect-ratio: 21/9; border-radius: 4px; overflow: hidden; }
-.about__visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.about__visual::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,18,14,0.18), rgba(20,18,14,0.02) 55%); }
+/* A single full-width banner reads as a webshop hero strip. Two photos,
+   offset in height, side by side at every width (never stacked, even
+   on phones) — a real editorial pair instead of one flat image. */
+.about__visual { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(0.6rem, 2vw, 1rem); align-items: start; margin-bottom: clamp(2rem, 5vw, 3rem); }
+.about__photo { position: relative; border-radius: 4px; overflow: hidden; aspect-ratio: 4/5; }
+.about__photo--b { margin-top: 14%; }
+.about__photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.about__photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,18,14,0.16), rgba(20,18,14,0.02) 55%); }
 .about__grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
 .about__title { font-size: clamp(2rem, 4.4vw, 3.1rem); max-width: 20ch; }
 .about__body { display: flex; flex-direction: column; gap: 1.1rem; font-size: 1rem; line-height: 1.7; color: var(--charcoal); max-width: 34rem; }
 @media (min-width: 900px) { .about__grid { grid-template-columns: 1fr 1fr; align-items: start; } }
-@media (max-width: 700px) { .about__visual { aspect-ratio: 4/5; } }
 
 /* =========================================================
    CONTACT
@@ -753,10 +773,6 @@ input, textarea { font: inherit; color: inherit; }
      and was overflowing the 390px bar alongside the search icon + hamburger. */
   .nav__links, .nav__right .btn--solid { display: none; }
   .nav__toggle { display: flex; }
-}
-@media (max-width: 780px) {
-  .gallery { grid-template-columns: repeat(2, 1fr); }
-  .gallery__item { grid-column: span 2 !important; aspect-ratio: 4/5 !important; }
 }
 @media (max-width: 640px) {
   .foot__top { flex-direction: column; }
@@ -989,7 +1005,10 @@ input, textarea { font: inherit; color: inherit; }
 <!-- ================= ABOUT ================= -->
 <section class="section section--ink" id="over-ons">
   <div class="about">
-    <div class="about__visual" data-reveal><img src="img/ff-thrift-browse.jpg" alt="" loading="lazy"></div>
+    <div class="about__visual" data-reveal>
+      <div class="about__photo about__photo--a"><img src="img/ff-thrift-browse.jpg" alt="" loading="lazy"></div>
+      <div class="about__photo about__photo--b"><img src="img/ff-rack-minimal.jpg" alt="" loading="lazy"></div>
+    </div>
     <div class="about__grid">
       <div>
         <span class="eyebrow" data-reveal>Over ons</span>
