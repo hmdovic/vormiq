@@ -439,6 +439,16 @@ section { position: relative; padding: var(--section-pad) var(--edge); }
   position: absolute; top: 0.75rem; left: 0.75rem; z-index: 2;
   border-color: hsl(var(--violet) / 0.5); color: hsl(var(--violet)); background: hsl(var(--bg) / 0.75);
 }
+/* Real platform stat, not a made-up number — only on the one piece we
+   actually have analytics for. Bottom-right so it never fights the tag. */
+.ai-showcase-item__stat {
+  position: absolute; bottom: 0.75rem; right: 0.75rem; z-index: 2;
+  display: flex; align-items: center; gap: 0.3rem;
+  font-family: var(--font-mono); font-size: 0.68rem; font-weight: 600; color: #fff;
+  background: hsl(0 0% 0% / 0.62); backdrop-filter: blur(6px);
+  padding: 0.3rem 0.55rem; border-radius: var(--r-full); line-height: 1;
+}
+.ai-showcase-item__stat svg { flex-shrink: 0; }
 .ai-showcase-item__caption { font-size: 0.85rem; color: hsl(var(--text-dim)); line-height: 1.5; }
 .badge--violet { border-color: hsl(var(--violet) / 0.5); color: hsl(var(--violet)); background: hsl(var(--violet) / 0.1); }
 
