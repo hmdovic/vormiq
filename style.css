@@ -423,6 +423,20 @@ section { position: relative; padding: var(--section-pad) var(--edge); }
   .showcase-card:hover .showcase-card__play { opacity: 1; transform: scale(1); }
 }
 
+/* AI content section — reuses the showcase-card video pattern, but
+   each one gets a visible corner tag + caption instead of staying
+   anonymous, since the whole point here is to make the AI-content
+   service legible at a glance, not just prove it works on click. */
+.ai-content__lead { color: hsl(var(--text-dim)); max-width: 34rem; }
+.ai-showcase-grid { align-items: start; }
+.ai-showcase-item { display: flex; flex-direction: column; gap: 0.85rem; max-width: 260px; margin-inline: auto; width: 100%; }
+.ai-showcase-item__tag {
+  position: absolute; top: 0.75rem; left: 0.75rem; z-index: 2;
+  border-color: hsl(var(--violet) / 0.5); color: hsl(var(--violet)); background: hsl(var(--bg) / 0.75);
+}
+.ai-showcase-item__caption { font-size: 0.85rem; color: hsl(var(--text-dim)); line-height: 1.5; }
+.badge--violet { border-color: hsl(var(--violet) / 0.5); color: hsl(var(--violet)); background: hsl(var(--violet) / 0.1); }
+
 .video-modal {
   position: fixed; inset: 0; z-index: 70; display: flex; align-items: center; justify-content: center; padding: 2rem;
   background: hsl(var(--bg) / 0.92); backdrop-filter: blur(14px);
