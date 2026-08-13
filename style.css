@@ -279,16 +279,19 @@ section { position: relative; padding: var(--section-pad) var(--edge); }
 @keyframes scrollDrip { to { top: 100%; } }
 
 /* ---------- hero mockup composition ----------
-   Real client work (same screenshots used in the portfolio browser-cards),
-   not invented UI — floated at low opacity/z-index around the copy, never
-   under it. Hidden below 901px: the desktop peripheral space this relies
-   on doesn't exist on tablet/mobile, so the hero reverts to the clean
-   text-only layout instead of a cramped shrink. Background images are only
-   declared inside the matching @media block so phones never fetch them. */
-.hero__mockups { position: absolute; inset: 0; z-index: 1; pointer-events: none; display: none; }
+   Real client work (same screenshots used in the portfolio cards further
+   down the page), not invented UI — floated around the copy, never under
+   it. Every card carries a small "Live"/"AI Avatar" badge so it reads as
+   proof, not decoration. Visible at every width: 2 small chips on mobile
+   (own compact treatment, not a shrunk desktop layout), 2 mid-size on
+   tablet, the full 4-piece composition from 1220px up. Background images
+   are only declared inside their matching @media block, so a given card's
+   image is never requested below the width it's actually shown at. */
+.hero__mockups { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
 
 .hero-mockup {
   position: absolute;
+  display: none;
   border-radius: var(--r-lg);
   overflow: hidden;
   background: hsl(var(--surface));
@@ -316,22 +319,65 @@ section { position: relative; padding: var(--section-pad) var(--edge); }
 .hero-mockup--phone .hero-mockup__screen { border-radius: 0.8rem; margin: 0 0.35rem 0.35rem; height: calc(100% - 0.85rem); }
 .hero-mockup__notch { position: absolute; top: 0.42rem; left: 50%; translate: -50% 0; width: 22px; height: 3px; border-radius: var(--r-full); background: hsl(0 0% 100% / 0.16); z-index: 2; }
 
-@media (min-width: 901px) {
-  .hero__mockups { display: block; }
-  .hero-mockup--browser { aspect-ratio: 16/10.5; }
-  .hero-mockup--phone { aspect-ratio: 9/18; }
+/* Proof badge — same dot+label language as the portfolio's browser-card
+   badges (accent = live site, violet = AI-made content), so these read
+   as the same kind of verified proof, not a fresh decorative motif. */
+.hero-mockup__badge {
+  position: absolute; top: 0.45rem; right: 0.45rem; z-index: 3;
+  display: flex; align-items: center; gap: 0.28rem;
+  font-family: var(--font-mono); font-size: 0.52rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+  color: hsl(var(--text)); background: hsl(0 0% 0% / 0.55); backdrop-filter: blur(4px);
+  padding: 0.2rem 0.4rem; border-radius: var(--r-full); line-height: 1;
+}
+.hero-mockup__badge span { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; background: hsl(var(--accent-bright)); box-shadow: 0 0 6px hsl(var(--accent-bright) / 0.9); }
+.hero-mockup__badge--ai span { background: hsl(var(--violet)); box-shadow: 0 0 6px hsl(var(--violet) / 0.9); }
+.hero-mockup__badge-label { display: none; }
 
-  .hero-mockup--a { top: 16%; right: 6%; width: clamp(160px, 15vw, 260px); z-index: 2; }
-  .hero-mockup--b { top: 66%; left: 4%; width: clamp(130px, 11vw, 210px); z-index: 1; }
-  .hero-mockup--c { top: 60%; right: 10%; width: clamp(58px, 5vw, 92px); z-index: 3; }
+/* ---- mobile (default): 2 small chips, own compact treatment ----
+   top is a fixed rem, not a %, so it clears the fixed pill nav (measured
+   ~73px tall incl. its own top offset) regardless of hero height. */
+.hero-mockup--a, .hero-mockup--d {
+  display: block; top: 5.6rem; width: clamp(56px, 17vw, 78px); aspect-ratio: 4/5; border-radius: var(--r-md);
+}
+.hero-mockup--a { right: 5%; }
+.hero-mockup--d { left: 5%; }
+.hero-mockup--a .hero-mockup__chrome, .hero-mockup--d .hero-mockup__chrome,
+.hero-mockup--a .hero-mockup__notch, .hero-mockup--d .hero-mockup__notch { display: none; }
+.hero-mockup--a .hero-mockup__screen, .hero-mockup--d .hero-mockup__screen { background-image: var(--shot); }
+.hero-mockup--a .hero-mockup__badge, .hero-mockup--d .hero-mockup__badge { top: 0.32rem; right: 0.32rem; padding: 0.28rem; }
+
+@media (min-width: 561px) and (max-width: 900px) {
+  /* small tablet / large phone: same 2 cards, a touch more room to breathe.
+     Badge label stays hidden (dot only) here too — even the larger 96px
+     card is too narrow for "AI Avatar" without wrapping or clipping. */
+  .hero-mockup--a, .hero-mockup--d { width: clamp(72px, 12vw, 96px); top: 5.8rem; }
+}
+
+@media (min-width: 901px) {
+  .hero-mockup { display: block; }
+  .hero-mockup--browser { aspect-ratio: 16/10.5; border-radius: var(--r-lg); }
+  .hero-mockup--phone { aspect-ratio: 9/18; }
+  .hero-mockup--a .hero-mockup__chrome, .hero-mockup--b .hero-mockup__chrome { display: flex; }
+  .hero-mockup--c .hero-mockup__notch, .hero-mockup--d .hero-mockup__notch { display: block; }
+  /* Label text only on the two browser cards — wide enough (130px+) to
+     hold "Live" without crowding. The phone cards stay at ~60-90px even
+     on desktop, too narrow for "AI Avatar"/"Live" without clipping, so
+     they stay dot-only at every breakpoint, not just on mobile. */
+  .hero-mockup--a .hero-mockup__badge-label, .hero-mockup--b .hero-mockup__badge-label { display: inline; }
+
+  .hero-mockup--a { top: 14%; right: 5%; width: clamp(160px, 15vw, 260px); border-radius: var(--r-lg); z-index: 2; }
+  .hero-mockup--b { top: 66%; left: 4%; width: clamp(130px, 11vw, 210px); aspect-ratio: 16/10.5; border-radius: var(--r-lg); z-index: 1; }
+  .hero-mockup--c { top: 57%; right: 9%; width: clamp(56px, 5vw, 88px); aspect-ratio: 9/18; border-radius: 1.15rem; z-index: 3; }
+  .hero-mockup--d { top: 15%; left: 7%; width: clamp(60px, 5.2vw, 96px); aspect-ratio: 9/18; border-radius: 1.15rem; z-index: 2; }
 
   .hero-mockup--a .hero-mockup__screen,
   .hero-mockup--b .hero-mockup__screen,
-  .hero-mockup--c .hero-mockup__screen { background-image: var(--shot); }
+  .hero-mockup--c .hero-mockup__screen,
+  .hero-mockup--d .hero-mockup__screen { background-image: var(--shot); }
 }
 @media (min-width: 901px) and (max-width: 1220px) {
-  .hero-mockup--c { display: none; }
-  .hero-mockup--a { top: 13%; right: 2%; width: clamp(150px, 16vw, 210px); }
+  .hero-mockup--c, .hero-mockup--d { display: none; }
+  .hero-mockup--a { top: 12%; right: 2%; width: clamp(150px, 16vw, 210px); }
   .hero-mockup--b { top: 68%; left: 2%; width: clamp(120px, 12vw, 175px); }
 }
 
