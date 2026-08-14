@@ -755,9 +755,14 @@ input, textarea { font: inherit; color: inherit; }
 }
 .bottom-nav__item.is-active { color: var(--ink); }
 .bottom-nav__item svg { width: 20px; height: 20px; }
-.bottom-nav__item--fusion { color: var(--paper); }
-.bottom-nav__item--fusion .bottom-nav__fdot { width: 34px; height: 34px; border-radius: 50%; background: var(--ink); display: flex; align-items: center; justify-content: center; margin-bottom: 0.1rem; }
-.bottom-nav__item--fusion .bottom-nav__fdot svg { color: var(--accent); width: 17px; height: 17px; }
+/* This was copied from the desktop launcher, which sits on a dark
+   background — var(--paper) text there is correct. The bottom bar
+   itself is light/paper-colored, so paper-on-paper made the "Fusion"
+   label all but invisible. Match the other three labels instead. */
+.bottom-nav__item--fusion { color: var(--stone); }
+.bottom-nav__item--fusion.is-active { color: var(--ink); }
+.bottom-nav__item--fusion .bottom-nav__fdot { width: 26px; height: 26px; border-radius: 50%; background: var(--ink); display: flex; align-items: center; justify-content: center; margin-bottom: 0.1rem; }
+.bottom-nav__item--fusion .bottom-nav__fdot svg { color: var(--accent); width: 13px; height: 13px; }
 
 @media (max-width: 720px) {
   .bottom-nav { display: flex; }
