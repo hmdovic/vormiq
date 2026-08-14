@@ -8,7 +8,7 @@
   /* Respect prefers-reduced-motion: the hero devices video autoplays via
      the HTML attribute (needed for iOS/Safari autoplay to work at all),
      but that attribute ignores the OS motion preference, so stop it here. */
-  var heroVideo = document.querySelector(".hero__visual-video");
+  var heroVideo = document.querySelector(".hero__bg-video");
   if (heroVideo && reduceMotion) heroVideo.pause();
 
   /* =========================================================
