@@ -6,6 +6,7 @@
 <title>Fashion Fusion — Tweedehands fashion met karakter</title>
 <meta name="description" content="Ontdek tweedehands fashion van €10 tot €100 bij Fashion Fusion. Ontdek unieke items en neem eenvoudig contact op." />
 <meta name="robots" content="noindex, nofollow" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%227%22%20fill%3D%22%2314120E%22/%3E%3Cg%20transform%3D%22translate%284%2C4%29%22%20stroke%3D%22%23FF3B2A%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20fill%3D%22none%22%3E%3Cpath%20d%3D%22M12%203v3M12%2018v3M4.2%204.2l2.1%202.1M17.7%2017.7l2.1%202.1M3%2012h3M18%2012h3M4.2%2019.8l2.1-2.1M17.7%206.3l2.1-2.1%22/%3E%3C/g%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
@@ -174,18 +175,17 @@ input, textarea { font: inherit; color: inherit; }
 .nav__mark-accent { color: var(--accent); }
 /* Same mark used for the Fusion assistant everywhere else (launcher,
    bottom nav) — repeated here so the logo itself doubles as a preview
-   of that mark, not a separate unrelated symbol. */
+   of that mark, not a separate unrelated symbol. Bare red glyph, no
+   circle backing — sits after the wordmark like a punctuation mark. */
 .nav__mark-icon {
-  width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
-  background: var(--ink); color: var(--accent);
+  width: 17px; height: 17px; flex-shrink: 0; color: var(--accent);
   display: flex; align-items: center; justify-content: center;
   transition: width var(--dur-2) var(--ease), height var(--dur-2) var(--ease);
 }
-.nav__mark-icon svg { width: 13px; height: 13px; }
-.nav.is-scrolled .nav__mark-icon { width: 22px; height: 22px; }
-.foot__mark { display: flex; align-items: center; gap: 0.6rem; }
-.foot__mark .nav__mark-icon { width: 30px; height: 30px; }
-.foot__mark .nav__mark-icon svg { width: 15px; height: 15px; }
+.nav__mark-icon svg { width: 100%; height: 100%; }
+.nav.is-scrolled .nav__mark-icon { width: 14px; height: 14px; }
+.foot__mark { display: flex; align-items: center; gap: 0.5rem; }
+.foot__mark .nav__mark-icon { width: 18px; height: 18px; }
 .nav__links { display: flex; align-items: center; gap: 2.1rem; }
 .nav__links a {
   position: relative; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.05em;
@@ -834,8 +834,8 @@ input, textarea { font: inherit; color: inherit; }
 
 <nav class="nav" data-nav>
   <a href="#top" class="nav__mark">
-    <span class="nav__mark-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></span>
     Fashion <span class="nav__mark-accent">Fusion</span>
+    <span class="nav__mark-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></span>
   </a>
   <div class="nav__links" aria-label="Hoofdnavigatie">
     <a href="#shop">Shop</a>
@@ -1094,8 +1094,8 @@ input, textarea { font: inherit; color: inherit; }
   <div class="foot__top">
     <div>
       <div class="foot__mark">
-        <span class="nav__mark-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></span>
         Fashion <span class="nav__mark-accent">Fusion</span>
+        <span class="nav__mark-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></span>
       </div>
       <p class="foot__tag">Tweedehands fashion met karakter. Amsterdam. &euro;10&ndash;&euro;100.</p>
     </div>
@@ -1461,6 +1461,15 @@ input, textarea { font: inherit; color: inherit; }
       closePanel("fusion");
       closePanel("search");
       closeAppt();
+      // Every other overlay closes on Escape — the mobile menu didn't,
+      // the one inconsistent one on the whole site.
+      var navMobileEl = document.querySelector("[data-nav-mobile]");
+      var navToggleEl = document.querySelector("[data-nav-toggle]");
+      if (navMobileEl && navMobileEl.classList.contains("is-open")) {
+        navMobileEl.classList.remove("is-open");
+        if (navToggleEl) { navToggleEl.classList.remove("is-open"); navToggleEl.setAttribute("aria-expanded", "false"); }
+        document.documentElement.style.overflow = "";
+      }
     }
   });
 
