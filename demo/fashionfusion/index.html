@@ -162,6 +162,7 @@ input, textarea { font: inherit; color: inherit; }
   border-bottom: 1px solid var(--line);
 }
 .nav__mark {
+  display: inline-flex; align-items: center; gap: 0.6rem;
   font-family: var(--font-display); font-size: clamp(1.1rem, 2vw, 1.3rem);
   text-transform: uppercase; letter-spacing: -0.01em; flex-shrink: 0;
   transition: font-size var(--dur-2) var(--ease);
@@ -171,6 +172,20 @@ input, textarea { font: inherit; color: inherit; }
    "Fusion" into the same accent used for pricing and the launch dot
    elsewhere, so the wordmark itself carries the brand color. */
 .nav__mark-accent { color: var(--accent); }
+/* Same mark used for the Fusion assistant everywhere else (launcher,
+   bottom nav) — repeated here so the logo itself doubles as a preview
+   of that mark, not a separate unrelated symbol. */
+.nav__mark-icon {
+  width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+  background: var(--ink); color: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  transition: width var(--dur-2) var(--ease), height var(--dur-2) var(--ease);
+}
+.nav__mark-icon svg { width: 13px; height: 13px; }
+.nav.is-scrolled .nav__mark-icon { width: 22px; height: 22px; }
+.foot__mark { display: flex; align-items: center; gap: 0.6rem; }
+.foot__mark .nav__mark-icon { width: 30px; height: 30px; }
+.foot__mark .nav__mark-icon svg { width: 15px; height: 15px; }
 .nav__links { display: flex; align-items: center; gap: 2.1rem; }
 .nav__links a {
   position: relative; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.05em;
@@ -309,15 +324,6 @@ input, textarea { font: inherit; color: inherit; }
 }
 
 /* =========================================================
-   MARQUEE
-   ========================================================= */
-.marquee { position: relative; z-index: 1; overflow: hidden; background: var(--ink); border-block: 1px solid var(--charcoal-2); padding-block: 1rem; }
-.marquee__track { display: flex; gap: 2.2rem; width: max-content; animation: marquee 24s linear infinite; }
-.marquee__track span { font-family: var(--font-display); font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.01em; color: var(--paper); display: flex; align-items: center; gap: 2.2rem; }
-.marquee__track span i { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
-@keyframes marquee { to { transform: translateX(-50%); } }
-
-/* =========================================================
    SHOP
    ========================================================= */
 .shop__filters { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: clamp(2rem, 4vw, 3rem); }
@@ -345,7 +351,16 @@ input, textarea { font: inherit; color: inherit; }
 
 .product-card {
   position: relative; display: flex; flex-direction: column; cursor: pointer;
+  padding-top: 16px;
 }
+/* Every card hangs from a small wire hook — the thing that's
+   physically true of a piece of secondhand clothing on a rack,
+   not a decorative flourish. */
+.product-card__hook {
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 15px; height: 15px; color: var(--stone); z-index: 3; pointer-events: none;
+}
+.product-card__hook svg { display: block; width: 100%; height: 100%; }
 .product-card__frame {
   position: relative; aspect-ratio: 3/4; border-radius: 4px; overflow: hidden;
   background: var(--swatch, var(--stone-soft));
@@ -611,6 +626,29 @@ input, textarea { font: inherit; color: inherit; }
 .fusion-launcher__label { font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; }
 .fusion-launcher.is-hidden { transform: translateY(140%); }
 
+/* Small "1 new" nudge on both Fusion triggers — a brief tremor every
+   few seconds, not constant motion, so it reads as a nudge rather
+   than nagging. Clears itself once the assistant is actually opened. */
+.fusion-notif {
+  position: absolute; top: -3px; right: -3px; z-index: 3;
+  min-width: 16px; height: 16px; padding: 0 3px; border-radius: 999px;
+  background: var(--accent); color: #fff; border: 1.5px solid var(--paper);
+  font-family: var(--font-mono); font-size: 0.58rem; font-weight: 700; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  animation: notifShiver 3.6s ease-in-out infinite;
+  transition: opacity var(--dur-1) var(--ease), transform var(--dur-1) var(--ease);
+}
+.fusion-notif.is-read { opacity: 0; transform: scale(0.4); pointer-events: none; }
+@keyframes notifShiver {
+  0%, 85%, 100% { transform: rotate(0deg); }
+  87% { transform: rotate(-10deg); }
+  89% { transform: rotate(9deg); }
+  91% { transform: rotate(-7deg); }
+  93% { transform: rotate(5deg); }
+  95% { transform: rotate(0deg); }
+}
+@media (prefers-reduced-motion: reduce) { .fusion-notif { animation: none; } }
+
 .fusion-panel {
   position: fixed; z-index: 210; right: 1.3rem; bottom: 1.3rem;
   width: min(400px, calc(100vw - 2rem)); height: min(640px, calc(100vh - 2.6rem));
@@ -761,7 +799,7 @@ input, textarea { font: inherit; color: inherit; }
    label all but invisible. Match the other three labels instead. */
 .bottom-nav__item--fusion { color: var(--stone); }
 .bottom-nav__item--fusion.is-active { color: var(--ink); }
-.bottom-nav__item--fusion .bottom-nav__fdot { width: 26px; height: 26px; border-radius: 50%; background: var(--ink); display: flex; align-items: center; justify-content: center; margin-bottom: 0.1rem; }
+.bottom-nav__item--fusion .bottom-nav__fdot { position: relative; width: 26px; height: 26px; border-radius: 50%; background: var(--ink); display: flex; align-items: center; justify-content: center; margin-bottom: 0.1rem; }
 .bottom-nav__item--fusion .bottom-nav__fdot svg { color: var(--accent); width: 13px; height: 13px; }
 
 @media (max-width: 720px) {
@@ -795,7 +833,10 @@ input, textarea { font: inherit; color: inherit; }
 <a href="#main" class="skip-link">Direct naar inhoud</a>
 
 <nav class="nav" data-nav>
-  <a href="#top" class="nav__mark">Fashion <span class="nav__mark-accent">Fusion</span></a>
+  <a href="#top" class="nav__mark">
+    <span class="nav__mark-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></span>
+    Fashion <span class="nav__mark-accent">Fusion</span>
+  </a>
   <div class="nav__links" aria-label="Hoofdnavigatie">
     <a href="#shop">Shop</a>
     <a href="#collectie">Collectie</a>
@@ -845,7 +886,7 @@ input, textarea { font: inherit; color: inherit; }
     <span>Shop</span>
   </a>
   <button type="button" class="bottom-nav__item bottom-nav__item--fusion" data-fusion-open aria-haspopup="dialog">
-    <span class="bottom-nav__fdot" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></span>
+    <span class="bottom-nav__fdot" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span class="fusion-notif" data-fusion-notif>1</span></span>
     <span>Fusion</span>
   </button>
   <a href="#contact" class="bottom-nav__item" data-bottom-link="contact">
@@ -893,14 +934,6 @@ input, textarea { font: inherit; color: inherit; }
   </div>
   <div class="hero__scroll" aria-hidden="true"><span>Scroll</span><div class="hero__scroll-track"><i></i></div></div>
 </section>
-
-<!-- ================= MARQUEE ================= -->
-<div class="marquee" aria-hidden="true">
-  <div class="marquee__track">
-    <span>Second-hand<i></i></span><span>Nieuwe energie<i></i></span><span>Fashion Fusion<i></i></span><span>&euro;10&ndash;&euro;100<i></i></span><span>Ontdek<i></i></span><span>Herhaal<i></i></span>
-    <span>Second-hand<i></i></span><span>Nieuwe energie<i></i></span><span>Fashion Fusion<i></i></span><span>&euro;10&ndash;&euro;100<i></i></span><span>Ontdek<i></i></span><span>Herhaal<i></i></span>
-  </div>
-</div>
 
 <!-- ================= SHOP ================= -->
 <section class="section" id="shop">
@@ -1060,7 +1093,10 @@ input, textarea { font: inherit; color: inherit; }
 <footer class="foot">
   <div class="foot__top">
     <div>
-      <div class="foot__mark">Fashion <span class="nav__mark-accent">Fusion</span></div>
+      <div class="foot__mark">
+        <span class="nav__mark-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></span>
+        Fashion <span class="nav__mark-accent">Fusion</span>
+      </div>
       <p class="foot__tag">Tweedehands fashion met karakter. Amsterdam. &euro;10&ndash;&euro;100.</p>
     </div>
     <div class="foot__cols">
@@ -1116,7 +1152,7 @@ input, textarea { font: inherit; color: inherit; }
 
 <!-- ================= FUSION ASSISTANT ================= -->
 <button type="button" class="fusion-launcher" data-fusion-open aria-haspopup="dialog">
-  <span class="fusion-launcher__dot" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#14120E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></span>
+  <span class="fusion-launcher__dot" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#14120E" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg><span class="fusion-notif" data-fusion-notif>1</span></span>
   <span class="fusion-launcher__label">Ask Fusion</span>
 </button>
 
@@ -1267,8 +1303,10 @@ input, textarea { font: inherit; color: inherit; }
     var visual = p.photo
       ? '<img class="product-card__photo" src="' + p.photo + '" alt="" loading="lazy" style="object-position:' + (p.photoPos || "50% 50%") + ';">'
       : '<span class="product-card__icon">' + ICONS[p.icon] + "</span>";
+    var hook = '<span class="product-card__hook" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M12 22V7"/><path d="M9 7a3 3 0 1 1 3 3"/></svg></span>';
     return (
       '<article class="product-card" data-product-card data-id="' + p.id + '" data-cat="' + p.cat + '" data-badge="' + (p.badge || "") + '" tabindex="0" role="button" aria-label="' + p.name + ", " + money(p.price) + '">' +
+        hook +
         '<div class="product-card__frame" style="--swatch:' + swatch + '; color:' + color + ';">' +
           badge +
           visual +
@@ -1388,6 +1426,9 @@ input, textarea { font: inherit; color: inherit; }
   function openPanel(name) {
     var el = panels[name];
     if (!el) return;
+    if (name === "fusion") {
+      document.querySelectorAll("[data-fusion-notif]").forEach(function (b) { b.classList.add("is-read"); });
+    }
     overlays.forEach(function (o) {
       if (o.dataset.closeTarget === name) o.classList.add("is-open");
     });
