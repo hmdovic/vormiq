@@ -253,7 +253,24 @@ section { position: relative; padding: var(--section-pad) var(--edge); }
   background: linear-gradient(135deg, hsl(var(--accent-bright) / 0.9), hsl(var(--violet) / 0.7));
   border-radius: 3px; will-change: transform, opacity;
 }
-.hero__content { position: relative; max-width: 56rem; display: flex; flex-direction: column; align-items: center; gap: 1.6rem; }
+.hero__layout {
+  position: relative; z-index: 1; width: 100%; max-width: 1280px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center;
+}
+.hero__content { position: relative; max-width: 56rem; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 1.6rem; }
+.hero__visual {
+  position: relative; width: 100%; max-width: 30rem; margin: 0 auto;
+  aspect-ratio: 4 / 3; border-radius: var(--r-xl); overflow: hidden;
+  background: hsl(var(--bg-soft)); border: 1px solid hsl(var(--border-strong));
+  box-shadow: 0 40px 90px -30px hsl(0 0% 0% / 0.65);
+}
+.hero__visual-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 78% 50%; display: block; }
+.hero__visual-glow {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(120% 90% at 15% 10%, hsl(var(--accent-bright) / 0.18), transparent 55%),
+    linear-gradient(180deg, transparent 60%, hsl(var(--bg) / 0.5) 100%);
+}
 .hero__title { font-size: clamp(1.9rem, 1.3rem + 2.8vw, 3.4rem); max-width: 46rem; color: hsl(var(--text-dim)); }
 .hero__title strong { color: hsl(var(--text)); font-weight: 700; }
 .hero__title strong.text-shine { color: transparent; }
@@ -268,6 +285,15 @@ section { position: relative; padding: var(--section-pad) var(--edge); }
 }
 .hero__trust strong { color: hsl(var(--text-dim)); font-weight: 600; }
 .hero__trust-dot { color: hsl(var(--border-strong)); }
+@media (min-width: 960px) {
+  .hero__layout { grid-template-columns: 1.05fr 0.95fr; gap: 3.5rem; text-align: left; }
+  .hero__content { max-width: none; margin: 0; align-items: flex-start; }
+  .hero__title { max-width: 30rem; font-size: clamp(1.7rem, 1rem + 1.7vw, 2.6rem); }
+  .hero__lead { margin: 0; }
+  .hero__actions { justify-content: flex-start; }
+  .hero__trust { justify-content: flex-start; }
+  .hero__visual { max-width: none; aspect-ratio: 6 / 5; }
+}
 .hero__scroll {
   position: absolute; bottom: 2.4rem; left: 50%; transform: translateX(-50%);
   display: flex; flex-direction: column; align-items: center; gap: 0.6rem;

@@ -5,6 +5,12 @@
   var hasGSAP = typeof window.gsap !== "undefined";
   if (hasGSAP && window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
 
+  /* Respect prefers-reduced-motion: the hero devices video autoplays via
+     the HTML attribute (needed for iOS/Safari autoplay to work at all),
+     but that attribute ignores the OS motion preference, so stop it here. */
+  var heroVideo = document.querySelector(".hero__visual-video");
+  if (heroVideo && reduceMotion) heroVideo.pause();
+
   /* =========================================================
      SMOOTH SCROLL (Lenis) + GSAP ticker sync
      ========================================================= */
