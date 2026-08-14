@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Fashion Fusion — Tweedehands fashion met karakter</title>
-<meta name="description" content="Ontdek tweedehands fashion van €10 tot €100 bij Fashion Fusion. Ontdek unieke items en neem eenvoudig contact op." />
+<title>Fashion Fusion — Tweedehands merkkleding met karakter</title>
+<meta name="description" content="Tweedehands merkkleding van €10 tot €100 bij Fashion Fusion — Levi's, Nike, Ralph Lauren en meer. Zoek op merk, maat en conditie." />
 <meta name="robots" content="noindex, nofollow" />
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%227%22%20fill%3D%22%2314120E%22/%3E%3Cg%20transform%3D%22translate%284%2C4%29%22%20stroke%3D%22%23FF3B2A%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20fill%3D%22none%22%3E%3Cpath%20d%3D%22M12%203v3M12%2018v3M4.2%204.2l2.1%202.1M17.7%2017.7l2.1%202.1M3%2012h3M18%2012h3M4.2%2019.8l2.1-2.1M17.7%206.3l2.1-2.1%22/%3E%3C/g%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -326,7 +326,10 @@ input, textarea { font: inherit; color: inherit; }
 /* =========================================================
    SHOP
    ========================================================= */
-.shop__filters { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: clamp(2rem, 4vw, 3rem); }
+.shop__filter-group { margin-bottom: clamp(1.2rem, 2.5vw, 1.6rem); }
+.shop__filter-group:last-of-type { margin-bottom: clamp(2rem, 4vw, 3rem); }
+.shop__filter-label { display: block; font-family: var(--font-mono); font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--stone); margin-bottom: 0.6rem; }
+.shop__filters { display: flex; flex-wrap: wrap; gap: 0.6rem; }
 .filter-pill {
   font-family: var(--font-mono); font-size: 0.76rem; letter-spacing: 0.04em; text-transform: uppercase;
   padding: 0.6rem 1.1rem; border: 1px solid var(--line); border-radius: 999px;
@@ -341,6 +344,7 @@ input, textarea { font: inherit; color: inherit; }
    Force two columns instead; smaller cards, same information. */
 @media (max-width: 560px) {
   .product-grid { grid-template-columns: repeat(2, 1fr); gap: 0.7rem 0.6rem; }
+  .product-card__brand { font-size: 0.6rem; }
   .product-card__name { font-size: 0.8rem; line-height: 1.25; }
   .product-card__cat { font-size: 0.6rem; }
   .product-card__price { font-size: 0.8rem; }
@@ -387,7 +391,11 @@ input, textarea { font: inherit; color: inherit; }
 }
 .product-card:hover .product-card__quick, .product-card:focus-visible .product-card__quick { opacity: 1; transform: translateY(0); }
 .product-card__meta { padding-top: 0.9rem; display: flex; justify-content: space-between; gap: 0.6rem; }
-.product-card__name { font-size: 0.95rem; font-weight: 600; }
+/* Brand leads — this is a marketplace for secondhand brand pieces,
+   not generic clothing, and the brand is the first thing a buyer
+   scans for. It outranks the item name in the hierarchy. */
+.product-card__brand { font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--ink); }
+.product-card__name { font-size: 0.95rem; font-weight: 600; margin-top: 0.15rem; }
 .product-card__cat { font-family: var(--font-mono); font-size: 0.68rem; color: var(--stone); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 0.2rem; }
 .product-card__price { font-family: var(--font-mono); font-size: 0.92rem; font-weight: 500; flex-shrink: 0; }
 
@@ -465,14 +473,29 @@ input, textarea { font: inherit; color: inherit; }
 }
 .quickview__icon-badge svg { display: block; width: 100%; height: 100%; }
 .quickview__body { flex: 1; overflow-y: auto; padding: 1.8rem; display: flex; flex-direction: column; gap: 1.3rem; }
-.quickview__cat { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--stone); }
-.quickview__name { font-family: var(--font-display); font-size: 2.1rem; text-transform: uppercase; margin-top: 0.3rem; }
+.quickview__brand { display: block; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink); }
+.quickview__name { font-family: var(--font-display); font-size: 2.1rem; text-transform: uppercase; margin-top: 0.2rem; }
+.quickview__cat { display: block; font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--stone); margin-top: 0.35rem; }
 .quickview__price { font-family: var(--font-mono); font-size: 1.3rem; margin-top: 0.5rem; }
 .quickview__desc { font-size: 0.95rem; line-height: 1.65; color: var(--charcoal); }
 .quickview__row { display: flex; justify-content: space-between; padding: 0.85rem 0; border-top: 1px solid var(--line); font-size: 0.85rem; }
 .quickview__row span:first-child { color: var(--stone); font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; }
 .quickview__actions { display: flex; flex-direction: column; gap: 0.7rem; margin-top: 0.5rem; }
 .quickview__disclaimer { font-size: 0.78rem; color: var(--stone); line-height: 1.5; padding: 0.9rem; background: var(--paper-dim); border-radius: 4px; }
+
+/* =========================================================
+   MERKEN — a hairline-grid brand wall. No logo assets exist for
+   a demo, so typography carries it, same as the rest of the site
+   — large, confident, unmistakably not a thrift-store bargain bin.
+   ========================================================= */
+.brands-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.brands-grid__item {
+  background: var(--paper); padding: clamp(1.7rem, 4vw, 2.6rem) 1rem;
+  font-family: var(--font-display); font-size: clamp(1.05rem, 2.1vw, 1.5rem); text-transform: uppercase; letter-spacing: -0.01em;
+  text-align: center; transition: background var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+}
+.brands-grid__item:hover, .brands-grid__item:focus-visible { background: var(--ink); color: var(--paper); }
+@media (max-width: 700px) { .brands-grid { grid-template-columns: repeat(2, 1fr); } }
 
 /* =========================================================
    PRICE STATEMENT
@@ -511,7 +534,7 @@ input, textarea { font: inherit; color: inherit; }
 .pillar__icon svg { display: block; width: 100%; height: 100%; }
 .pillar h3 { font-family: var(--font-display); font-size: 1.6rem; text-transform: uppercase; }
 .pillar p { font-size: 0.92rem; line-height: 1.6; color: var(--charcoal); }
-@media (min-width: 780px) { .pillars { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 780px) { .pillars { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
 /* =========================================================
    PORTFOLIO / EDITORIAL GALLERY
@@ -839,6 +862,7 @@ input, textarea { font: inherit; color: inherit; }
   </a>
   <div class="nav__links" aria-label="Hoofdnavigatie">
     <a href="#shop">Shop</a>
+    <a href="#merken">Merken</a>
     <a href="#collectie">Collectie</a>
     <a href="#over-ons">Over ons</a>
     <a href="#portfolio">Portfolio</a>
@@ -860,15 +884,16 @@ input, textarea { font: inherit; color: inherit; }
   <div class="search-panel__bar">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
     <label class="sr-only" for="search-input">Zoek in de collectie</label>
-    <input type="text" id="search-input" data-search-input placeholder="Zoek op naam of categorie&hellip; bijv. &lsquo;jas&rsquo; of &lsquo;onder 25&rsquo;" autocomplete="off">
+    <input type="text" id="search-input" data-search-input placeholder="Zoek op merk, naam of maat&hellip; bijv. &lsquo;Levi&rsquo;s&rsquo; of &lsquo;onder 25&rsquo;" autocomplete="off">
     <button type="button" class="quickview__close" style="position:static;" data-close-target="search" aria-label="Sluiten"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg></button>
   </div>
   <div class="search-panel__results" data-search-results></div>
-  <p class="search-panel__hint" data-search-hint>Typ om te zoeken door de demo-collectie.</p>
+  <p class="search-panel__hint" data-search-hint>Zoek op merk, naam, categorie of maat.</p>
 </div>
 
 <div class="nav__mobile" data-nav-mobile>
   <a href="#shop" data-nav-mobile-link>Shop</a>
+  <a href="#merken" data-nav-mobile-link>Merken</a>
   <a href="#collectie" data-nav-mobile-link>Collectie</a>
   <a href="#over-ons" data-nav-mobile-link>Over ons</a>
   <a href="#portfolio" data-nav-mobile-link>Portfolio</a>
@@ -903,12 +928,12 @@ input, textarea { font: inherit; color: inherit; }
   <div class="hero__grain" aria-hidden="true"></div>
   <div class="hero__grid" style="padding: 0 var(--edge);">
     <div class="hero__copy">
-      <div class="hero__eyebrow"><span class="dot" aria-hidden="true"></span><span class="eyebrow">Fashion Fusion &middot; Tweedehands, herontdekt</span></div>
+      <div class="hero__eyebrow"><span class="dot" aria-hidden="true"></span><span class="eyebrow">Fashion Fusion &middot; Tweedehands merkkleding</span></div>
       <h1 class="hero__title display">
         <span><span class="word">Second-hand.</span></span>
         <span><span class="word"><em>First</em> choice.</span></span>
       </h1>
-      <p class="hero__lead" data-reveal>Ontdek tweedehands fashion met karakter &mdash; geselecteerd voor mensen die hun eigen stijl volgen, niet de winkelstraat.</p>
+      <p class="hero__lead" data-reveal>Tweedehands kleding van merken die je kent &mdash; Levi&rsquo;s, Nike, Ralph Lauren en meer &mdash; geselecteerd voor mensen die kwaliteit herkennen.</p>
       <div class="hero__actions" data-reveal>
         <a href="#shop" class="btn btn--solid">Ontdek de collectie <svg class="icon-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <button type="button" class="btn btn--ghost" data-fusion-open>Praat met Fashion Assistant</button>
@@ -926,7 +951,7 @@ input, textarea { font: inherit; color: inherit; }
         <div class="hero__tag-icon" aria-hidden="true"><img src="img/ff-street-rack.jpg" alt="" style="object-position:50% 75%;"></div>
         <div class="hero__tag-bottom">
           <div class="display">Karakter<br>op maat</div>
-          <div class="hero__tag-price">&euro; 48 &mdash; Jassen</div>
+          <div class="hero__tag-price">&euro; 48 &mdash; Levi&rsquo;s</div>
         </div>
       </div>
       <div class="hero__badge-2">Nieuwe items wekelijks</div>
@@ -939,22 +964,59 @@ input, textarea { font: inherit; color: inherit; }
 <section class="section" id="shop">
   <div class="section-head">
     <span class="eyebrow" data-reveal>Shop &middot; Demo-collectie</span>
-    <h2 class="display" style="font-size: clamp(2.1rem, 5vw, 3.4rem); margin-top: 0.6rem;" data-reveal>Stuk voor stuk anders.</h2>
-    <p data-reveal>Elk item is een eenmalig exemplaar. Dit zijn voorbeelditems die laten zien hoe de collectie eruit gaat zien &mdash; voor actuele voorraad neem je contact op met Fashion Fusion.</p>
+    <h2 class="display" style="font-size: clamp(2.1rem, 5vw, 3.4rem); margin-top: 0.6rem;" data-reveal>Merkkleding, stuk voor stuk anders.</h2>
+    <p data-reveal>Elk item is een eenmalig exemplaar van een merk dat je kent. Dit zijn voorbeelditems die laten zien hoe de collectie eruit gaat zien &mdash; voor actuele voorraad neem je contact op met Fashion Fusion.</p>
   </div>
 
-  <div class="shop__filters" data-reveal role="tablist" aria-label="Filter op categorie">
-    <button type="button" class="filter-pill is-active" data-filter="all" role="tab" aria-selected="true">Alles</button>
-    <button type="button" class="filter-pill" data-filter="new" role="tab" aria-selected="false">New in</button>
-    <button type="button" class="filter-pill" data-filter="jackets" role="tab" aria-selected="false">Jassen</button>
-    <button type="button" class="filter-pill" data-filter="tops" role="tab" aria-selected="false">Tops</button>
-    <button type="button" class="filter-pill" data-filter="bottoms" role="tab" aria-selected="false">Bottoms</button>
-    <button type="button" class="filter-pill" data-filter="accessories" role="tab" aria-selected="false">Accessoires</button>
-    <button type="button" class="filter-pill" data-filter="featured" role="tab" aria-selected="false">Featured</button>
+  <div class="shop__filter-group">
+    <span class="shop__filter-label">Categorie</span>
+    <div class="shop__filters" data-reveal role="tablist" aria-label="Filter op categorie">
+      <button type="button" class="filter-pill is-active" data-filter="all" role="tab" aria-selected="true">Alles</button>
+      <button type="button" class="filter-pill" data-filter="new" role="tab" aria-selected="false">New in</button>
+      <button type="button" class="filter-pill" data-filter="jackets" role="tab" aria-selected="false">Jassen</button>
+      <button type="button" class="filter-pill" data-filter="tops" role="tab" aria-selected="false">Tops</button>
+      <button type="button" class="filter-pill" data-filter="bottoms" role="tab" aria-selected="false">Bottoms</button>
+      <button type="button" class="filter-pill" data-filter="accessories" role="tab" aria-selected="false">Accessoires</button>
+      <button type="button" class="filter-pill" data-filter="featured" role="tab" aria-selected="false">Featured</button>
+    </div>
+  </div>
+
+  <div class="shop__filter-group">
+    <span class="shop__filter-label">Merk</span>
+    <div class="shop__filters" data-reveal role="tablist" aria-label="Filter op merk">
+      <button type="button" class="filter-pill is-active" data-brand-filter="all" role="tab" aria-selected="true">Alle merken</button>
+      <button type="button" class="filter-pill" data-brand-filter="Levi's" role="tab" aria-selected="false">Levi&rsquo;s</button>
+      <button type="button" class="filter-pill" data-brand-filter="Diesel" role="tab" aria-selected="false">Diesel</button>
+      <button type="button" class="filter-pill" data-brand-filter="Ralph Lauren" role="tab" aria-selected="false">Ralph Lauren</button>
+      <button type="button" class="filter-pill" data-brand-filter="Tommy Hilfiger" role="tab" aria-selected="false">Tommy Hilfiger</button>
+      <button type="button" class="filter-pill" data-brand-filter="Nike" role="tab" aria-selected="false">Nike</button>
+      <button type="button" class="filter-pill" data-brand-filter="Calvin Klein" role="tab" aria-selected="false">Calvin Klein</button>
+      <button type="button" class="filter-pill" data-brand-filter="Carhartt WIP" role="tab" aria-selected="false">Carhartt WIP</button>
+      <button type="button" class="filter-pill" data-brand-filter="Coach" role="tab" aria-selected="false">Coach</button>
+    </div>
   </div>
 
   <div class="product-grid" data-product-grid></div>
-  <p class="shop__empty" data-shop-empty>Geen items in deze categorie. <button type="button" class="link" data-filter-reset>Bekijk alles</button></p>
+  <p class="shop__empty" data-shop-empty>Geen items voor deze combinatie van filters. <button type="button" class="link" data-filter-reset>Bekijk alles</button></p>
+</section>
+
+<!-- ================= MERKEN ================= -->
+<section class="section" id="merken" style="padding-bottom: 0;">
+  <div class="section-head">
+    <span class="eyebrow" data-reveal>Merken</span>
+    <h2 class="display" style="font-size: clamp(2.1rem, 5vw, 3.4rem); margin-top: 0.6rem;" data-reveal>Niet zomaar tweedehands.</h2>
+    <p data-reveal>Fashion Fusion draait om merken die het waard zijn om door te geven &mdash; herkenbare namen, geselecteerd om hun karakter, niet om hun prijs.</p>
+  </div>
+  <div class="brands-grid" data-reveal>
+    <button type="button" class="brands-grid__item" data-jump-brand="Levi's">Levi&rsquo;s</button>
+    <button type="button" class="brands-grid__item" data-jump-brand="Nike">Nike</button>
+    <button type="button" class="brands-grid__item" data-jump-brand="Ralph Lauren">Ralph Lauren</button>
+    <button type="button" class="brands-grid__item" data-jump-brand="Tommy Hilfiger">Tommy Hilfiger</button>
+    <button type="button" class="brands-grid__item" data-jump-brand="Diesel">Diesel</button>
+    <button type="button" class="brands-grid__item" data-jump-brand="Calvin Klein">Calvin Klein</button>
+    <button type="button" class="brands-grid__item" data-jump-brand="Carhartt WIP">Carhartt WIP</button>
+    <button type="button" class="brands-grid__item" data-jump-brand="Coach">Coach</button>
+  </div>
 </section>
 
 <!-- ================= PRICE STATEMENT ================= -->
@@ -970,7 +1032,7 @@ input, textarea { font: inherit; color: inherit; }
     <span class="display" data-reveal>tot</span>
     <span class="display is-accent" data-reveal>&euro;100.</span>
   </div>
-  <p class="price-statement__sub" data-reveal>Geen designer-drempel, geen fast-fashion-compromis. Fashion Fusion houdt het midden &mdash; toegankelijk genoeg om te ontdekken, karaktervol genoeg om te onthouden.</p>
+  <p class="price-statement__sub" data-reveal>Geen designer-drempel, geen fast-fashion-compromis. Fashion Fusion houdt het midden &mdash; merkkwaliteit die toegankelijk blijft.</p>
 </section>
 
 <!-- ================= EDITORIAL STORY ================= -->
@@ -980,7 +1042,7 @@ input, textarea { font: inherit; color: inherit; }
     <div>
       <span class="eyebrow story__eyebrow">Editorial</span>
       <h2 class="display story__title">Style has no expiry date.</h2>
-      <p class="story__quote pull-quote">&ldquo;Een goede look draait niet om het label. Het draait om hoe je hem draagt.&rdquo;</p>
+      <p class="story__quote pull-quote">&ldquo;Een goed merk gooi je niet weg. Dat geef je door.&rdquo;</p>
       <a href="#portfolio" class="story__cta link">Ontdek Fashion Fusion &rarr;</a>
     </div>
   </div>
@@ -996,20 +1058,20 @@ input, textarea { font: inherit; color: inherit; }
     <div class="pillar">
       <span class="pillar__num">01</span>
       <div class="pillar__icon"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M32 6 38 24 57 24 42 35 47 54 32 42 17 54 22 35 7 24 26 24Z"/></svg></div>
-      <h3>Karakter</h3>
-      <p>Stuks met een verhaal, geen massaproductie. Wat je vindt, vindt niemand anders.</p>
+      <h3>Merkkwaliteit</h3>
+      <p>Denim, leer en wol van merken die gemaakt zijn om te blijven &mdash; geen fast fashion, geen wegwerpstuks.</p>
     </div>
     <div class="pillar">
       <span class="pillar__num">02</span>
       <div class="pillar__icon"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8 34 8 56 30 34 52 8 52Z"/><circle cx="19" cy="19" r="4"/></svg></div>
       <h3>Toegankelijk</h3>
-      <p>Fashion van &euro;10 tot &euro;100. Ontdekken staat voorop, niet de prijsdrempel.</p>
+      <p>Merken die je kent, zonder de merkprijs. Van &euro;10 tot &euro;100.</p>
     </div>
     <div class="pillar">
       <span class="pillar__num">03</span>
       <div class="pillar__icon"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="32" cy="32" r="24"/><path d="M42 22 34 34 22 42 30 30Z"/></svg></div>
       <h3>Ontdekking</h3>
-      <p>Vind iets waarvan je niet wist dat je ernaar op zoek was.</p>
+      <p>Vind het stuk waarvan je niet wist dat je ernaar op zoek was &mdash; van een merk dat je al kent.</p>
     </div>
   </div>
 </section>
@@ -1053,7 +1115,7 @@ input, textarea { font: inherit; color: inherit; }
         <h2 class="display about__title" data-reveal>Fashion Fusion is about finding the piece that feels like you.</h2>
       </div>
       <div class="about__body" data-reveal>
-        <p>Fashion Fusion draait om tweedehands fashion die aanvoelt als een bewuste keuze, niet als een compromis. Elk stuk heeft al een leven gehad &mdash; en krijgt bij jou een nieuwe richting.</p>
+        <p>Fashion Fusion draait om tweedehands merkkleding die aanvoelt als een bewuste keuze, niet als een compromis. Elk stuk komt van een merk dat zijn kwaliteit al heeft bewezen &mdash; en krijgt bij jou een nieuwe richting.</p>
         <p>Achter Fashion Fusion staat Max Trip. Geen omweg via een callcenter of ticketsysteem &mdash; vragen, twijfels of maatadvies gaan rechtstreeks naar de persoon die de collectie samenstelt.</p>
       </div>
     </div>
@@ -1097,12 +1159,13 @@ input, textarea { font: inherit; color: inherit; }
         Fashion <span class="nav__mark-accent">Fusion</span>
         <span class="nav__mark-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></span>
       </div>
-      <p class="foot__tag">Tweedehands fashion met karakter. Amsterdam. &euro;10&ndash;&euro;100.</p>
+      <p class="foot__tag">Tweedehands merkkleding met karakter. Amsterdam. &euro;10&ndash;&euro;100.</p>
     </div>
     <div class="foot__cols">
       <div class="foot__col">
         <h5>Site</h5>
         <a href="#shop">Shop</a>
+        <a href="#merken">Merken</a>
         <a href="#portfolio">Portfolio</a>
         <a href="#over-ons">Over ons</a>
         <a href="#reviews">Reviews</a>
@@ -1133,14 +1196,15 @@ input, textarea { font: inherit; color: inherit; }
   <div class="quickview__visual" data-qv-visual></div>
   <div class="quickview__body">
     <div>
-      <span class="quickview__cat" data-qv-cat></span>
+      <span class="quickview__brand" data-qv-brand></span>
       <h3 class="quickview__name display" data-qv-name></h3>
+      <span class="quickview__cat" data-qv-cat></span>
       <div class="quickview__price" data-qv-price></div>
     </div>
     <p class="quickview__desc" data-qv-desc></p>
     <div>
       <div class="quickview__row"><span>Maat</span><span data-qv-size>&mdash;</span></div>
-      <div class="quickview__row"><span>Status</span><span data-qv-status>&mdash;</span></div>
+      <div class="quickview__row"><span>Conditie</span><span data-qv-condition>&mdash;</span></div>
     </div>
     <div class="quickview__actions">
       <button type="button" class="btn btn--solid" data-qv-ask style="justify-content:center;">Vraag de assistent</button>
@@ -1170,12 +1234,12 @@ input, textarea { font: inherit; color: inherit; }
   </div>
   <div class="fusion-panel__body" data-fusion-body></div>
   <div class="fusion-panel__prompts" data-fusion-prompts>
+    <button type="button" class="fprompt" data-prompt>Hebben jullie Levi&rsquo;s?</button>
     <button type="button" class="fprompt" data-prompt>Help me een outfit vinden</button>
     <button type="button" class="fprompt" data-prompt>Ik heb &euro;50 budget</button>
-    <button type="button" class="fprompt" data-prompt>Wat past bij een zwarte broek?</button>
+    <button type="button" class="fprompt" data-prompt>Welke merken hebben jullie?</button>
     <button type="button" class="fprompt" data-prompt>Ik zoek iets voor een feestje</button>
     <button type="button" class="fprompt" data-prompt>Wat hebben jullie onder &euro;25?</button>
-    <button type="button" class="fprompt" data-prompt>Ik weet mijn stijl niet</button>
   </div>
   <form class="fusion-panel__form" data-fusion-form>
     <label class="sr-only" for="fusion-input">Typ je vraag aan Fusion</label>
@@ -1269,21 +1333,31 @@ input, textarea { font: inherit; color: inherit; }
      DEMO PRODUCTS — clearly a demo catalogue (see disclaimers
      in the UI); architected so a real inventory feed can swap
      in later without touching the render/filter/assistant logic.
+     Brand names are real, well-known labels that are genuinely,
+     commonly resold secondhand (Vinted/Depop/Vestiaire-tier) —
+     this is a secondhand *designer/brand* marketplace, and demo
+     listings need recognizable brands to demonstrate that. One
+     item is deliberately unbranded ("Vintage") since costume
+     jewelry realistically often is — not every resale item has
+     a labeled maker, and pretending otherwise would be its own
+     kind of dishonesty.
      ========================================================= */
   var PRODUCTS = [
-    { id: "p1", name: "Oversized Denim Jacket", cat: "jackets", price: 48, badge: "new", icon: "jacket", tone: "light", photo: "img/ff-street-rack.jpg", photoPos: "50% 75%", desc: "Verwassen denim, boxy fit. Het soort jasje dat bij alles past en nooit uit de roulatie gaat." },
-    { id: "p2", name: "Cropped Leather Biker", cat: "jackets", price: 85, badge: "featured", icon: "jacket", tone: "dark", photo: "img/ff-hero-rack.jpg", photoPos: "70% 45%", desc: "Structuur, karakter en genoeg leeftijd om al zacht te zijn. Een statement zonder moeite." },
-    { id: "p3", name: "Vintage Wool Coat", cat: "jackets", price: 72, badge: null, icon: "coat", tone: "dark", photo: "img/ff-rack-minimal.jpg", photoPos: "50% 50%", desc: "Zware wollen jas met een silhouet dat je niet meer terugvindt in nieuwe collecties." },
-    { id: "p4", name: "Ribbed Knit Top", cat: "tops", price: 22, badge: "new", icon: "top", tone: "dark", photo: "img/ff-sweater.jpg", photoPos: "50% 45%", desc: "Nauwsluitend geribbeld truitje, perfect om te lagen of solo te dragen." },
-    { id: "p5", name: "Graphic Band Tee", cat: "tops", price: 18, badge: null, icon: "tee", tone: "light", photo: "img/ff-tees-rack.jpg", photoPos: "50% 55%", desc: "Vintage bandshirt met net genoeg slijtage om echt te voelen." },
-    { id: "p6", name: "Silk Slip Cami", cat: "tops", price: 28, badge: "featured", icon: "top", tone: "dark", photo: "img/ff-flatlay.jpg", photoPos: "62% 30%", desc: "Zijden top, subtiele glans. Draag 'm onder een blazer of alleen op een avond uit." },
-    { id: "p7", name: "Wide-Leg Trousers", cat: "bottoms", price: 35, badge: null, icon: "pants", tone: "light", photo: "img/ff-rail-rope.jpg", photoPos: "50% 65%", desc: "Hoge taille, brede pijp. Verandert elke outfit meteen in een silhouet." },
-    { id: "p8", name: "Cargo Combat Pants", cat: "bottoms", price: 40, badge: "new", icon: "cargo", tone: "dark", photo: "img/ff-jeans-detail.jpg", photoPos: "50% 50%", desc: "Utility-fit met stevige zakken. Robuust genoeg voor dagelijks gebruik." },
-    { id: "p9", name: "Pleated Midi Skirt", cat: "bottoms", price: 30, badge: null, icon: "skirt", tone: "light", photo: "img/ff-thrift-browse.jpg", photoPos: "50% 40%", desc: "Geplooide midi met beweging in elke stap. Combineert net zo makkelijk met sneakers als hakken." },
-    { id: "p10", name: "Statement Belt Buckle", cat: "accessories", price: 15, badge: null, icon: "belt", tone: "dark", photo: "img/ff-flatlay.jpg", photoPos: "8% 15%", desc: "Grote gesp, dun leer. Het detail dat een outfit optilt zonder dat je het doorhebt." },
-    { id: "p11", name: "Chunky Chain Necklace", cat: "accessories", price: 12, badge: "new", icon: "necklace", tone: "light", photo: "img/ff-flatlay.jpg", photoPos: "42% 58%", desc: "Massieve schakels, subtiele glans. Draag 'm los over een simpel shirt." },
-    { id: "p12", name: "Structured Mini Bag", cat: "accessories", price: 38, badge: "featured", icon: "bag", tone: "light", photo: "img/ff-flatlay.jpg", photoPos: "78% 60%", desc: "Compact, strak silhouet. Precies genoeg ruimte voor het essentiële." }
+    { id: "p1", name: "Oversized Denim Jacket", brand: "Levi's", size: "L", condition: "Zo goed als nieuw", cat: "jackets", price: 48, badge: "new", icon: "jacket", tone: "light", photo: "img/ff-street-rack.jpg", photoPos: "50% 75%", desc: "Verwassen denim, boxy fit. Het soort jasje dat bij alles past en nooit uit de roulatie gaat." },
+    { id: "p2", name: "Cropped Leather Biker", brand: "Diesel", size: "M", condition: "Licht gebruikt", cat: "jackets", price: 85, badge: "featured", icon: "jacket", tone: "dark", photo: "img/ff-hero-rack.jpg", photoPos: "70% 45%", desc: "Structuur, karakter en genoeg leeftijd om al zacht te zijn. Een statement zonder moeite." },
+    { id: "p3", name: "Vintage Wool Coat", brand: "Ralph Lauren", size: "L", condition: "Gebruikt, goede staat", cat: "jackets", price: 72, badge: null, icon: "coat", tone: "dark", photo: "img/ff-rack-minimal.jpg", photoPos: "50% 50%", desc: "Zware wollen jas met een silhouet dat je niet meer terugvindt in nieuwe collecties." },
+    { id: "p4", name: "Ribbed Knit Top", brand: "Tommy Hilfiger", size: "S", condition: "Zo goed als nieuw", cat: "tops", price: 22, badge: "new", icon: "top", tone: "dark", photo: "img/ff-sweater.jpg", photoPos: "50% 45%", desc: "Nauwsluitend geribbeld truitje, perfect om te lagen of solo te dragen." },
+    { id: "p5", name: "Graphic Band Tee", brand: "Nike", size: "M", condition: "Licht gebruikt", cat: "tops", price: 18, badge: null, icon: "tee", tone: "light", photo: "img/ff-tees-rack.jpg", photoPos: "50% 55%", desc: "Vintage bandshirt met net genoeg slijtage om echt te voelen." },
+    { id: "p6", name: "Silk Slip Cami", brand: "Calvin Klein", size: "S", condition: "Zo goed als nieuw", cat: "tops", price: 28, badge: "featured", icon: "top", tone: "dark", photo: "img/ff-flatlay.jpg", photoPos: "62% 30%", desc: "Zijden top, subtiele glans. Draag 'm onder een blazer of alleen op een avond uit." },
+    { id: "p7", name: "Wide-Leg Trousers", brand: "Ralph Lauren", size: "38", condition: "Licht gebruikt", cat: "bottoms", price: 35, badge: null, icon: "pants", tone: "light", photo: "img/ff-rail-rope.jpg", photoPos: "50% 65%", desc: "Hoge taille, brede pijp. Verandert elke outfit meteen in een silhouet." },
+    { id: "p8", name: "Cargo Combat Pants", brand: "Carhartt WIP", size: "M", condition: "Gebruikt, goede staat", cat: "bottoms", price: 40, badge: "new", icon: "cargo", tone: "dark", photo: "img/ff-jeans-detail.jpg", photoPos: "50% 50%", desc: "Utility-fit met stevige zakken. Robuust genoeg voor dagelijks gebruik." },
+    { id: "p9", name: "Pleated Midi Skirt", brand: "Tommy Hilfiger", size: "36", condition: "Zo goed als nieuw", cat: "bottoms", price: 30, badge: null, icon: "skirt", tone: "light", photo: "img/ff-thrift-browse.jpg", photoPos: "50% 40%", desc: "Geplooide midi met beweging in elke stap. Combineert net zo makkelijk met sneakers als hakken." },
+    { id: "p10", name: "Statement Belt Buckle", brand: "Diesel", size: "One size", condition: "Licht gebruikt", cat: "accessories", price: 15, badge: null, icon: "belt", tone: "dark", photo: "img/ff-flatlay.jpg", photoPos: "8% 15%", desc: "Grote gesp, dun leer. Het detail dat een outfit optilt zonder dat je het doorhebt." },
+    { id: "p11", name: "Chunky Chain Necklace", brand: "Vintage", size: "One size", condition: "Gebruikt, goede staat", cat: "accessories", price: 12, badge: "new", icon: "necklace", tone: "light", photo: "img/ff-flatlay.jpg", photoPos: "42% 58%", desc: "Massieve schakels, subtiele glans. Draag 'm los over een simpel shirt." },
+    { id: "p12", name: "Structured Mini Bag", brand: "Coach", size: "One size", condition: "Zo goed als nieuw", cat: "accessories", price: 38, badge: "featured", icon: "bag", tone: "light", photo: "img/ff-flatlay.jpg", photoPos: "78% 60%", desc: "Compact, strak silhouet. Precies genoeg ruimte voor het essentiële." }
   ];
+
+  var BRANDS = ["Levi's", "Diesel", "Ralph Lauren", "Tommy Hilfiger", "Nike", "Calvin Klein", "Carhartt WIP", "Coach"];
 
   var toneSwatch = { light: "var(--stone-soft)", dark: "var(--ink)" };
   function money(n) { return "€ " + n; }
@@ -1305,7 +1379,7 @@ input, textarea { font: inherit; color: inherit; }
       : '<span class="product-card__icon">' + ICONS[p.icon] + "</span>";
     var hook = '<span class="product-card__hook" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M12 22V7"/><path d="M9 7a3 3 0 1 1 3 3"/></svg></span>';
     return (
-      '<article class="product-card" data-product-card data-id="' + p.id + '" data-cat="' + p.cat + '" data-badge="' + (p.badge || "") + '" tabindex="0" role="button" aria-label="' + p.name + ", " + money(p.price) + '">' +
+      '<article class="product-card" data-product-card data-id="' + p.id + '" data-cat="' + p.cat + '" data-brand="' + p.brand + '" data-badge="' + (p.badge || "") + '" tabindex="0" role="button" aria-label="' + p.brand + " " + p.name + ", " + money(p.price) + '">' +
         hook +
         '<div class="product-card__frame" style="--swatch:' + swatch + '; color:' + color + ';">' +
           badge +
@@ -1314,8 +1388,9 @@ input, textarea { font: inherit; color: inherit; }
         "</div>" +
         '<div class="product-card__meta">' +
           "<div>" +
+            '<div class="product-card__brand">' + p.brand + "</div>" +
             '<div class="product-card__name">' + p.name + "</div>" +
-            '<div class="product-card__cat">' + catLabel(p.cat) + "</div>" +
+            '<div class="product-card__cat">' + catLabel(p.cat) + " &middot; Maat " + p.size + "</div>" +
           "</div>" +
           '<div class="product-card__price">' + money(p.price) + "</div>" +
         "</div>" +
@@ -1329,13 +1404,21 @@ input, textarea { font: inherit; color: inherit; }
 
   var grid = document.querySelector("[data-product-grid]");
   var emptyMsg = document.querySelector("[data-shop-empty]");
+  // Category and brand are two independent facets that combine — a
+  // buyer browsing a secondhand *brand* marketplace expects to narrow
+  // by both at once ("jassen" + "Levi's"), not one or the other.
+  var activeCategory = "all";
+  var activeBrand = "all";
 
-  function renderGrid(filter) {
+  function renderGrid() {
     var items = PRODUCTS.filter(function (p) {
-      if (filter === "all") return true;
-      if (filter === "new") return p.badge === "new";
-      if (filter === "featured") return p.badge === "featured";
-      return p.cat === filter;
+      var catOk =
+        activeCategory === "all" ? true :
+        activeCategory === "new" ? p.badge === "new" :
+        activeCategory === "featured" ? p.badge === "featured" :
+        p.cat === activeCategory;
+      var brandOk = activeBrand === "all" ? true : p.brand === activeBrand;
+      return catOk && brandOk;
     });
     grid.innerHTML = items.map(productCardHTML).join("");
     emptyMsg.classList.toggle("is-visible", items.length === 0);
@@ -1348,13 +1431,37 @@ input, textarea { font: inherit; color: inherit; }
       document.querySelectorAll("[data-filter]").forEach(function (b) { b.classList.remove("is-active"); b.setAttribute("aria-selected", "false"); });
       btn.classList.add("is-active");
       btn.setAttribute("aria-selected", "true");
-      renderGrid(btn.dataset.filter);
+      activeCategory = btn.dataset.filter;
+      renderGrid();
+    });
+  });
+  document.querySelectorAll("[data-brand-filter]").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      document.querySelectorAll("[data-brand-filter]").forEach(function (b) { b.classList.remove("is-active"); b.setAttribute("aria-selected", "false"); });
+      btn.classList.add("is-active");
+      btn.setAttribute("aria-selected", "true");
+      activeBrand = btn.dataset.brandFilter;
+      renderGrid();
     });
   });
   var resetBtn = document.querySelector("[data-filter-reset]");
   if (resetBtn) resetBtn.addEventListener("click", function () {
     var allBtn = document.querySelector('[data-filter="all"]');
+    var allBrandBtn = document.querySelector('[data-brand-filter="all"]');
     if (allBtn) allBtn.click();
+    if (allBrandBtn) allBrandBtn.click();
+  });
+
+  // Exposed so the "Merken" showcase section can jump straight into a
+  // brand-filtered view of the shop grid.
+  function filterByBrand(brand) {
+    var brandBtn = document.querySelector('[data-brand-filter="' + brand + '"]');
+    if (brandBtn) brandBtn.click();
+    var shop = document.getElementById("shop");
+    if (shop) shop.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
+  }
+  document.querySelectorAll("[data-jump-brand]").forEach(function (el) {
+    el.addEventListener("click", function () { filterByBrand(el.dataset.jumpBrand); });
   });
 
   /* =========================================================
@@ -1362,12 +1469,13 @@ input, textarea { font: inherit; color: inherit; }
      ========================================================= */
   var qv = document.querySelector("[data-quickview]");
   var qvVisual = document.querySelector("[data-qv-visual]");
+  var qvBrand = document.querySelector("[data-qv-brand]");
   var qvCat = document.querySelector("[data-qv-cat]");
   var qvName = document.querySelector("[data-qv-name]");
   var qvPrice = document.querySelector("[data-qv-price]");
   var qvDesc = document.querySelector("[data-qv-desc]");
   var qvSize = document.querySelector("[data-qv-size]");
-  var qvStatus = document.querySelector("[data-qv-status]");
+  var qvCondition = document.querySelector("[data-qv-condition]");
   var qvAsk = document.querySelector("[data-qv-ask]");
   var qvMail = document.querySelector("[data-qv-mail]");
   var currentProduct = null;
@@ -1380,13 +1488,14 @@ input, textarea { font: inherit; color: inherit; }
       ? '<img class="quickview__photo" src="' + p.photo + '" alt="" style="object-position:' + (p.photoPos || "50% 50%") + ';">' +
         '<span class="quickview__icon-badge" aria-hidden="true">' + ICONS[p.icon] + "</span>"
       : ICONS[p.icon];
-    qvCat.textContent = catLabel(p.cat) + (p.badge ? " · " + badgeLabel(p.badge) : "");
+    qvBrand.textContent = p.brand;
     qvName.textContent = p.name;
+    qvCat.textContent = catLabel(p.cat) + (p.badge ? " · " + badgeLabel(p.badge) : "");
     qvPrice.textContent = money(p.price);
     qvDesc.textContent = p.desc;
-    qvSize.textContent = "Eenmalig — vraag naar beschikbare maat";
-    qvStatus.textContent = "Demo-item";
-    qvMail.href = "mailto:fashionfusionks@gmail.com?subject=" + encodeURIComponent("Vraag over: " + p.name) + "&body=" + encodeURIComponent("Hoi Fashion Fusion,\n\nIk ben geïnteresseerd in: " + p.name + " (" + money(p.price) + ").\nKlopt het dat dit item nog beschikbaar is?\n\nGroet,");
+    qvSize.textContent = p.size;
+    qvCondition.textContent = p.condition;
+    qvMail.href = "mailto:fashionfusionks@gmail.com?subject=" + encodeURIComponent("Vraag over: " + p.brand + " " + p.name) + "&body=" + encodeURIComponent("Hoi Fashion Fusion,\n\nIk ben geïnteresseerd in: " + p.brand + " " + p.name + " (maat " + p.size + ", " + money(p.price) + ").\nKlopt het dat dit item nog beschikbaar is?\n\nGroet,");
     openPanel("quickview");
   }
 
@@ -1531,7 +1640,7 @@ input, textarea { font: inherit; color: inherit; }
         : '<span class="frec-card__swatch" style="--swatch:' + toneSwatch[p.tone] + "; color:" + (p.tone === "dark" ? "var(--paper)" : "var(--ink)") + ';">' + ICONS[p.icon] + "</span>";
       card.innerHTML =
         swatch +
-        '<span class="frec-card__info"><strong>' + p.name + "</strong><span>" + catLabel(p.cat) + "</span></span>" +
+        '<span class="frec-card__info"><strong>' + p.brand + " &middot; " + p.name + "</strong><span>" + catLabel(p.cat) + " &middot; Maat " + p.size + "</span></span>" +
         '<span class="frec-card__price">' + money(p.price) + "</span>";
       card.addEventListener("click", function () { openQuickView(p); });
       wrap.appendChild(card);
@@ -1560,11 +1669,24 @@ input, textarea { font: inherit; color: inherit; }
     return PRODUCTS.filter(function (p) { return p.price <= max; }).sort(function (a, b) { return b.price - a.price; }).slice(0, 3);
   }
 
+  function normBrand(s) { return s.toLowerCase().replace(/['’]/g, ""); }
+
   function respond(userText) {
     var t = userText.toLowerCase();
+    var tNorm = t.replace(/['’]/g, "");
     var budgetM = t.match(/€?\s?(\d{2,3})/);
+    var brandHit = BRANDS.filter(function (b) { return tNorm.indexOf(normBrand(b)) !== -1; })[0];
 
-    if (/feestje|party|avond|uit\b/.test(t)) {
+    if (/welke merken|wat voor merken|welke labels|merken hebben/.test(t)) {
+      botSay("We hebben op dit moment onder meer " + BRANDS.slice(0, -1).join(", ") + " en " + BRANDS[BRANDS.length - 1] + " in de demo-collectie. Zoek je een specifiek merk?");
+    } else if (brandHit) {
+      var brandPicks = PRODUCTS.filter(function (p) { return p.brand === brandHit; });
+      if (brandPicks.length) {
+        botSay(brandHit + " hebben we zeker. Dit zijn de voorbeelditems:", function () { addRecommendations(brandPicks); });
+      } else {
+        botSay(brandHit + " hebben we op dit moment niet in de demo-collectie, maar neem gerust contact op — de collectie wisselt.");
+      }
+    } else if (/feestje|party|avond|uit\b/.test(t)) {
       botSay("Dan zou ik kijken naar een sterke statement top of een tweedehands blazer gecombineerd met een basic. Zal ik een paar opties voor je selecteren?", function () {
         var picks = [PRODUCTS[5], PRODUCTS[1], PRODUCTS[9]];
         addRecommendations(picks);
@@ -1841,7 +1963,7 @@ input, textarea { font: inherit; color: inherit; }
     return (
       '<button type="button" class="search-row" data-search-result data-id="' + p.id + '">' +
         swatch +
-        '<span class="search-row__info"><strong>' + p.name + "</strong><span>" + catLabel(p.cat) + "</span></span>" +
+        '<span class="search-row__info"><strong>' + p.brand + " &middot; " + p.name + "</strong><span>" + catLabel(p.cat) + " &middot; Maat " + p.size + "</span></span>" +
         '<span class="search-row__price">' + money(p.price) + "</span>" +
       "</button>"
     );
@@ -1851,7 +1973,7 @@ input, textarea { font: inherit; color: inherit; }
     var q = raw.trim().toLowerCase();
     if (!q) {
       searchResults.innerHTML = "";
-      searchHint.textContent = "Typ om te zoeken door de demo-collectie.";
+      searchHint.textContent = "Zoek op merk, naam, categorie of maat.";
       searchHint.classList.remove("is-hidden");
       return;
     }
@@ -1862,7 +1984,11 @@ input, textarea { font: inherit; color: inherit; }
       matches = PRODUCTS.filter(function (p) { return p.price <= max; });
     } else {
       matches = PRODUCTS.filter(function (p) {
-        return p.name.toLowerCase().indexOf(q) !== -1 || catLabel(p.cat).toLowerCase().indexOf(q) !== -1;
+        return p.brand.toLowerCase().indexOf(q) !== -1 ||
+          p.name.toLowerCase().indexOf(q) !== -1 ||
+          catLabel(p.cat).toLowerCase().indexOf(q) !== -1 ||
+          p.size.toLowerCase().indexOf(q) !== -1 ||
+          p.condition.toLowerCase().indexOf(q) !== -1;
       });
     }
     if (matches.length) {
@@ -1888,7 +2014,7 @@ input, textarea { font: inherit; color: inherit; }
   if (searchInput) searchInput.addEventListener("input", function () { runSearch(searchInput.value); });
 
   /* init */
-  renderGrid("all");
+  renderGrid();
 })();
 
 </script>
