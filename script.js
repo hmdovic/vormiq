@@ -55,15 +55,19 @@
   var navToggle = document.querySelector("[data-nav-toggle]");
   var navMobile = document.querySelector("[data-nav-mobile]");
   if (navToggle && navMobile) {
+    var closeMobileNav = function () {
+      navMobile.classList.remove("is-open");
+      navToggle.setAttribute("aria-expanded", "false");
+    };
     navToggle.addEventListener("click", function () {
       var open = navMobile.classList.toggle("is-open");
       navToggle.setAttribute("aria-expanded", open ? "true" : "false");
     });
     navMobile.querySelectorAll("a").forEach(function (a) {
-      a.addEventListener("click", function () {
-        navMobile.classList.remove("is-open");
-        navToggle.setAttribute("aria-expanded", "false");
-      });
+      a.addEventListener("click", closeMobileNav);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && navMobile.classList.contains("is-open")) closeMobileNav();
     });
   }
 
